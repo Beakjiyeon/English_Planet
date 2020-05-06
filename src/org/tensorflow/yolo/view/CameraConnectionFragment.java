@@ -26,6 +26,7 @@ import android.util.Log;
 import android.util.Size;
 import android.util.SparseIntArray;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.Surface;
 import android.view.TextureView;
 import android.view.View;
@@ -130,7 +131,9 @@ public class CameraConnectionFragment extends Fragment {
      */
     private CaptureRequest previewRequest;
 
-    @Override
+
+
+        @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
         return inflater.inflate(R.layout.camera_connection_fragment, container, false);
     }

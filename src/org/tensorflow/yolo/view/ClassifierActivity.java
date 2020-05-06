@@ -1,5 +1,6 @@
 package org.tensorflow.yolo.view;
 
+import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.graphics.Canvas;
@@ -8,17 +9,26 @@ import android.graphics.Typeface;
 import android.media.Image;
 import android.media.ImageReader;
 import android.media.ImageReader.OnImageAvailableListener;
+import android.os.Environment;
 import android.os.SystemClock;
 import android.util.Log;
 import android.util.Size;
 import android.util.TypedValue;
+import android.view.View;
+import android.widget.Button;
 
 import org.tensorflow.yolo.R;
 import org.tensorflow.yolo.TensorFlowImageRecognizer;
 import org.tensorflow.yolo.model.Recognition;
+import org.tensorflow.yolo.setting.AppSetting;
 import org.tensorflow.yolo.util.ImageUtils;
 import org.tensorflow.yolo.view.components.BorderedText;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.List;
 import java.util.Vector;
 
@@ -31,8 +41,8 @@ import static org.tensorflow.yolo.Config.LOGGING_TAG;
  */
 public class ClassifierActivity extends TextToSpeechActivity implements OnImageAvailableListener {
     private boolean MAINTAIN_ASPECT = true;
-    private float TEXT_SIZE_DIP = 10;
-
+    private float TEXT_SIZE_DIP = 25;//10
+    Canvas b;
     private TensorFlowImageRecognizer recognizer;
     private Integer sensorOrientation;
     private int previewWidth = 0;
@@ -44,6 +54,7 @@ public class ClassifierActivity extends TextToSpeechActivity implements OnImageA
     private OverlayView overlayView;
     private BorderedText borderedText;
     private long lastProcessingTimeMs;
+    private Button word_button;
 
     @Override
     public void onPreviewSizeChosen(final Size size, final int rotation) {
@@ -105,19 +116,64 @@ public class ClassifierActivity extends TextToSpeechActivity implements OnImageA
         runInBackground(() -> {
             final long startTime = SystemClock.uptimeMillis();
             final List<Recognition> results = recognizer.recognizeImage(croppedBitmap);
+
+            saveView(croppedBitmap);
+
             lastProcessingTimeMs = SystemClock.uptimeMillis() - startTime;
-            overlayView.setResults(results);
+            overlayView.setResults(results,croppedBitmap);
             speak(results);
             requestRender();
             computing = false;
         });
     }
+    @SuppressLint("WrongThread")
+    private void saveView(Bitmap bitmap )
+
+    {
+        String path = Environment.getExternalStorageDirectory().getAbsolutePath();
+        Bitmap b = bitmap;
+
+        if(b!=null){
+            try {
+                File f = new File(path+"/notes");
+                f.mkdir();
+                File f2 = new File(path + "/notes/"+"a.png");
+                Canvas c = new Canvas( b );
+                //view.draw( c );
+                FileOutputStream fos = new FileOutputStream(f2);
+
+
+                if ( fos != null )
+                {
+                    b.compress(Bitmap.CompressFormat.PNG, 100, fos );
+                    try {
+                        fos.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+
+
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+
+
+        }
+    }
+
 
     private void fillCroppedBitmap(final Image image) {
             Bitmap rgbFrameBitmap = Bitmap.createBitmap(previewWidth, previewHeight, Config.ARGB_8888);
             rgbFrameBitmap.setPixels(ImageUtils.convertYUVToARGB(image, previewWidth, previewHeight),
                     0, previewWidth, 0, 0, previewWidth, previewHeight);
+
             new Canvas(croppedBitmap).drawBitmap(rgbFrameBitmap, frameToCropTransform, null);
+
+            // 추가
+
+
     }
 
     @Override
@@ -140,6 +196,12 @@ public class ClassifierActivity extends TextToSpeechActivity implements OnImageA
         lines.add("View: " + canvas.getWidth() + "x" + canvas.getHeight());
         lines.add("Rotation: " + sensorOrientation);
         lines.add("Inference time: " + lastProcessingTimeMs + "ms");
+        if(AppSetting.object!=null) {
+            lines.add("결과: " + AppSetting.object.getTitle());
+
+        }else{
+            lines.add("결과: 준비중");
+        }
 
         borderedText.drawLines(canvas, 10, 10, lines);
     }

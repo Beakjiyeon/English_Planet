@@ -1,5 +1,7 @@
 package org.tensorflow.yolo.model;
 
+import org.tensorflow.yolo.setting.AppSetting;
+
 /**
  * Model to store the position of the bounding boxes
  *
@@ -29,7 +31,8 @@ public class BoxPosition {
         this.top = boxPosition.top;
         this.width = boxPosition.width;
         this.height = boxPosition.height;
-
+        // 백지연
+        //AppSetting.box_position=this;
         init();
     }
 
