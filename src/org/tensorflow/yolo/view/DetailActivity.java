@@ -14,7 +14,7 @@ public class DetailActivity extends Activity {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(null);
         //getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-
+//qㅎㅎ
         setContentView(R.layout.activity_detail);
         Button back2camera = (Button) findViewById(R.id.back2camera) ;
         back2camera.setOnClickListener(new Button.OnClickListener() {
