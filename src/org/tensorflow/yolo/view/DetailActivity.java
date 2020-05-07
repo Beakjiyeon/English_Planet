@@ -21,7 +21,7 @@ public class DetailActivity extends Activity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(),CameraActivity.class);
-                startActivity(intent);//액티비티 띄우기
+                startActivity(intent);//액티비티 띄우기.
             }
         });
     }
