@@ -14,4 +14,10 @@ public class AppSetting {
     public static int dialog_flag=0;
     public static int viewWidth;
     public static int viewHeight;
+
+    // 민주희 : 가입자 정보
+    public static String uid;
+    public static String upwd;
+    public static String unickname;
+    public static int progress;
 }
