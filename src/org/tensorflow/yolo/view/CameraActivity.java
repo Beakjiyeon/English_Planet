@@ -186,6 +186,7 @@ public abstract class CameraActivity extends Activity implements OnImageAvailabl
                       //  intent.putExtra("뷰", getApplicationContext());
                       //  intent.putExtra("메시지", "이것이 메시지의 vaule입니다.");
                       //  startActivity(intent);//액티비티 띄우기
+                        saveView(AppSetting.image);
                         Toast.makeText(getApplicationContext(),"예를 선택했습니다.",Toast.LENGTH_LONG).show();
                         dialog.cancel();// 네 버튼을 눌렀을 때, 다이얼로그가 종료되게 한다.
 
@@ -210,19 +211,19 @@ public abstract class CameraActivity extends Activity implements OnImageAvailabl
     // 백지연
 // 백지연 추가
     @SuppressLint("WrongThread")
-    private void saveView(View view, String title )
+    private void saveView(Bitmap bitmap )
 
     {
         String path = Environment.getExternalStorageDirectory().getAbsolutePath();
-        Bitmap b = Bitmap.createBitmap(view.getWidth(), view.getHeight(), Bitmap.Config.RGB_565);
+        Bitmap b = bitmap;
 
         if(b!=null){
             try {
-                File f = new File(path+"/notes");
+                File f = new File(path+"/project2");
                 f.mkdir();
-                File f2 = new File(path + "/notes/"+title+".png");
+                File f2 = new File(path + "/project2/"+AppSetting.object.getTitle()+".png");
                 Canvas c = new Canvas( b );
-                view.draw( c );
+                //view.draw( c );
                 FileOutputStream fos = new FileOutputStream(f2);
 
 

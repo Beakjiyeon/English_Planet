@@ -112,52 +112,17 @@ public class OverlayView extends View {
                      }
 
                 Bitmap newbitmap=Bitmap.createBitmap( bitmap,a,b,c,d);
-
-               saveView(newbitmap);
+                // 지연!===============================================================================
+               //saveView(newbitmap);
+               AppSetting.image=newbitmap;
                 //break;
                 // 추가
+
                 // saveView(this,title);
                  //break;
 
 
             }
-        }
-    }
-
-    @SuppressLint("WrongThread")
-    private void saveView(Bitmap bitmap )
-
-    {
-        String path = Environment.getExternalStorageDirectory().getAbsolutePath();
-        Bitmap b = bitmap;
-
-        if(b!=null){
-            try {
-                File f = new File(path+"/notes2");
-                f.mkdir();
-                File f2 = new File(path + "/notes2/"+AppSetting.object.getTitle()+".png");
-                Canvas c = new Canvas( b );
-                //view.draw( c );
-                FileOutputStream fos = new FileOutputStream(f2);
-
-
-                if ( fos != null )
-                {
-                    b.compress(Bitmap.CompressFormat.PNG, 100, fos );
-                    try {
-                        fos.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-
-
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-
-
         }
     }
 

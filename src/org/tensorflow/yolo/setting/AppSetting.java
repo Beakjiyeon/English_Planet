@@ -1,5 +1,7 @@
 package org.tensorflow.yolo.setting;
 
+import android.graphics.Bitmap;
+
 import org.tensorflow.yolo.model.BoxPosition;
 import org.tensorflow.yolo.model.Recognition;
 
@@ -14,4 +16,6 @@ public class AppSetting {
     public static int dialog_flag=0;
     public static int viewWidth;
     public static int viewHeight;
+
+    public static Bitmap image;
 }
