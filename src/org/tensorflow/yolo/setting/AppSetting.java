@@ -19,4 +19,10 @@ public class AppSetting {
 
     public static Bitmap image;
     public static String image_name;
+
+    // 민주희 : 가입자 정보
+    public static String uid;
+    public static String upwd;
+    public static String unickname;
+    public static int progress;
 }

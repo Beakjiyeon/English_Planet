@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg2"
+    tools:context=".MainActivity">
+
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/singup_box"
+            android:layout_width="600dp"
+            android:layout_height="500dp"
+            android:layout_gravity="center"
+            android:src="@drawable/signup_box"></ImageView>
+
+
+        <Button
+            android:id="@+id/signup_enter"
+            android:layout_width="110dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="0dp"
+            android:layout_marginLeft="131dp"
+            android:layout_marginTop="98dp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginRight="24dp"
+            android:background="@drawable/btn_confirm2"></Button>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="25dp"
+                    android:fontFamily="@font/cookierun_bold"
+                    android:text="아이디"
+                    android:textSize="20dp">
+
+                </TextView>
+
+                <EditText
+                    android:id="@+id/user_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:width="300dp"
+                    android:background="#FFFFFF"></EditText>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="25dp"
+                    android:fontFamily="@font/cookierun_bold"
+                    android:text="닉네임"
+                    android:textSize="20dp"></TextView>
+
+                <EditText
+                    android:id="@+id/user_nickname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:width="300dp"
+                    android:background="#FFFFFF"></EditText>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:fontFamily="@font/cookierun_bold"
+                    android:text="비밀번호"
+                    android:textSize="20dp"></TextView>
+
+                <EditText
+                    android:id="@+id/user_pwd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:width="300dp"
+                    android:background="#FFFFFF"
+                    android:inputType="textPassword"></EditText>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

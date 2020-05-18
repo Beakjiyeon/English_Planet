@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/relative1">
+
+<!--        TODO progress bar 따라오게 만들기 / 위에 고정 -->
+
+        <ImageView
+            android:id="@+id/progBar"
+            android:layout_width="500dp"
+            android:layout_height="65dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="8dp"
+            android:adjustViewBounds="true"
+            android:background="@drawable/progress_bar2" />
+
+        <ImageView
+            android:id="@+id/BtnPlus"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignBaseline="@id/progBar"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_toRightOf="@id/progBar"
+            app:srcCompat="@drawable/btnplus" />
+    </LinearLayout>
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/planet1"
+            android:layout_width="365dp"
+            android:layout_height="365dp"
+            android:layout_gravity="bottom|center"
+            android:adjustViewBounds="true"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/planet1"
+            android:layout_marginBottom="5dp"/>
+
+        <ImageView
+            android:id="@+id/planet2"
+            style="@style/planet"
+            android:layout_marginLeft="-60dp"
+            android:layout_gravity="bottom|center"
+            android:layout_toRightOf="@id/planet1"
+            android:adjustViewBounds="true"
+            android:src="@drawable/planet2" />
+
+        <ImageView
+            android:id="@+id/planet3"
+            style="@style/planet"
+            android:layout_marginLeft="-70dp"
+            android:layout_gravity="bottom|center"
+            android:layout_toRightOf="@id/planet2"
+            android:adjustViewBounds="true"
+            android:src="@drawable/planet3" />
+
+        <ImageView
+            style="@style/planet"
+            android:id="@+id/dev"
+            android:layout_marginLeft="-40dp"
+            android:layout_gravity="bottom|center"
+            android:layout_toRightOf="@id/planet3"
+            android:adjustViewBounds="true"
+            android:src="@drawable/planet_devs" />
+        </RelativeLayout>
+    </HorizontalScrollView>
+</LinearLayout>
