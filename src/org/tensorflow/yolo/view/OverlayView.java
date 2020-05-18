@@ -75,8 +75,10 @@ public class OverlayView extends View {
                 AppSetting.object=results.get(i);
                 RectF box = reCalcSize(results.get(i).getLocation());
 
+
                 String title = results.get(i).getTitle() + ":"
                         + String.format("%.2f", results.get(i).getConfidence());
+               AppSetting.image_name=results.get(i).getTitle();
                 paint.setColor(colors.get(results.get(i).getId()));
                 canvas.drawRect(box, paint);
                 canvas.drawText(title, box.left, box.top, paint);

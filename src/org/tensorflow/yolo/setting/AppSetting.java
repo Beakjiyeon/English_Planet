@@ -18,4 +18,5 @@ public class AppSetting {
     public static int viewHeight;
 
     public static Bitmap image;
+    public static String image_name;
 }

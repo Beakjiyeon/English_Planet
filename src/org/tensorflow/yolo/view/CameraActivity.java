@@ -10,6 +10,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Point;
+import android.graphics.drawable.BitmapDrawable;
 import android.media.ImageReader.OnImageAvailableListener;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -17,6 +18,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.HandlerThread;
+import android.support.annotation.NonNull;
 import android.util.Log;
 import android.util.Size;
 import android.view.Display;
@@ -25,6 +27,13 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.StorageTask;
+import com.google.firebase.storage.UploadTask;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -36,6 +45,7 @@ import org.tensorflow.yolo.model.BoxPosition;
 import org.tensorflow.yolo.setting.AppSetting;
 
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -50,6 +60,10 @@ import static org.tensorflow.yolo.Config.LOGGING_TAG;
 public abstract class CameraActivity extends Activity implements OnImageAvailableListener {
     private static final int PERMISSIONS_REQUEST = 1;
 
+    // firebase===========================
+    StorageReference mStorageRef;
+    private StorageTask uploadTask; // 지연 : 중복 방지
+    // firebase===========================
     private Handler handler;
     private HandlerThread handlerThread;
     boolean not_this_time=false;
@@ -187,6 +201,7 @@ public abstract class CameraActivity extends Activity implements OnImageAvailabl
                       //  intent.putExtra("메시지", "이것이 메시지의 vaule입니다.");
                       //  startActivity(intent);//액티비티 띄우기
                         saveView(AppSetting.image);
+
                         Toast.makeText(getApplicationContext(),"예를 선택했습니다.",Toast.LENGTH_LONG).show();
                         dialog.cancel();// 네 버튼을 눌렀을 때, 다이얼로그가 종료되게 한다.
 
@@ -210,6 +225,7 @@ public abstract class CameraActivity extends Activity implements OnImageAvailabl
     }
     // 백지연
 // 백지연 추가
+    // 파이어베이스 연결
     @SuppressLint("WrongThread")
     private void saveView(Bitmap bitmap )
 
@@ -217,8 +233,42 @@ public abstract class CameraActivity extends Activity implements OnImageAvailabl
         String path = Environment.getExternalStorageDirectory().getAbsolutePath();
         Bitmap b = bitmap;
 
+
+
         if(b!=null){
             try {
+                // 지연 : storage
+                mStorageRef= FirebaseStorage.getInstance().getReference("Images/"+AppSetting.image_name);
+
+                Bitmap image_bitmap = AppSetting.image;
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                image_bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                byte[] data = baos.toByteArray();
+
+                UploadTask uploadTask = mStorageRef.putBytes(data);
+                uploadTask.addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+                        // Handle unsuccessful uploads
+                        Toast.makeText(CameraActivity.this,"실패",Toast.LENGTH_LONG).show();
+                        Log.d("백지연","실패");
+                    }
+                }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
+                        // ...
+                        // 성공하면
+                        Toast.makeText(CameraActivity.this,"Image Uproad Successfultty",Toast.LENGTH_LONG).show();
+                        Log.d("백지연",taskSnapshot.getMetadata().getReference().getDownloadUrl()+"");
+                    }
+                });
+                // 서버에 올릴 것.
+                // 영문, 한글, 이미지 유알엘, 유아이디
+
+
+
+
                 File f = new File(path+"/project2");
                 f.mkdir();
                 File f2 = new File(path + "/project2/"+AppSetting.object.getTitle()+".png");
