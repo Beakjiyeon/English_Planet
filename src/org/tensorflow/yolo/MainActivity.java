@@ -19,6 +19,7 @@ import android.widget.Toast;
 //import androidx.appcompat.app.AppCompatActivity;
 
 import org.tensorflow.yolo.view.CameraActivity;
+import org.tensorflow.yolo.view.CameraWordBookActivity;
 import org.tensorflow.yolo.view.ClassifierActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -112,6 +113,16 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Toast.makeText(getApplicationContext(),"와우",Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(getApplicationContext(), ClassifierActivity.class);
+                startActivity(intent);//액티비티 띄우기
+            }
+        });
+
+        Button b2=(Button)findViewById(R.id.testbook);
+        b2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(),"와2우",Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(getApplicationContext(), CameraWordBookActivity.class);
                 startActivity(intent);//액티비티 띄우기
             }
         });

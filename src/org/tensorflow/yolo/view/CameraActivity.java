@@ -12,6 +12,7 @@ import android.graphics.Canvas;
 import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
 import android.media.ImageReader.OnImageAvailableListener;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -28,8 +29,11 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
@@ -39,8 +43,12 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.tensorflow.yolo.Camera;
 import org.tensorflow.yolo.MainActivity;
+import org.tensorflow.yolo.NetworkService;
 import org.tensorflow.yolo.R;
+import org.tensorflow.yolo.RetrofitSender;
+import org.tensorflow.yolo.User;
 import org.tensorflow.yolo.model.BoxPosition;
 import org.tensorflow.yolo.setting.AppSetting;
 
@@ -50,6 +58,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static org.tensorflow.yolo.Config.LOGGING_TAG;
 
@@ -67,8 +79,10 @@ public abstract class CameraActivity extends Activity implements OnImageAvailabl
     private Handler handler;
     private HandlerThread handlerThread;
     boolean not_this_time=false;
-
+    String imageUrl;
+    NetworkService networkService;
     Button hidebutton;
+    String fuckUrl;
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(null);
@@ -192,6 +206,7 @@ public abstract class CameraActivity extends Activity implements OnImageAvailabl
         not_this_time=false;
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("단어장에 추가할까요?");
+        AppSetting.means=means;
         builder.setMessage(AppSetting.object.getTitle()+" : "+means);
         builder.setPositiveButton("예",
                 new DialogInterface.OnClickListener() {
@@ -260,11 +275,64 @@ public abstract class CameraActivity extends Activity implements OnImageAvailabl
                         // ...
                         // 성공하면
                         Toast.makeText(CameraActivity.this,"Image Uproad Successfultty",Toast.LENGTH_LONG).show();
-                        Log.d("백지연",taskSnapshot.getMetadata().getReference().getDownloadUrl()+"");
+                        Log.d("백지연",taskSnapshot.getMetadata().getReference().getDownloadUrl().toString()+"");
+
+                        Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                            @Override
+                            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                                if (!task.isSuccessful()) {
+                                    throw task.getException();
+                                }
+
+                                // Continue with the task to get the download URL
+                                return mStorageRef.getDownloadUrl();
+                            }
+                        }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Uri> task) {
+                                if (task.isSuccessful()) {
+                                    //Uri downloadUri = task.getResult();
+                                    //Toast.makeText(getApplicationContext(),downloadUri+"",Toast.LENGTH_LONG).show();
+                                    //imageUrl= downloadUri.toString();
+
+                                    networkService = RetrofitSender.getNetworkService();
+                                    //Call<Camera> response = networkService.register_camera(imageUrl+"",AppSetting.image_name+"",AppSetting.means+"","유저");
+
+                                    //Log.d("시발",imageUrl+"/"+AppSetting.image_name+"/"+AppSetting.means);
+
+
+
+                                    Call<Camera> response = networkService.register_camera(task.getResult().toString(),AppSetting.image_name,AppSetting.means,"유저");
+                                    response.enqueue(new Callback<Camera>() {
+
+                                        @Override
+                                        public void onResponse(Call<Camera> call, Response<Camera> response) {
+                                            Log.d("카메라","성공================================================================");
+                                        }
+
+                                        @Override
+                                        public void onFailure(Call<Camera> call, Throwable t) {
+                                            Log.d("카메라","실패================================================================");
+                                        }
+                                    });
+
+                                    fuckUrl=imageUrl;
+                                    AppSetting.uarl=imageUrl;
+                                    Log.e("fuckUrl"+fuckUrl,"==============================================");
+                                } else {
+                                    // Handle failures
+                                    // ...
+                                    Log.d("이미지","실패");
+                                }
+                            }
+                        });
+
                     }
                 });
                 // 서버에 올릴 것.
+
                 // 영문, 한글, 이미지 유알엘, 유아이디
+
 
 
 

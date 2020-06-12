@@ -19,6 +19,8 @@ public class AppSetting {
 
     public static Bitmap image;
     public static String image_name;
+    public static String means;
+    public static String uarl;
 
     // 민주희 : 가입자 정보
     public static String uid;
