@@ -28,5 +28,19 @@ public class PlanetActivity1 extends AppCompatActivity {
             startActivity(intent);
             finish();
         });
+
+        ImageView img2 = findViewById(R.id.imageView3);
+        img2.setOnClickListener(view -> {
+            Intent intent = new Intent(getApplicationContext(), SentenceActivity.class);
+            startActivity(intent);
+            finish();
+        });
+
+        ImageView img3 = findViewById(R.id.imageView4);
+        img3.setOnClickListener(view -> {
+            Intent intent = new Intent(getApplicationContext(), WordquizActivity.class);
+            startActivity(intent);
+            finish();
+        });
     }
 }

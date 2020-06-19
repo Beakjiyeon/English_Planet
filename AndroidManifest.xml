@@ -8,6 +8,7 @@
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
 
 
     <uses-sdk
@@ -61,6 +62,18 @@
             android:screenOrientation="landscape"
             android:theme="@style/fullScreen">
         </activity>
+        <activity android:name=".SentenceActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/fullScreen"></activity>
+        <activity android:name=".ScoreActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/fullScreen"></activity>
+        <activity android:name=".WordanswerActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/fullScreen"></activity>
+        <activity android:name=".WordquizActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/fullScreen"></activity>
 
     </application>
 

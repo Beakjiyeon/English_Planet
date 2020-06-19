@@ -59,7 +59,12 @@ public interface NetworkService {
     @GET("/api/book/{pk}")
     Call<Book> get_book(@Path("pk") int pk);
 
+    // quiz
+    @GET("/api/quiz/{userId}") Call<Quiz> getData(@Path("userId") String id);
 
+    // bookword
+    @GET("/api/bookword/{userId}") Call<Bookword> get_bw_data(@Path("userId") String id);
+    @GET("api/bookword") Call<List<Bookword>> get_bw(@Query("b_id") int b_id);
 
 }
 
