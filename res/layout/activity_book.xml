@@ -43,8 +43,8 @@
             android:layout_alignParentEnd="true"
             android:layout_marginTop="25dp"
             android:layout_marginEnd="91dp"
-            android:fontFamily="casual"
-            android:text=""
+            android:fontFamily="serif"
+            android:gravity="center_vertical"
             android:textColor="#000000"
             android:textSize="20sp"></TextView>
 
@@ -54,7 +54,8 @@
             android:layout_height="80dp"
             android:layout_below="@id/book_text1"
             android:layout_centerInParent="true"
-            android:fontFamily="casual"
+            android:fontFamily="serif"
+            android:gravity="center_vertical"
             android:text=""
             android:textColor="#000000"
             android:textSize="20sp"></TextView>
@@ -65,7 +66,8 @@
             android:layout_height="80dp"
             android:layout_below="@id/book_text2"
             android:layout_centerInParent="true"
-            android:fontFamily="casual"
+            android:fontFamily="serif"
+            android:gravity="center_vertical"
             android:text=""
             android:textColor="#000000"
             android:textSize="20sp"></TextView>
