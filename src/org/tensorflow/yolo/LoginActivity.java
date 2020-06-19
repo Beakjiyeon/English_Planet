@@ -3,6 +3,8 @@ package org.tensorflow.yolo;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -22,9 +24,10 @@ import retrofit2.Response;
 public class LoginActivity extends AppCompatActivity {
     static NetworkService networkService;
     static boolean tf=false; // 로그인 함수
+    boolean mloginstatus;
 
     public static boolean UserLogin(final String id, final String pwd){
-        networkService = RetrofitSender.getNetworkService();
+
 
         Call<User> response = networkService.get_pk_user(id);
         response.enqueue(new Callback<User>() {
@@ -36,8 +39,7 @@ public class LoginActivity extends AppCompatActivity {
                     if((id.equals(u.getUid()))&&pwd.equals(u.getUpw())){
                         System.out.println("debug1");
                         tf=true;
-                        System.out.print("#############");
-                        System.out.println(tf);
+                        Log.e("tf값"+tf+"","###########################");
                         AppSetting.uid = id;
                         AppSetting.upwd = pwd;
                         AppSetting.unickname = u.getNickname();
@@ -64,11 +66,13 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
 //        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 //                WindowManager.LayoutParams.FLAG_FULLSCREEN);
 //        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         setContentView(R.layout.activity_login);
+        networkService = RetrofitSender.getNetworkService();
 
         // 네이게이션 바
         Window w = getWindow();
@@ -82,21 +86,39 @@ public class LoginActivity extends AppCompatActivity {
         // 주희 : 이름 입력하면 다음 페이지로 넘어감 (행성 리스트)
         Button enter_btn = (Button) findViewById(R.id.enter_btn);
 
+        mPwd.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                UserLogin(mName.getText().toString(),mPwd.getText().toString());
+            }
+        });
+
         // TODO : 로그인
         // 아이디 존재하는지
-        // 아이디랑 비밀번호 값이 일치하는지 
+        // 아이디랑 비밀번호 값이 일치하는지
         enter_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("TTTTTTT");
-                boolean loginstatus = UserLogin(mName.getText().toString(),mPwd.getText().toString());
-                System.out.print("login status debug:");
-                System.out.println(loginstatus);
-                if (loginstatus){
-                Intent intent = new Intent(getApplicationContext(), PlanetListActivity.class);
-                startActivity(intent);
-                finish();
-            } else {
+//                UserLogin(mName.getText().toString(),mPwd.getText().toString());
+//                Log.e("1번","==================================================");
+//                Log.e("mName",mName.getText().toString()+"=====================");
+//                Log.e("mName",mPwd.getText().toString()+"=====================");
+//                Log.e("3번","================================================");
+                if (tf){
+                    Intent intent = new Intent(getApplicationContext(), PlanetListActivity.class);
+                    startActivity(intent);
+                    finish();
+                } else {
                     mName.setText("");
                     mPwd.setText("");
                     mName.requestFocus();
@@ -110,6 +132,6 @@ public class LoginActivity extends AppCompatActivity {
 
 
 
-    }
+}
 
 

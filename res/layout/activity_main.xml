@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:background="@drawable/main_bg_with_yellow">
 
     <!--지연 : 전체 배경 이미지뷰-->
 
@@ -14,127 +14,81 @@
     <!--지연 : 반짝이 이미지뷰2-->
     <!--지연 : 반짝이 이미지뷰2-->
 
-    <ImageView
-        android:id="@+id/main_bg"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
-        android:background="@drawable/main_bg_with_yellow"
-        android:contentDescription="bg_main"
-        android:padding="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/blink3"
-        tools:ignore="MissingConstraints" />
-
-    <ImageView
-        android:id="@+id/blink"
-        android:layout_width="0dp"
-        android:layout_height="164dp"
-        android:layout_marginTop="31dp"
-        android:layout_marginEnd="16dp"
-        android:background="@drawable/blink"
-        android:contentDescription="blink"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/test"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
 
     <!--지연 : 새 게임 버튼-->
 
     <ImageView
-        android:id="@+id/blink4"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="122dp"
-        android:layout_marginBottom="2dp"
+        android:id="@+id/blink"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
         android:background="@drawable/blink"
-        android:contentDescription="blink4"
-        app:layout_constraintBottom_toTopOf="@+id/blink2"
-        app:layout_constraintEnd_toStartOf="@+id/testbook"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/test"
-        tools:ignore="MissingConstraints" />
+        android:contentDescription="blink" />
+
+    <ImageView
+        android:id="@+id/blink4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/blink" />
 
     <ImageView
         android:id="@+id/blink2"
-        android:layout_width="183dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="1dp"
-        android:background="@drawable/blink"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/testbook"
-        tools:ignore="MissingConstraints" />
-
-    <ImageView
-        android:id="@+id/blink3"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@drawable/blink"
-        app:layout_constraintBottom_toTopOf="parent"
-        app:layout_constraintEnd_toStartOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
+        android:layout_width="273dp"
+        android:layout_height="230dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="475dp"
+        android:layout_marginEnd="-5dp"
+        android:layout_marginBottom="139dp" />
 
     <!--    카메라 단어-->
 
     <!--지연 : 불러오기 버튼-->
 
     <!--카메라 단어북-->
+    <ImageView
+        android:id="@+id/blink3"
+        android:layout_width="163dp"
+        android:layout_height="125dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="120dp" />
+
     <Button
         android:id="@+id/test"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="31dp"
-        android:layout_marginEnd="289dp"
-        android:layout_marginBottom="34dp"
         android:text="카메라 단어장"
-        app:layout_constraintBottom_toTopOf="@+id/blink4"
-        app:layout_constraintEnd_toStartOf="@+id/blink"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
+        android:textSize="20sp"/>
 
     <Button
         android:id="@+id/testbook"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="135dp"
-        android:layout_marginEnd="183dp"
-        android:layout_marginBottom="426dp"
+        android:layout_below="@id/test"
         android:text="카메라 단어북"
-        app:layout_constraintBottom_toTopOf="@+id/blink2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/blink4"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
+        android:textSize="20sp" />
 
     <Button
         android:id="@+id/btn_login"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_gravity="center"
-
-        android:background="@drawable/btn_login"
-        android:contentDescription="butt"
-        app:layout_constraintBottom_toTopOf="parent"
-        app:layout_constraintEnd_toStartOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_width="150dp"
+        android:layout_height="70dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="60dp"
+        android:layout_marginBottom="32dp"
+        android:layout_toLeftOf="@id/btn_signup"
+        android:background="@drawable/btn_login" />
 
     <Button
         android:id="@+id/btn_signup"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_gravity="center"
-        android:background="@drawable/btn_signup"
-        android:contentDescription="btn_signup"
-        app:layout_constraintBottom_toTopOf="parent"
-        app:layout_constraintEnd_toStartOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_width="150dp"
+        android:layout_height="70dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="177dp"
+        android:layout_marginBottom="33dp"
+        android:background="@drawable/btn_signup" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

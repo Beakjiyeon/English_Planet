@@ -55,6 +55,10 @@ public interface NetworkService {
     @GET("/api/camera?")
     Call<List<Camera>> get_Cameras();
 
+    // book text
+    @GET("/api/book/{pk}")
+    Call<Book> get_book(@Path("pk") int pk);
+
 
 
 }
