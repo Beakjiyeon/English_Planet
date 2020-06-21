@@ -13,28 +13,37 @@
         android:orientation="horizontal"
         android:id="@+id/relative1">
 
-<!--        TODO progress bar 따라오게 만들기 / 위에 고정 -->
-
         <ImageView
             android:id="@+id/progBar"
             android:layout_width="500dp"
             android:layout_height="65dp"
             android:layout_alignParentTop="true"
-            android:layout_marginLeft="60dp"
+            android:layout_marginLeft="50dp"
             android:layout_marginTop="8dp"
             android:adjustViewBounds="true"
             android:background="@drawable/progress_bar2" />
 
         <ImageView
-            android:id="@+id/BtnPlus"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:id="@+id/BtnCamera"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:layout_alignBaseline="@id/progBar"
             android:layout_alignParentTop="true"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="8dp"
             android:layout_toRightOf="@id/progBar"
-            app:srcCompat="@drawable/btnplus" />
+            app:srcCompat="@drawable/icon_camera" />
+
+        <ImageView
+            android:id="@+id/BtnMypage"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_alignBaseline="@id/progBar"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/BtnCamera"
+            app:srcCompat="@drawable/icon_mypage"/>
     </LinearLayout>
 
     <HorizontalScrollView

@@ -22,6 +22,7 @@ import org.tensorflow.yolo.Camera;
 import org.tensorflow.yolo.NetworkService;
 import org.tensorflow.yolo.R;
 import org.tensorflow.yolo.RetrofitSender;
+import org.tensorflow.yolo.setting.AppSetting;
 
 import java.util.List;
 
@@ -55,7 +56,7 @@ public class CameraWordBookActivity extends Activity {
                     int totalElements = list.size();// arrayList의 요소의 갯수를 구한다.
                     for (int index = 0; index < totalElements; index++) {
 
-                        if(list.get(index).getUid().equals("ji")) {
+                        if(list.get(index).getUid().equals(AppSetting.uid)) {
                             Log.d("########", list.get(index).getC_word_e() + "/" + list.get(index).getC_word_k());
                             FirebaseStorage fs = FirebaseStorage.getInstance();
 

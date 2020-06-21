@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -17,6 +18,11 @@ public class ScoreActivity extends AppCompatActivity {
         setContentView(R.layout.activity_score);
         ImageButton btn = (ImageButton)findViewById(R.id.btn);
         LinearLayout scorelayout = (LinearLayout)findViewById(R.id.scorelayout);
+
+        Window w = getWindow();
+        Navigation_Bar n = new Navigation_Bar();
+        n.HideNavigationBar(w);
+
 
         // 발음 점수 받아오기
        Intent intent=new Intent(this.getIntent());
@@ -47,9 +53,13 @@ public class ScoreActivity extends AppCompatActivity {
         btn.setOnClickListener(new Button.OnClickListener(){
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), SentenceActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(getApplicationContext(), SentenceActivity.class);
+//                startActivity(intent);
+                finish();
             }
         });
+
+
+
     }
 }
