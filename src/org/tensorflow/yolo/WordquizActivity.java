@@ -101,6 +101,7 @@ public class WordquizActivity extends AppCompatActivity {
                     intent.putExtra("correct",0);
                 }
                 startActivity(intent);
+                finish();
             }
         });
         ivans2.setOnClickListener(new View.OnClickListener() {

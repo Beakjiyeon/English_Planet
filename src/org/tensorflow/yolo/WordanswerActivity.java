@@ -45,6 +45,8 @@ public class WordanswerActivity extends AppCompatActivity {
 //                Intent intent=new Intent(getApplicationContext(), WordquizActivity.class);
 //                startActivity(intent);
                 finish();
+                Intent intent = new Intent(getApplicationContext(), PlanetActivity1.class);
+                startActivity(intent);
             }
         });
     }

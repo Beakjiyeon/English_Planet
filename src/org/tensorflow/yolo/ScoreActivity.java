@@ -56,6 +56,8 @@ public class ScoreActivity extends AppCompatActivity {
 //                Intent intent = new Intent(getApplicationContext(), SentenceActivity.class);
 //                startActivity(intent);
                 finish();
+                Intent intent = new Intent(getApplicationContext(), PlanetActivity1.class);
+                startActivity(intent);
             }
         });
 

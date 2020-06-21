@@ -302,7 +302,7 @@ public abstract class CameraActivity extends Activity implements OnImageAvailabl
 
 
 
-                                    Call<Camera> response = networkService.register_camera(task.getResult().toString(),AppSetting.image_name,AppSetting.means,"유저");
+                                    Call<Camera> response = networkService.register_camera(task.getResult().toString(),AppSetting.image_name,AppSetting.means,AppSetting.uid);
                                     response.enqueue(new Callback<Camera>() {
 
                                         @Override

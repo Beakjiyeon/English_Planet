@@ -17,6 +17,7 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.Window;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
@@ -137,6 +138,10 @@ public class SentenceActivity extends AppCompatActivity {public static final Str
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sentence);
+
+        Window w = getWindow();
+        Navigation_Bar n = new Navigation_Bar();
+        n.HideNavigationBar(w);
 
         sen=(TextView)findViewById(R.id.sen);
         buttonStart = (Button)findViewById(R.id.buttonStart);
@@ -277,6 +282,7 @@ public class SentenceActivity extends AppCompatActivity {public static final Str
                                             intent.putExtra("myscore",Double.parseDouble(score));
 
                                             startActivity(intent);
+                                            finish();
                                         }catch(Throwable t){
                                             Log.d("에러","object 없음");
                                         }

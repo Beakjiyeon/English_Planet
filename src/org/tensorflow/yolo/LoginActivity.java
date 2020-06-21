@@ -44,6 +44,9 @@ public class LoginActivity extends AppCompatActivity {
                         AppSetting.upwd = pwd;
                         AppSetting.unickname = u.getNickname();
                         AppSetting.progress = u.getP_progress();
+
+
+
                     } else {
 
                         //tf = false;
