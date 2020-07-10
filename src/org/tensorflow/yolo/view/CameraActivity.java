@@ -414,7 +414,7 @@ public abstract class CameraActivity extends Activity implements OnImageAvailabl
         protected void onPreExecute() {
             super.onPreExecute();
         }
-        String means="뜻은?";
+        String means="";
         @Override
         protected Void doInBackground(Void... params) {
             try {
