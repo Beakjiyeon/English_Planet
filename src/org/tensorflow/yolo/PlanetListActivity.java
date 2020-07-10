@@ -11,6 +11,7 @@ import android.widget.Toast;
 //import androidx.appcompat.app.AppCompatActivity;
 
 import org.tensorflow.yolo.setting.AppSetting;
+import org.tensorflow.yolo.view.ClassifierActivity;
 
 // 주희 : 행성리스트 액티비티
 public class PlanetListActivity extends AppCompatActivity {
@@ -61,6 +62,26 @@ public class PlanetListActivity extends AppCompatActivity {
 
         ImageView dev = (ImageView) findViewById(R.id.dev);
         dev.setImageResource(R.drawable.planet_devs);
+
+        ImageView btnCamera = (ImageView) findViewById(R.id.BtnCamera);
+        btnCamera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(),"영어 뜻을 알고싶은 물건을 찍어보세요",Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(getApplicationContext(), ClassifierActivity.class);
+                startActivity(intent);//액티비티 띄우기
+            }
+        });
+
+        ImageView btnMypage = (ImageView) findViewById(R.id.BtnMypage);
+        btnMypage.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), MypageActivity.class);
+                startActivity(intent);//액티비티 띄우기
+            }
+        });
 
     }
 

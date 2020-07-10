@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.Window;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -18,6 +19,11 @@ public class WordanswerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wordanswer);
         answerlayout = (RelativeLayout)findViewById(R.id.answerlayout);
+
+        Window w = getWindow();
+        Navigation_Bar n = new Navigation_Bar();
+        n.HideNavigationBar(w);
+
         tvans = (TextView)findViewById(R.id.tvans);
         btn = (ImageButton)findViewById(R.id.btn);
         Intent intent = getIntent();
@@ -36,7 +42,10 @@ public class WordanswerActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(getApplicationContext(), WordquizActivity.class);
+//                Intent intent=new Intent(getApplicationContext(), WordquizActivity.class);
+//                startActivity(intent);
+                finish();
+                Intent intent = new Intent(getApplicationContext(), PlanetActivity1.class);
                 startActivity(intent);
             }
         });

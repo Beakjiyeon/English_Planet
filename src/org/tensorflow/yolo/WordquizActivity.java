@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -26,6 +27,12 @@ public class WordquizActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wordquiz);
+
+        Window w = getWindow();
+        Navigation_Bar n = new Navigation_Bar();
+        n.HideNavigationBar(w);
+
+
         wordtv = (TextView)findViewById(R.id.word);
         ivans1 = (ImageView)findViewById(R.id.wiv1);
         ivans2 = (ImageView)findViewById(R.id.wiv2);
@@ -94,6 +101,7 @@ public class WordquizActivity extends AppCompatActivity {
                     intent.putExtra("correct",0);
                 }
                 startActivity(intent);
+                finish();
             }
         });
         ivans2.setOnClickListener(new View.OnClickListener() {
