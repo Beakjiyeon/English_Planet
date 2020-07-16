@@ -8,6 +8,7 @@
     android:background="#000000">
 
     <TextView
+        android:fontFamily="@font/cookierun_bold"
         android:id="@+id/textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

@@ -1,18 +1,24 @@
 package org.tensorflow.yolo;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.tensorflow.yolo.setting.AppSetting;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.List;
 import java.util.NoSuchElementException;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -95,10 +101,43 @@ public class BookActivity extends Activity {
 
         } catch (NoSuchElementException ne) {
             Toast t = Toast.makeText(this.getApplicationContext(), "마지막 페이지입니다.", Toast.LENGTH_SHORT);
+            // 지연 : progressBar 진행상황 디비 수정
+            // AppSetting 값 수정 db에서 받아오는데 시간이 걸리기떄문...
+            AppSetting.progress=1;
+            // 쳅터 1의 시작=0, 동화=1
+            // db에 값 반영
+            updateProgressDB();
+            Intent intent = new Intent(getApplicationContext(), PlanetActivity1.class);
+            startActivity(intent);
             t.show();
             finish();
+
+
         }
 
+    }
+    // 지연: DB 진행률을 수정하는 함수
+    void updateProgressDB(){
+        networkService = RetrofitSender.getNetworkService();
+        // b_id : 1번으로 설정
+        Call<ResponseBody> response2 = networkService.updateProgress(AppSetting.uid,1);
+        response2.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if(response!=null) {
+                    Log.d("ㅋㅋㅋ#", "수정하고싶다");
+
+                }else{
+                    Log.d("ㅋㅋㅋ#", "ㄴㄴㄴxxxxxxx");
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.d("ㅋㅋㅋ#", t.getMessage());
+            }
+        });
     }
 }
 

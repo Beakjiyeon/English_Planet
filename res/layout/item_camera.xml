@@ -25,6 +25,7 @@
             android:orientation="vertical"
            >
             <TextView
+                android:fontFamily="@font/cookierun_regular"
                 android:textSize="30dp"
                 android:gravity="center"
                 android:textColor="#000000"
@@ -43,6 +44,7 @@
             </ImageView>
 
             <TextView
+                android:fontFamily="@font/cookierun_regular"
                 android:id="@+id/cword_text2"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
@@ -51,7 +53,7 @@
                 android:gravity="center"
                 android:text="dddd"
                 android:textColor="#000000"
-                android:textSize="20dp" />
+                android:textSize="10dp" />
 
 
         </LinearLayout>
