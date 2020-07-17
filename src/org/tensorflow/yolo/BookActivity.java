@@ -104,9 +104,11 @@ public class BookActivity extends Activity {
             // 지연 : progressBar 진행상황 디비 수정
             // AppSetting 값 수정 db에서 받아오는데 시간이 걸리기떄문...
             AppSetting.progress=1;
+            AppSetting.dp_bool=true;
             // 쳅터 1의 시작=0, 동화=1
             // db에 값 반영
             updateProgressDB();
+            Log.d("널체크","동화엔 "+AppSetting.uid);
             Intent intent = new Intent(getApplicationContext(), PlanetActivity1.class);
             startActivity(intent);
             t.show();
@@ -126,6 +128,7 @@ public class BookActivity extends Activity {
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if(response!=null) {
                     Log.d("ㅋㅋㅋ#", "수정하고싶다");
+
 
                 }else{
                     Log.d("ㅋㅋㅋ#", "ㄴㄴㄴxxxxxxx");

@@ -7,6 +7,7 @@ import org.tensorflow.yolo.model.Recognition;
 
 public class AppSetting {
     // 백지연
+    public static boolean dp_bool=true;
     // 박스 포지션
     public static float box_left;
     public static float box_top;

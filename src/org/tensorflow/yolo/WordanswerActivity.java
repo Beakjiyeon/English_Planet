@@ -58,7 +58,9 @@ public class WordanswerActivity extends AppCompatActivity {
                 // db에 값 반영
                 updateProgressDB();
 
+                Log.d("널체크","문법점수엔 "+AppSetting.uid);
                 finish();
+                AppSetting.dp_bool=true;
                 Intent intent = new Intent(getApplicationContext(), PlanetActivity1.class);
                 startActivity(intent);
             }
