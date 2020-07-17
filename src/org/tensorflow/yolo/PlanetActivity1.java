@@ -9,6 +9,8 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import org.tensorflow.yolo.setting.AppSetting;
+
 //import androidx.annotation.Nullable;
 //import androidx.appcompat.app.AppCompatActivity;
 
@@ -18,7 +20,8 @@ public class PlanetActivity1 extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_planet1);
-
+        AppSetting.quizcount=0;
+        AppSetting.quizsen=0;
         Window w = getWindow();
         Navigation_Bar n = new Navigation_Bar();
         n.HideNavigationBar(w);

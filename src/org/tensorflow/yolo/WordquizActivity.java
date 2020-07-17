@@ -9,6 +9,8 @@ import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.tensorflow.yolo.setting.AppSetting;
+
 import java.util.List;
 
 import retrofit2.Call;
@@ -16,7 +18,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class WordquizActivity extends AppCompatActivity {
-
     TextView wordtv,tv1,tv2,tv3;
     ImageView ivans1, ivans2, ivans3;
     String answer,answer2;
@@ -43,16 +44,16 @@ public class WordquizActivity extends AppCompatActivity {
 
         wordarray= new String[3];
 
-
         // 서버 데이터 가져옴
         networkService = RetrofitSender.getNetworkService();
         //Call<Bookword> call =  retrofitConnection.server.get_bw_data("1");
         Call<List<Bookword>> call =  networkService.get_bw(1);
+        //Log.d("흠흠무무무이",AppSetting.quizcount+"");
         call.enqueue(new Callback<List<Bookword>>() {
             @Override
             public void onResponse(Call<List<Bookword>> call, Response<List<Bookword>> response) {
                 if (response.isSuccessful()) {
-                    Bookword bw= response.body().get(0);
+                    Bookword bw= response.body().get(AppSetting.quizcount);
                     String bo=bw.getB_word_e();
                     answer2=bo;
                     answer = bw.getB_word_k();
@@ -100,6 +101,7 @@ public class WordquizActivity extends AppCompatActivity {
                     intent.putExtra("answer2",answer2);
                     intent.putExtra("correct",0);
                 }
+                intent.putExtra("type", "word");
                 startActivity(intent);
                 finish();
             }
@@ -114,6 +116,7 @@ public class WordquizActivity extends AppCompatActivity {
                     intent.putExtra("answer",answer);
                     intent.putExtra("answer2",answer2);
                     intent.putExtra("correct",0);}
+                intent.putExtra("type", "word");
                 startActivity(intent);
             }
         });
@@ -126,6 +129,7 @@ public class WordquizActivity extends AppCompatActivity {
                     intent.putExtra("answer",answer);
                     intent.putExtra("answer2",answer2);
                     intent.putExtra("correct",0);}
+                intent.putExtra("type", "word");
                 startActivity(intent);
             }
         });
