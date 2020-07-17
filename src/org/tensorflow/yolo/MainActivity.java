@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
 
         // 지연 : 배경음악시작
         mp = MediaPlayer.create(this, R.raw.milos);
-        mp.setLooping(true); // 반복여부
+        mp.setLooping(false); // 반복여부
         mp.start();
 
 

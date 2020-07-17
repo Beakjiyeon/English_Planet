@@ -192,6 +192,7 @@ public class ClassifierActivity extends TextToSpeechActivity implements OnImageA
             }
         }
 
+
         lines.add("Frame: " + previewWidth + "x" + previewHeight);
         lines.add("View: " + canvas.getWidth() + "x" + canvas.getHeight());
         lines.add("Rotation: " + sensorOrientation);
@@ -202,7 +203,9 @@ public class ClassifierActivity extends TextToSpeechActivity implements OnImageA
         }else{
             lines.add("결과: 준비중");
         }
+        //mfont = Typeface.createFromAsset(getAssets(),"syastro_.ttf");
 
+        //pnt.setTypeface(mfont);
         borderedText.drawLines(canvas, 10, 10, lines);
     }
 }

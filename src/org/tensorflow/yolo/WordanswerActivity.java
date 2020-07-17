@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageButton;
@@ -11,6 +12,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import org.tensorflow.yolo.setting.AppSetting;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class WordanswerActivity extends AppCompatActivity {
     RelativeLayout answerlayout;
@@ -57,7 +63,7 @@ public class WordanswerActivity extends AppCompatActivity {
                 Intent intent;
                 AppSetting.quizcount++;
                 if(AppSetting.quizcount<3) {
-                   intent = new Intent(getApplicationContext(), WordquizActivity.class);
+                    intent = new Intent(getApplicationContext(), WordquizActivity.class);
                 }
                 else if(AppSetting.quizcount==3){
                     intent=new Intent(getApplicationContext(), SenquizActivity.class);
@@ -72,7 +78,31 @@ public class WordanswerActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
                 //Intent intent = new Intent(getApplicationContext(), PlanetActivity1.class);
-               // startActivity(intent);
+                // startActivity(intent);
+            }
+        });
+    }
+
+    // 지연: DB 진행률을 수정하는 함수
+    void updateProgressDB(){
+        NetworkService networkService = RetrofitSender.getNetworkService();
+        // b_id : 1번으로 설정
+        Call<ResponseBody> response2 = networkService.updateProgress(AppSetting.uid,2);
+        response2.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if(response!=null) {
+                    Log.d("ㅋㅋㅋ4#", "수정하고싶다");
+
+                }else{
+                    Log.d("ㅋㅋㅋ#", "ㄴㄴㄴxxxxxxx");
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.d("ㅋㅋㅋ#", t.getMessage());
             }
         });
     }

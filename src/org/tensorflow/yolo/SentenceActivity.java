@@ -14,6 +14,8 @@ import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.speech.tts.TextToSpeech;
+import android.speech.tts.Voice;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -45,13 +47,22 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class SentenceActivity extends AppCompatActivity {public static final String PREFS_NAME = "prefs";
+public class SentenceActivity extends AppCompatActivity implements TextToSpeech.OnInitListener {
+
+    //tts
+    TextToSpeech tts;
+    Button buttonSound;
+
+    public static final String PREFS_NAME = "prefs";
     private static final String MSG_KEY = "status";
 
     Button buttonStart;
@@ -149,6 +160,30 @@ public class SentenceActivity extends AppCompatActivity {public static final Str
         Window w = getWindow();
         Navigation_Bar n = new Navigation_Bar();
         n.HideNavigationBar(w);
+
+        // back
+        Button btn_back = findViewById(R.id.btn_back);
+        btn_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
+
+        // tts create
+        tts = new TextToSpeech(this.getApplicationContext(), this, "com.google.android.tts");
+
+        // buttonSound 영어문장퀴즈 tts
+        buttonSound = (Button)findViewById(R.id.buttonSound);
+        // onclick evnet
+        buttonSound.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tts.speak(sen.getText().toString(),TextToSpeech.QUEUE_FLUSH,null);
+            }
+        });
+
 
         sen=(TextView)findViewById(R.id.sen);
         buttonStart = (Button)findViewById(R.id.buttonStart);
@@ -465,4 +500,18 @@ public class SentenceActivity extends AppCompatActivity {public static final Str
         }
     }
 
+    @Override
+    public void onInit(int i) {
+        if (i == TextToSpeech.SUCCESS) {
+            Set<String> a=new HashSet<>();
+            a.add("female");//here you can give male if you want to select male voice.
+            Voice v=new Voice("en-us-x-sfg#female_2-local",new Locale("en","US"),400,200,true,a);
+            tts.setLanguage(Locale.ENGLISH);
+            tts.setVoice(v);
+            tts.setSpeechRate(0.8f);
+        } else {
+            Log.e("TTS", "Initilization Failed!");
+        }
+
+    }
 }
