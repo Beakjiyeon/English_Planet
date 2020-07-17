@@ -87,7 +87,7 @@ public class PlanetActivity1 extends AppCompatActivity {
         switch (AppSetting.progress) {	// 조건 %5
             case 0: // 시작, 동화 단계가 노란글씨 + 첫번쨰 컨텐츠 깜빡임
                 handler=new Handler();
-                r=new Runnable(){
+                r=new Runnable(){//
                     @Override
                     public void run() {
                         if(AppSetting.dp_bool){
@@ -107,6 +107,12 @@ public class PlanetActivity1 extends AppCompatActivity {
                 detailProgBar.setImageResource(R.drawable.dprog1);
                 break;
             case 1:// 문법 단계가 노란글씨 + 두번쨰 컨텐츠 깜빡임 + 첫번째 컨텐츠 /
+                img.setOnTouchListener(new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+                        return true;
+                    }
+                });//
 
                 img3.setOnTouchListener(new View.OnTouchListener() {
                     @Override
@@ -130,13 +136,25 @@ public class PlanetActivity1 extends AppCompatActivity {
                             AppSetting.dp_bool=true;
                         }
                         handler.postDelayed(r,400);
-                    }
-                };
+        }
+    };
                 handler.post(r);
                 detailProgBar.setImageResource(R.drawable.dprog2);
 
                 break;
             case 2: // 발음단계
+                img.setOnTouchListener(new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+                        return true;
+                    }
+                });//
+                img2.setOnTouchListener(new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+                        return true;
+                    }
+                });//
 
 
                 handler=new Handler();
