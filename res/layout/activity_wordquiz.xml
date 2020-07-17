@@ -7,11 +7,20 @@
     android:orientation="vertical"
     android:background="@drawable/bg"
     >
+
+    <Button
+        android:id="@+id/btn_back"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/back_btn"/>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/cookierun_bold"
         android:gravity="center"
+        android:layout_marginTop="-50dp"
         android:text="다음 단어의 뜻은 무엇일까요?"
         android:textColor="#ffffff"
         android:textSize="30dp">

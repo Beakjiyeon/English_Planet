@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -32,6 +33,14 @@ public class WordquizActivity extends AppCompatActivity {
         Navigation_Bar n = new Navigation_Bar();
         n.HideNavigationBar(w);
 
+        // back btn
+        Button btn_back = findViewById(R.id.btn_back);
+        btn_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         wordtv = (TextView)findViewById(R.id.word);
         ivans1 = (ImageView)findViewById(R.id.wiv1);
