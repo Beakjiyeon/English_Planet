@@ -28,4 +28,8 @@ public class AppSetting {
     public static String upwd;
     public static String unickname;
     public static int progress;
+
+    // 구세영: 퀴즈 숫자
+    public static int quizcount;
+    public static int quizsen;
 }

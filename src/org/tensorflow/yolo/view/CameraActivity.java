@@ -364,7 +364,7 @@ public abstract class CameraActivity extends Activity implements OnImageAvailabl
 
         }
     }
-
+///////////////////////
     public boolean onTouchEvent(MotionEvent event) {  //onTouchEvent 함수
         AppSetting.dialog_flag=0;
         if(AppSetting.object!=null){

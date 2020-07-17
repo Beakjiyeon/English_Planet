@@ -39,6 +39,13 @@ public class PlanetActivity1 extends AppCompatActivity {
         Window w = getWindow();
         Navigation_Bar n = new Navigation_Bar();
         n.HideNavigationBar(w);
+        // 세영: 퀴즈 숫자
+        AppSetting.quizcount=0;
+        AppSetting.quizsen=0;
+        ImageView detailProgBar=(ImageView)findViewById(R.id.detailProgBar);
+
+
+
 
         ImageView img = findViewById(R.id.imageView2);
         img.setOnClickListener(view -> {
@@ -70,7 +77,7 @@ public class PlanetActivity1 extends AppCompatActivity {
             }
         });
 
-        ImageView detailProgBar=(ImageView)findViewById(R.id.detailProgBar);
+
         // 지연 : DB에서 USER 진행률 가져오기
         AppSetting.progress=getProgressDB();
         // 지연 : 행성별 프로그레스 바
@@ -188,7 +195,6 @@ public class PlanetActivity1 extends AppCompatActivity {
             public void onResponse(Call<User> call, Response<User> response) {
                 if(response!=null) {
                     AppSetting.progress=response.body().getP_progress();
-
                     Log.d("ㅋㅋㅋ2#", ""+AppSetting.progress);
                 }else{
                     Log.d("ㅋㅋㅋ2#", "ㄴㄴㄴxxxxxxx");
@@ -204,5 +210,4 @@ public class PlanetActivity1 extends AppCompatActivity {
 
         return AppSetting.progress;
     }
-
 }
