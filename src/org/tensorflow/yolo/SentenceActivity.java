@@ -37,6 +37,7 @@ import com.google.gson.Gson;
 
 import org.apache.commons.lang.StringEscapeUtils;
 import org.json.JSONObject;
+import org.tensorflow.yolo.setting.AppSetting;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -48,6 +49,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
@@ -197,13 +199,14 @@ public class SentenceActivity extends AppCompatActivity implements TextToSpeech.
 
         // 서버 데이터 가져옴
         networkService = RetrofitSender.getNetworkService();
-        Call<Quiz> call =  networkService.getData("1");
-        call.enqueue(new Callback<Quiz>() {
+        Call<List<Quiz>> call =  networkService.get_qb(1);
+        call.enqueue(new Callback<List<Quiz>>(){
             @Override
-            public void onResponse(Call<Quiz> call, Response<Quiz> response) {
+            public void onResponse(Call<List<Quiz>> call, Response<List<Quiz>> response) {
                 if (response.isSuccessful()) {
-                    String bo=response.body().q_sentence_e;
-                    qw=response.body().q_word;
+                    Quiz qq= response.body().get(AppSetting.quizsen);
+                    String bo=qq.q_sentence_e;
+                    qw=qq.q_word;
                     sen.setText(bo);
                 }
                 else {
@@ -213,7 +216,7 @@ public class SentenceActivity extends AppCompatActivity implements TextToSpeech.
             }
 
             @Override
-            public void onFailure(Call<Quiz> call, Throwable t) {
+            public void onFailure(Call<List<Quiz>> call, Throwable t) {
                 Log.d("tag", "onFailure: " + t.toString()); //서버와 연결 실패
             }
         });
