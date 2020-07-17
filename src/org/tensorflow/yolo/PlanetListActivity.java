@@ -23,9 +23,25 @@ public class PlanetListActivity extends AppCompatActivity {
         String msg = AppSetting.unickname+"님 환영합니다.";
         Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
 
+
         Window w = getWindow();
         Navigation_Bar n = new Navigation_Bar();
         n.HideNavigationBar(w);
+
+        /*
+        // 지연 : 프로그레스 바
+        ImageView progBar=(ImageView)findViewById(R.id.progBar);
+        if(AppSetting.progress>=0&&AppSetting.progress<=4) {	// 조건
+                detailProgBar.setImageDrawable(R.id.Prog0);
+        }else if(AppSetting.progress>=5&&AppSetting.progress<=9){
+                detailProgBar.setImageDrawable(R.id.Prog1);
+        }else if(AppSetting.progress>=10&&AppSetting.progress<=14){
+                detailProgBar.setImageDrawable(R.id.Prog2);
+        }else{
+        }
+
+        */
+
 
         ImageView planet1 = (ImageView) findViewById(R.id.planet1);
         planet1.setImageResource(R.drawable.planet1);
