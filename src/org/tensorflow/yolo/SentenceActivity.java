@@ -1,9 +1,13 @@
 package org.tensorflow.yolo;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.media.AudioFormat;
 import android.media.AudioRecord;
 import android.media.MediaRecorder;
@@ -15,9 +19,12 @@ import android.speech.tts.Voice;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.AttributeSet;
 import android.util.Base64;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.SurfaceHolder;
+import android.view.SurfaceView;
 import android.view.View;
 import android.view.Window;
 import android.view.inputmethod.EditorInfo;
@@ -30,6 +37,7 @@ import com.google.gson.Gson;
 
 import org.apache.commons.lang.StringEscapeUtils;
 import org.json.JSONObject;
+import org.tensorflow.yolo.setting.AppSetting;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -41,6 +49,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
@@ -190,13 +199,14 @@ public class SentenceActivity extends AppCompatActivity implements TextToSpeech.
 
         // 서버 데이터 가져옴
         networkService = RetrofitSender.getNetworkService();
-        Call<Quiz> call =  networkService.getData("1");
-        call.enqueue(new Callback<Quiz>() {
+        Call<List<Quiz>> call =  networkService.get_qb(1);
+        call.enqueue(new Callback<List<Quiz>>(){
             @Override
-            public void onResponse(Call<Quiz> call, Response<Quiz> response) {
+            public void onResponse(Call<List<Quiz>> call, Response<List<Quiz>> response) {
                 if (response.isSuccessful()) {
-                    String bo=response.body().q_sentence_e;
-                    qw=response.body().q_word;
+                    Quiz qq= response.body().get(AppSetting.quizsen);
+                    String bo=qq.q_sentence_e;
+                    qw=qq.q_word;
                     sen.setText(bo);
                 }
                 else {
@@ -206,7 +216,7 @@ public class SentenceActivity extends AppCompatActivity implements TextToSpeech.
             }
 
             @Override
-            public void onFailure(Call<Quiz> call, Throwable t) {
+            public void onFailure(Call<List<Quiz>> call, Throwable t) {
                 Log.d("tag", "onFailure: " + t.toString()); //서버와 연결 실패
             }
         });

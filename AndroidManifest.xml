@@ -80,6 +80,10 @@
             android:screenOrientation="landscape"
             android:theme="@style/fullScreen">
         </activity>
+        <activity android:name=".SenquizActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/fullScreen">
+        </activity>
 
     </application>
 
