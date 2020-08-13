@@ -29,14 +29,11 @@ public interface NetworkService {
                              @Field("nickname") String nickname,
                              @Field("p_progress") int p_progress);
 
-
-
     @PATCH("/api/user/{pk}/")
     Call<User> patch_user(@Path("pk") int pk, @Body User user);
 
     @DELETE("/api/user/{pk}/")
     Call<User> delete_user(@Path("pk") int pk);
-
 
     // all user
     @GET("/api/user/")

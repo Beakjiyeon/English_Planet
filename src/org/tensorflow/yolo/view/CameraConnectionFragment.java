@@ -48,7 +48,7 @@ import static org.tensorflow.yolo.Config.LOGGING_TAG;
 
 /**
  * Camera connection fragment
- * Modified by Zoltan Szabo
+ * Modified by Zoltan Szabo__
  */
 public class CameraConnectionFragment extends Fragment {
     private static final Size DESIRED_PREVIEW_SIZE = new Size(640, 480);

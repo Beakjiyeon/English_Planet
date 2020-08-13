@@ -247,14 +247,10 @@ public abstract class CameraActivity extends Activity implements OnImageAvailabl
     {
         String path = Environment.getExternalStorageDirectory().getAbsolutePath();
         Bitmap b = bitmap;
-
-
-
         if(b!=null){
             try {
-                // 지연 : storage
-                mStorageRef= FirebaseStorage.getInstance().getReference("Images/"+AppSetting.image_name);
 
+                mStorageRef= FirebaseStorage.getInstance().getReference("Images/"+AppSetting.image_name);
                 Bitmap image_bitmap = AppSetting.image;
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
                 image_bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
@@ -266,7 +262,7 @@ public abstract class CameraActivity extends Activity implements OnImageAvailabl
                     public void onFailure(@NonNull Exception exception) {
                         // Handle unsuccessful uploads
                         Toast.makeText(CameraActivity.this,"실패",Toast.LENGTH_LONG).show();
-                        Log.d("백지연","실패");
+
                     }
                 }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
@@ -275,7 +271,7 @@ public abstract class CameraActivity extends Activity implements OnImageAvailabl
                         // ...
                         // 성공하면
                         Toast.makeText(CameraActivity.this,"Image Uproad Successfultty",Toast.LENGTH_LONG).show();
-                        Log.d("백지연",taskSnapshot.getMetadata().getReference().getDownloadUrl().toString()+"");
+
 
                         Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                             @Override
@@ -291,25 +287,16 @@ public abstract class CameraActivity extends Activity implements OnImageAvailabl
                             @Override
                             public void onComplete(@NonNull Task<Uri> task) {
                                 if (task.isSuccessful()) {
-                                    //Uri downloadUri = task.getResult();
-                                    //Toast.makeText(getApplicationContext(),downloadUri+"",Toast.LENGTH_LONG).show();
-                                    //imageUrl= downloadUri.toString();
 
                                     networkService = RetrofitSender.getNetworkService();
-                                    //Call<Camera> response = networkService.register_camera(imageUrl+"",AppSetting.image_name+"",AppSetting.means+"","유저");
-
-                                    //Log.d("시발",imageUrl+"/"+AppSetting.image_name+"/"+AppSetting.means);
-
 
 
                                     Call<Camera> response = networkService.register_camera(task.getResult().toString(),AppSetting.image_name,AppSetting.means,AppSetting.uid);
                                     response.enqueue(new Callback<Camera>() {
-
                                         @Override
                                         public void onResponse(Call<Camera> call, Response<Camera> response) {
                                             Log.d("카메라","성공================================================================");
                                         }
-
                                         @Override
                                         public void onFailure(Call<Camera> call, Throwable t) {
                                             Log.d("카메라","실패================================================================");
