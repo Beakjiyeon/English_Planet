@@ -32,4 +32,7 @@ public class AppSetting {
     // 구세영: 퀴즈 숫자
     public static int quizcount;
     public static int quizsen;
+
+    // 튜토리얼 여부
+    public static boolean tutorial = false;
 }

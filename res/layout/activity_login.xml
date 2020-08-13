@@ -20,6 +20,7 @@
             android:src="@drawable/login_box"></ImageView>
 
 
+
         <Button
             android:id="@+id/enter_btn"
             android:layout_width="120dp"
@@ -84,6 +85,12 @@
                     android:inputType="textPassword"></EditText>
             </LinearLayout>
 
+<!--            <CheckBox-->
+<!--                android:id="@+id/autoLogin"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:fontFamily="@font/cookierun_bold"-->
+<!--                android:text="자동로그인" />-->
         </LinearLayout>
 
     </FrameLayout>
