@@ -84,7 +84,11 @@ public class BookActivity extends Activity implements View.OnClickListener, Text
             }
         });
 
+        Intent intent = new Intent(this, BookwordActivity.class);
+        startActivity(intent);
+
         networkService = RetrofitSender.getNetworkService();
+
         // b_id : 1번으로 설정
         Call<Book> response = networkService.get_book(1);
         response.enqueue(new Callback<Book>() {
