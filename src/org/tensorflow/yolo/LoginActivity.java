@@ -105,18 +105,20 @@ public class LoginActivity extends AppCompatActivity {
         enter_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                MainActivity.btnmp.start();
+
                 if (tf){
-                    if (!(AppSetting.tutorial)){
-                        Log.v("tutorial=====","튜토리얼 시작");
-                        Intent intent = new Intent(getApplicationContext(), TutorialActivity.class);
-                        startActivity(intent);
-                        finish();
-                    } else {
-                        Log.v("tutorial==============",AppSetting.tutorial+"");
+//                    if (AppSetting.tutorial==false){
+//                        Log.v("tutorial=====","튜토리얼 시작");
+//                        Intent intent = new Intent(getApplicationContext(), TutorialActivity.class);
+//                        startActivity(intent);
+//                        finish();
+//                    } else {
+//                        Log.v("tutorial==============",AppSetting.tutorial+"");
                         Intent intent = new Intent(getApplicationContext(), PlanetListActivity.class);
                         startActivity(intent);
                         finish();
-                    }
+
 
                 } else {
                     mName.setText("");

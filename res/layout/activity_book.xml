@@ -12,6 +12,7 @@
         android:background="@drawable/back_btn"/>
 
     <TextView
+        android:id="@+id/chapter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
@@ -85,15 +86,27 @@
 
 
         <Button
-            android:id="@+id/btn_trans"
+            android:id="@+id/btn_EngToKor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentBottom="true"
             android:background="#69F0AE"
             android:fontFamily="@font/cookierun_bold"
-            android:text="번역"
-            android:onClick="btnTrans"
+            android:text="한글"
+            android:onClick="btnEngToKor"
+            android:textColor="#000000" />
+        <Button
+            android:id="@+id/btn_KorToEng"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_alignParentBottom="true"
+            android:layout_toRightOf="@id/btn_EngToKor"
+            android:background="#69F0AE"
+            android:fontFamily="@font/cookierun_bold"
+            android:text="영어"
+            android:onClick="btnKorToEng"
             android:textColor="#000000" />
 
         <Button

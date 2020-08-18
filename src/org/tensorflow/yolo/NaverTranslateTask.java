@@ -1,8 +1,8 @@
 package org.tensorflow.yolo;
 
 import android.os.AsyncTask;
+import android.service.autofill.ImageTransformation;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -100,6 +100,9 @@ public class NaverTranslateTask extends AsyncTask<String, Void, String> {
 
             resultText = rootObj.getAsString();
             String[] str = resultText.split("/");
+//            BookActivity.mTransText = resultText.split("/");
+//            Log.v("mTransText===", BookActivity.mTransText[0]);
+
 
             for (int i=0;i<str.length;i++){
                 BookActivity.mTvList[i].setText(str[i]);

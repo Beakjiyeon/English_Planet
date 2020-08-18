@@ -49,6 +49,7 @@ public class PlanetListActivity extends AppCompatActivity {
         planet1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                MainActivity.btnmp.start();
                 Intent intent = new Intent(getApplicationContext(), PlanetActivity1.class);
                 startActivity(intent);
             }
@@ -60,6 +61,7 @@ public class PlanetListActivity extends AppCompatActivity {
         planet2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                MainActivity.btnmp.start();
                 Intent intent = new Intent(getApplicationContext(), PlanetActivity2.class);
                 startActivity(intent);
             }
@@ -71,6 +73,7 @@ public class PlanetListActivity extends AppCompatActivity {
         planet3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                MainActivity.btnmp.start();
                 Intent intent = new Intent(getApplicationContext(), PlanetActivity3.class);
                 startActivity(intent);
             }
@@ -83,6 +86,7 @@ public class PlanetListActivity extends AppCompatActivity {
         btnCamera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                MainActivity.btnmp.start();
                 Toast.makeText(getApplicationContext(),"영어 뜻을 알고싶은 물건을 찍어보세요",Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(getApplicationContext(), ClassifierActivity.class);
                 startActivity(intent);//액티비티 띄우기
@@ -94,6 +98,7 @@ public class PlanetListActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
+                MainActivity.btnmp.start();
                 Intent intent = new Intent(getApplicationContext(), MypageActivity.class);
                 startActivity(intent);//액티비티 띄우기
             }
