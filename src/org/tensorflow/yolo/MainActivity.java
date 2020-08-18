@@ -28,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
     private static MediaPlayer mp;
     // 지연 : 배경음악 설정
     // 지연 : 홈버튼 누를때 음악 종료
+
+    public static MediaPlayer btnmp;
     @Override
     protected void onUserLeaveHint(){
         mp.pause();
@@ -65,6 +67,10 @@ public class MainActivity extends AppCompatActivity {
         mp.setLooping(false); // 반복여부
         mp.start();
 
+        // 버튼 음악
+        btnmp = MediaPlayer.create(this, R.raw.btnsound);
+
+
 
         // 두 버튼 연결
         Button main_btn1 = (Button) findViewById(R.id.btn_login);
@@ -88,6 +94,9 @@ public class MainActivity extends AppCompatActivity {
         main_btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // 버튼 효과틈
+                btnmp.start();
+
                 //Toast.makeText(getApplicationContext(), "액티비티 전환", Toast.LENGTH_LONG).show();
                 // 액티비티 전환 코드
                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
@@ -99,6 +108,9 @@ public class MainActivity extends AppCompatActivity {
         main_btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // 버튼 효과음
+                btnmp.start();
+
                 //Toast.makeText(getApplicationContext(), "액티비티 전환", Toast.LENGTH_LONG).show();
                 // 액티비티 전환 코드
                 Intent intent = new Intent(getApplicationContext(), SignupActivity.class);

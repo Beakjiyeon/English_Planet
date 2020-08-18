@@ -96,6 +96,10 @@
             android:name=".MypageActivity"
             android:screenOrientation="landscape"
             android:theme="@style/fullScreen"/>
+        <activity android:name=".SenquizActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/fullScreen"
+            />
 
     </application>
 

@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:textSize="50dp"
         android:textAlignment="center"
+        android:layout_margin="5dp"
         android:fontFamily="@font/cookierun_regular"
         android:textColor="#ffffff"
         ></TextView>
@@ -19,9 +20,11 @@
     <LinearLayout
         android:id="@+id/ans_lay"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:background="#a03485"
-        android:orientation="horizontal"></LinearLayout>
+        android:layout_height="100dp"
+        android:background="@drawable/senquiz_bg"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingTop="15dp"></LinearLayout>
 
     <LinearLayout
         android:id="@+id/layout"

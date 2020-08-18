@@ -32,6 +32,7 @@ public class WordanswerActivity extends AppCompatActivity {
         Navigation_Bar n = new Navigation_Bar();
         n.HideNavigationBar(w);
 
+
         tvans = (TextView)findViewById(R.id.tvans);
         btn = (ImageButton)findViewById(R.id.btn);
         Intent intent = getIntent();
@@ -63,9 +64,11 @@ public class WordanswerActivity extends AppCompatActivity {
                 Intent intent;
                 AppSetting.quizcount++;
                 if(AppSetting.quizcount<3) {
+                    Log.v("quizCount=======",AppSetting.quizcount+"");
                     intent = new Intent(getApplicationContext(), WordquizActivity.class);
                 }
                 else if(AppSetting.quizcount==3){
+                    Log.v("Sentence Quiz=======","OK");
                     intent=new Intent(getApplicationContext(), SenquizActivity.class);
                 }
                 else if(AppSetting.quizcount<5){

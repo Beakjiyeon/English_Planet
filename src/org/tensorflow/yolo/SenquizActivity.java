@@ -65,6 +65,8 @@ public class SenquizActivity extends AppCompatActivity {
                         btn.setId(i+1);
                         btn.setText(array[i]);
                         btn.setTextColor(Color.BLACK);
+                        btn.setTextSize(25);
+
                         layout.addView(btn);
                         btn.setOnClickListener(new View.OnClickListener() {
                             @Override

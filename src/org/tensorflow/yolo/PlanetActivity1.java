@@ -45,16 +45,17 @@ public class PlanetActivity1 extends AppCompatActivity {
         ImageView detailProgBar=(ImageView)findViewById(R.id.detailProgBar);
 
 
-
-
         ImageView img = findViewById(R.id.imageView2);
         img.setOnClickListener(view -> {
+            MainActivity.btnmp.start();
             Intent intent = new Intent(getApplicationContext(), BookActivity.class);
+            intent.putExtra("b_id",1);
             startActivity(intent);
         });
 
         ImageView img2 = findViewById(R.id.imageView3);
         img2.setOnClickListener(view -> {
+            MainActivity.btnmp.start();
             Intent intent = new Intent(getApplicationContext(), WordquizActivity.class);
             startActivity(intent);
             //finish();
@@ -71,6 +72,7 @@ public class PlanetActivity1 extends AppCompatActivity {
         btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                MainActivity.btnmp.start();
                 Intent intent = new Intent(getApplicationContext(),PlanetListActivity.class);
                 startActivity(intent);
                 finish();

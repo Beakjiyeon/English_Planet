@@ -1,8 +1,11 @@
 package org.tensorflow.yolo;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.media.AudioAttributes;
+import android.media.MediaPlayer;
 import android.net.wifi.p2p.WifiP2pManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -33,23 +36,39 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-
-public class BookActivity extends Activity implements View.OnClickListener, TextToSpeech.OnInitListener{
+public class BookActivity extends Activity implements View.OnClickListener, TextToSpeech.OnInitListener {
     // iterator
     Iterator<String> mItr;
     ArrayList<String> mBookList;
     NetworkService networkService;
     Button mBtn;
-    Button mBtn_trans;
+    Button mBtn_EngToKor;
+    Button mBtn_KorToEng;
 
     NaverTranslateTask asyncTask;
 
 
     // TextView List
-     public static TextView[] mTvList;
+    public static TextView[] mTvList;
+    public static String[] mTransText;
+
+    // 원문을 보여주기 위한 ArrayList<>
+    public ArrayList<String> mOrigin;
 
     TextToSpeech tts;
     String[] b_text;
+
+    // b_id
+    int mB_id;
+
+    //
+    TextView mChapter;
+    TextView mBooktitle;
+
+    // 효과음
+    private MediaPlayer mp;
+
+
 
 
     @Override
@@ -62,8 +81,39 @@ public class BookActivity extends Activity implements View.OnClickListener, Text
         Navigation_Bar n = new Navigation_Bar();
         n.HideNavigationBar(w);
 
+        // 효과음
+        mp = MediaPlayer.create(this,R.raw.book);
+
+        // ArrayList create
+        mOrigin = new ArrayList<>();
+
+        // getIntent
+        Intent intent = getIntent();
+        mB_id = intent.getIntExtra("b_id", 0);
+
+        mChapter = findViewById(R.id.chapter);
+        mBooktitle = findViewById(R.id.book_title);
+        // chaper하고 책 제목 변경
+        switch (mB_id) {
+            case 2:
+                mChapter.setText("Chapter2");
+                mBooktitle.setText("Friends");
+                break;
+
+            // case 3:
+//            mChapter.setText("Chapter3");
+        }
+
+
         mBtn = findViewById(R.id.btn_next); // 다음페이지 버튼
-        mBtn_trans = findViewById(R.id.btn_trans); // 번역 버튼
+        // EngToKor
+        mBtn_EngToKor = findViewById(R.id.btn_EngToKor);
+        // KorToEng
+        mBtn_KorToEng = findViewById(R.id.btn_KorToEng);
+        // 초기값 비활성화 : 처음에 영어문장이므로 영어로 번역하는 버튼 비활성화함
+        mBtn_KorToEng.setEnabled(false);
+        mBtn_KorToEng.setBackgroundColor(Color.GRAY);
+
 
         // textview
         mTvList = new TextView[3];
@@ -92,7 +142,7 @@ public class BookActivity extends Activity implements View.OnClickListener, Text
         networkService = RetrofitSender.getNetworkService();
 
         // b_id : 1번으로 설정
-        Call<Book> response = networkService.get_book(1);
+        Call<Book> response = networkService.get_book(mB_id);
         response.enqueue(new Callback<Book>() {
             @Override
             public void onResponse(Call<Book> call, Response<Book> response) {
@@ -115,6 +165,12 @@ public class BookActivity extends Activity implements View.OnClickListener, Text
     }
 
     public void btnNext(View v) {
+        // 효과음
+        mp.start();
+
+        // 다음페이지로 넘어가면 초기값 세팅
+        SetEngToKor();
+
         BookItr();
 
     }
@@ -122,6 +178,7 @@ public class BookActivity extends Activity implements View.OnClickListener, Text
     private void BookItr() {
         try {
             String s = "";
+            mOrigin.clear();
             mTvList[0].setText("");
             mTvList[1].setText("");
             mTvList[2].setText("");
@@ -129,12 +186,16 @@ public class BookActivity extends Activity implements View.OnClickListener, Text
             if (mItr.hasNext()) {
                 s = mItr.next();
                 mTvList[0].setText(s);
+                mOrigin.add(s);
 
                 s = mItr.next();
                 mTvList[1].setText(s);
+                mOrigin.add(s);
 
                 s = mItr.next();
                 mTvList[2].setText(s);
+                mOrigin.add(s);
+
             }
 
         } catch (NoSuchElementException ne) {
@@ -143,12 +204,12 @@ public class BookActivity extends Activity implements View.OnClickListener, Text
                 @Override
                 public void onClick(View view) {
                     Toast t = Toast.makeText(getApplicationContext(), "학습 종료", Toast.LENGTH_SHORT);
-                    AppSetting.progress=1;
-                    AppSetting.dp_bool=true;
+                    AppSetting.progress = 1;
+                    AppSetting.dp_bool = true;
                     // 쳅터 1의 시작=0, 동화=1
                     // db에 값 반영
                     updateProgressDB();
-                    Log.d("널체크","동화엔 "+AppSetting.uid);
+                    Log.d("널체크", "동화엔 " + AppSetting.uid);
                     Intent intent = new Intent(getApplicationContext(), PlanetActivity1.class);
                     startActivity(intent);
                     t.show();
@@ -159,19 +220,20 @@ public class BookActivity extends Activity implements View.OnClickListener, Text
         }
 
     }
+
     // 지연: DB 진행률을 수정하는 함수
-    void updateProgressDB(){
+    void updateProgressDB() {
         networkService = RetrofitSender.getNetworkService();
         // b_id : 1번으로 설정
-        Call<ResponseBody> response2 = networkService.updateProgress(AppSetting.uid,1);
+        Call<ResponseBody> response2 = networkService.updateProgress(AppSetting.uid, 1);
         response2.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if(response!=null) {
+                if (response != null) {
                     Log.d("ㅋㅋㅋ#", "수정하고싶다");
 
 
-                }else{
+                } else {
                     Log.d("ㅋㅋㅋ#", "ㄴㄴㄴxxxxxxx");
                 }
 
@@ -204,7 +266,6 @@ public class BookActivity extends Activity implements View.OnClickListener, Text
     }
 
 
-
     @Override
     public void onInit(int status) {
         if (status == TextToSpeech.SUCCESS) {
@@ -223,15 +284,61 @@ public class BookActivity extends Activity implements View.OnClickListener, Text
         }
     }
 
-    public void btnTrans(View view){
+
+    public void btnEngToKor(View view){
         asyncTask = new NaverTranslateTask();
-        String str ="";
-        for(int i=0;i<3;i++) {
-            if (mTvList==null) break;
-            str += mTvList[i].getText().toString()+"/";
+        String str = "";
+        for (int i = 0; i < 3; i++) {
+            if (mTvList == null) break;
+            str += mTvList[i].getText().toString() + "/";
         }
         asyncTask.execute(str);
+
+//        for (int i=0;i<mTransText.length;i++){
+//                mTvList[i].setText(mTransText[i]);
+//            }
+
+        // setdisabeld 값 변경하기
+        SetKorToEng();
+
+
     }
+
+    public void btnKorToEng(View view){
+
+        for(int i=0;i<mOrigin.size();i++){
+            mTvList[i].setText(mOrigin.get(i));
+        }
+
+        SetEngToKor();
+
+    }
+
+    // TODO EngTOKor, KorToEng 바꿀때마다 변경하는 함수 제작
+
+    private void SetEngToKor(){
+        mBtn_KorToEng.setEnabled(false);
+        mBtn_KorToEng.setBackgroundColor(Color.GRAY);
+        mBtn_EngToKor.setEnabled(true);
+        mBtn_EngToKor.setBackgroundColor(Color.parseColor("#69F0AE"));
+
+        for (int i=0;i<3;i++){
+            mTvList[i].setEnabled(true);
+        }
+
+    }
+    private void SetKorToEng(){
+        mBtn_KorToEng.setEnabled(true);
+        mBtn_KorToEng.setBackgroundColor(Color.parseColor("#69F0AE"));
+        mBtn_EngToKor.setEnabled(false);
+        mBtn_EngToKor.setBackgroundColor(Color.GRAY);
+
+        for (int i=0;i<3;i++){
+            mTvList[i].setEnabled(false);
+        }
+
+    }
+
 
 
 }
