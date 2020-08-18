@@ -136,8 +136,8 @@ public class BookActivity extends Activity implements View.OnClickListener, Text
             }
         });
 
-        Intent intent = new Intent(this, BookwordActivity.class);
-        startActivity(intent);
+        //Intent intentt = new Intent(this, BookwordActivity.class);
+       // startActivity(intentt);
 
         networkService = RetrofitSender.getNetworkService();
 

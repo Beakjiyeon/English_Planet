@@ -53,6 +53,8 @@ public class WordanswerActivity extends AppCompatActivity {
                 answerlayout.setBackgroundDrawable(ContextCompat.getDrawable(this, R.drawable.wordcorrect));
 
             } else {
+                String sen = intent.getExtras().getString("sen");
+                tvans.setText(sen);
                 answerlayout.setBackgroundDrawable(ContextCompat.getDrawable(this, R.drawable.wordwrong));
 
             }
