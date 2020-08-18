@@ -298,18 +298,12 @@ public class SentenceActivity extends AppCompatActivity implements TextToSpeech.
                                     public void run() {
                                         result = sendDataAndGetResult();
                                         JSONObject obj = null;
-                                        //String a,b,c="lion",""
                                         try {
                                             obj = new JSONObject(result);
-                                            //Log.d("원본결과",result);
                                             obj=new JSONObject(obj.getString("return_object"));
                                             String score=obj.getString("score");
                                             String recognized = obj.getString("recognized");
-                                            Log.d("흠",recognized);
-                                            //countWord(recognized);
                                             countword = countWord(recognized);
-                                            //Log.d("숫자",String.valueOf(countword));
-
 
 
                                             // Log.d("score",score);
@@ -344,7 +338,7 @@ public class SentenceActivity extends AppCompatActivity implements TextToSpeech.
                                     threadRecog.join(20000);
                                     if (threadRecog.isAlive()) {
                                         threadRecog.interrupt();
-                                        SendMessage("No response from server for 20 secs", 4);
+                                        SendMessage("No response from _server for 20 secs", 4);
                                     } else {
                                         SendMessage("OK", 5);
                                     }
@@ -365,22 +359,20 @@ public class SentenceActivity extends AppCompatActivity implements TextToSpeech.
     //단어 비교
     public static int countWord(String recognized){
         if (recognized.length() > 0 && recognized.charAt(recognized.length()-1)=='.') {
-            recognized = recognized.substring(0, recognized.length()-1);
+            recognized = recognized.substring(0, recognized.length()-1); // 인식된 단어
         }
-        String[] array_recognized = recognized.split(" ");
-        String[] array_word = qw.split(" ");
-        //Log.d("qwqwqw",array_word[0]+array_word[1]);
-        //Log.d("qwqwqw",qw);
-        int cw=0;
+        String[] array_recognized = recognized.split(" ");  //인식된 단어 배열
+        String[] array_word = qw.split(" "); // 비교단어 배열
+
+        int cw=0; // 일치값
         for(int i=0;i<array_recognized.length;i++){
-            //Log.d("흠흠",array_recognized[i]);
             for(int j=0;j<array_word.length;j++){
-                if(array_recognized[i].equals(array_word[j]))
-                    cw++;
+                if(array_recognized[i].equals(array_word[j]))  // 단어가 일치하면
+                    cw++;   // 일치값 증가
             }
         }
         Log.d("숫자1",String.valueOf(cw));
-        return cw;
+        return cw;  // 일치값 리턴
 
     }
 

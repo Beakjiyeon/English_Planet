@@ -110,6 +110,7 @@ public class SenquizActivity extends AppCompatActivity {
                                     } else {
                                         intent.putExtra("correct", "0");
                                     }
+                                    intent.putExtra("sen",sen);
                                     intent.putExtra("type", "sentence");
                                     startActivity(intent);
                                 }

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="700dp"
+    android:layout_height="400dp"
+   android:background="@drawable/bg_bword">
+<TableLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:collapseColumns="3,3"
+    >
+    <TableRow
+        android:weightSum="3">
+        <TextView
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            ></TextView>
+    </TableRow>
+    <TableRow>
+    <Button
+        android:layout_weight="1"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:text="horn\n뿔">
+
+    </Button>
+    <Button
+        android:layout_weight="1"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+    android:text="horn\n뿔">
+
+</Button>
+    <Button
+        android:layout_weight="1"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:text="horn\n뿔">
+
+    </Button>
+    </TableRow>
+    <TableRow>
+    <Button
+        android:layout_weight="1"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:text="horn\n뿔">
+
+    </Button>
+    <Button
+        android:layout_weight="1"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:text="horn\n뿔">
+
+    </Button>
+    <Button
+        android:layout_weight="1"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:text="horn\n뿔">
+
+    </Button>
+</TableRow>
+</TableLayout>
+
+
+</android.support.constraint.ConstraintLayout>
