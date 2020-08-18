@@ -75,14 +75,18 @@ public class WordanswerActivity extends AppCompatActivity {
                 else{
                     intent=new Intent(getApplicationContext(), PlanetActivity1.class);
                 }
-                startActivity(intent);
+                AppSetting.progress=2;
+                // 쳅터 1의 시작=0, 동화=1
+                // db에 값 반영
+                updateProgressDB();
+
+                Log.d("널체크","문법점수엔 "+AppSetting.uid);
                 finish();
-                //Intent intent = new Intent(getApplicationContext(), PlanetActivity1.class);
-                // startActivity(intent);
+                AppSetting.dp_bool=true;
+                startActivity(intent);
             }
         });
     }
-
     // 지연: DB 진행률을 수정하는 함수
     void updateProgressDB(){
         NetworkService networkService = RetrofitSender.getNetworkService();

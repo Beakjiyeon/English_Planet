@@ -27,9 +27,11 @@ import java.util.Iterator;
 import java.util.Locale;
 import java.util.NoSuchElementException;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
 
 
 public class BookActivity extends Activity implements View.OnClickListener, TextToSpeech.OnInitListener{
@@ -94,12 +96,14 @@ public class BookActivity extends Activity implements View.OnClickListener, Text
         response.enqueue(new Callback<Book>() {
             @Override
             public void onResponse(Call<Book> call, Response<Book> response) {
+
                 Book b = (Book) response.body();
                 b_text = b.getB_text().split("\r\n");
                 mBookList = new ArrayList<>(Arrays.asList(b_text));
                 mItr = mBookList.iterator();
-                BookItr();
 
+                // book iterator
+                BookItr();
             }
 
             @Override
@@ -109,7 +113,6 @@ public class BookActivity extends Activity implements View.OnClickListener, Text
         });
 
     }
-
 
     public void btnNext(View v) {
         BookItr();
@@ -140,14 +143,45 @@ public class BookActivity extends Activity implements View.OnClickListener, Text
                 @Override
                 public void onClick(View view) {
                     Toast t = Toast.makeText(getApplicationContext(), "학습 종료", Toast.LENGTH_SHORT);
+                    AppSetting.progress=1;
+                    AppSetting.dp_bool=true;
+                    // 쳅터 1의 시작=0, 동화=1
+                    // db에 값 반영
+                    updateProgressDB();
+                    Log.d("널체크","동화엔 "+AppSetting.uid);
+                    Intent intent = new Intent(getApplicationContext(), PlanetActivity1.class);
+                    startActivity(intent);
                     t.show();
-                    AppSetting.progress = 1;
                     finish();
                 }
             });
 
         }
 
+    }
+    // 지연: DB 진행률을 수정하는 함수
+    void updateProgressDB(){
+        networkService = RetrofitSender.getNetworkService();
+        // b_id : 1번으로 설정
+        Call<ResponseBody> response2 = networkService.updateProgress(AppSetting.uid,1);
+        response2.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if(response!=null) {
+                    Log.d("ㅋㅋㅋ#", "수정하고싶다");
+
+
+                }else{
+                    Log.d("ㅋㅋㅋ#", "ㄴㄴㄴxxxxxxx");
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.d("ㅋㅋㅋ#", t.getMessage());
+            }
+        });
     }
 
 
@@ -167,8 +201,9 @@ public class BookActivity extends Activity implements View.OnClickListener, Text
 
 
         }
-
     }
+
+
 
     @Override
     public void onInit(int status) {
@@ -200,6 +235,5 @@ public class BookActivity extends Activity implements View.OnClickListener, Text
 
 
 }
-
 
 

@@ -97,7 +97,6 @@ public class NaverTranslateTask extends AsyncTask<String, Void, String> {
                     .getAsJsonObject().get("result")
                     .getAsJsonObject().get("translatedText");
 
-            Log.e("Translated Text==", rootObj.getAsString());
 
             resultText = rootObj.getAsString();
             String[] str = resultText.split("/");

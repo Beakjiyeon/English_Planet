@@ -7,6 +7,7 @@ import org.tensorflow.yolo.model.Recognition;
 
 public class AppSetting {
     // 백지연
+    public static boolean dp_bool=true;
     // 박스 포지션
     public static float box_left;
     public static float box_top;
@@ -31,4 +32,7 @@ public class AppSetting {
     // 구세영: 퀴즈 숫자
     public static int quizcount;
     public static int quizsen;
+
+    // 튜토리얼 여부
+    public static boolean tutorial = false;
 }

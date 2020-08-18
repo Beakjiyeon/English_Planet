@@ -45,8 +45,6 @@ public class LoginActivity extends AppCompatActivity {
                         AppSetting.unickname = u.getNickname();
                         AppSetting.progress = u.getP_progress();
 
-
-
                     } else {
 
                         //tf = false;
@@ -71,9 +69,6 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-//                WindowManager.LayoutParams.FLAG_FULLSCREEN);
-//        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         setContentView(R.layout.activity_login);
         networkService = RetrofitSender.getNetworkService();
 
@@ -106,21 +101,23 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        // TODO : 로그인
-        // 아이디 존재하는지
-        // 아이디랑 비밀번호 값이 일치하는지
+        // TODO : 서버측 로그인으로 변경하고 튜토리얼 연결하기
         enter_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                UserLogin(mName.getText().toString(),mPwd.getText().toString());
-//                Log.e("1번","==================================================");
-//                Log.e("mName",mName.getText().toString()+"=====================");
-//                Log.e("mName",mPwd.getText().toString()+"=====================");
-//                Log.e("3번","================================================");
                 if (tf){
-                    Intent intent = new Intent(getApplicationContext(), PlanetListActivity.class);
-                    startActivity(intent);
-                    finish();
+                    if (!(AppSetting.tutorial)){
+                        Log.v("tutorial=====","튜토리얼 시작");
+                        Intent intent = new Intent(getApplicationContext(), TutorialActivity.class);
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        Log.v("tutorial==============",AppSetting.tutorial+"");
+                        Intent intent = new Intent(getApplicationContext(), PlanetListActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+
                 } else {
                     mName.setText("");
                     mPwd.setText("");

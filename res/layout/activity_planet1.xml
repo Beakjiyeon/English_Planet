@@ -68,20 +68,21 @@
             android:layout_height="200dp"
             android:layout_marginLeft="20dp"
             android:layout_weight="1"
-            android:background="@drawable/yellow_rocket" />
+            app:srcCompat="@drawable/yellow_rocket_g"
+            />
 
         <ImageView
             android:id="@+id/imageView3"
             android:layout_width="500dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:srcCompat="@drawable/satellite" />
+            app:srcCompat="@drawable/satellite_g" />
 
         <ImageView
             android:id="@+id/imageView4"
             android:layout_width="400dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:srcCompat="@drawable/battery1" />
+            app:srcCompat="@drawable/battery1_gray" />
     </LinearLayout>
 </LinearLayout>

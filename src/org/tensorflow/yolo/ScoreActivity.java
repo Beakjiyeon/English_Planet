@@ -65,12 +65,14 @@ public class ScoreActivity extends AppCompatActivity {
 //                startActivity(intent);
                 // AppSetting 값 수정 db에서 받아오는데 시간이 걸리기떄문...
                 if(AppSetting.quizsen==2) {
-                    AppSetting.progress = 3;
+
                     // 쳅터 1의 시작=0, 동화=1
                     // db에 값 반영
                     updateProgressDB();
 
                     finish();
+                    AppSetting.progress=3;
+                    Log.d("널체크","발음점수엔 "+AppSetting.uid);
                     Intent intent = new Intent(getApplicationContext(), PlanetActivity1.class);
                     startActivity(intent);
                 }
