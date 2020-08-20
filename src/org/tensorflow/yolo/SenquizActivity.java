@@ -61,7 +61,8 @@ public class SenquizActivity extends AppCompatActivity {
 
                     for(int i=0;i<array.length;i++){
                         final Button btn = new Button(getApplicationContext());
-                        btn.setBackgroundResource(R.drawable.senword_btn);
+//                        btn.setBackgroundColor(Color.WHITE);
+                        btn.setBackgroundResource(R.drawable.senword_btn2);
                         btn.setId(i+1);
                         btn.setText(array[i]);
                         btn.setTextColor(Color.BLACK);

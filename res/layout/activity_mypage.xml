@@ -30,58 +30,34 @@
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="match_parent">
-
-
-        <ImageView
-            android:id="@+id/btnBook1"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_centerVertical="true"
-            app:srcCompat="@drawable/book1" />
-
-        <TextView
-            android:id="@+id/voca"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/btnBook1"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="21dp"
-            android:layout_marginTop="0dp"
-            android:fontFamily="@font/cookierun_bold"
-            android:gravity="center_horizontal"
-            android:text="단어장"
-            android:textColor="#FFFFFFFF"
-            android:textSize="40sp" />
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="15dp">
 
         <ImageView
-            android:id="@+id/btnBook2"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_toRightOf="@id/btnBook1"
-            android:layout_alignBaseline="@id/btnBook1"
-            android:layout_weight="1"
-            android:layout_centerVertical="true"
-            app:srcCompat="@drawable/book2" />
-
-        <TextView
-            android:id="@+id/incorrect"
+            android:id="@+id/btnVoca"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/btnBook2"
-            android:layout_alignBaseline="@id/voca"
-            android:layout_marginStart="-144dp"
-            android:layout_marginLeft="45dp"
-            android:layout_marginTop="3dp"
-            android:layout_toEndOf="@id/btnBook2"
-            android:layout_toRightOf="@id/voca"
-            android:fontFamily="@font/cookierun_bold"
-            android:gravity="center_horizontal"
-            android:text="오답노트"
-            android:textSize="40sp"
-            android:textColor="#FFFFFF"/>
+            android:layout_height="100dp"
+            android:layout_marginBottom="15dp"
+            android:src="@drawable/btn_voca" />
+
+        <ImageView
+            android:id="@+id/btnSettings"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:layout_below="@id/btnVoca"
+            android:layout_marginBottom="15dp"
+            android:src="@drawable/btn_settings" />
+
+        <ImageView
+            android:id="@+id/btnLogout"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:layout_below="@id/btnSettings"
+            android:src="@drawable/btn_logout" />
+
 
     </RelativeLayout>
 
