@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.ImageView;
 
 //import androidx.annotation.Nullable;
 //import androidx.appcompat.app.AppCompatActivity;
@@ -33,6 +34,33 @@ public class PlanetActivity3 extends AppCompatActivity {
                 finish();
             }
         });
+
+        ImageView img = findViewById(R.id.imageView7);
+        img.setOnClickListener(view -> {
+            MainActivity.btnmp.start();
+            Intent intent = new Intent(getApplicationContext(), BookActivity.class);
+            intent.putExtra("b_id",3);
+            startActivity(intent);
+        });
+
+        ImageView img2 = findViewById(R.id.imageView8);
+        img2.setOnClickListener(view -> {
+            MainActivity.btnmp.start();
+            Intent intent = new Intent(getApplicationContext(), WordquizActivity.class);
+            //intent.putExtra("b_id",2);
+            startActivity(intent);
+            //finish();
+        });
+
+        ImageView img3 = findViewById(R.id.imageView9);
+        img3.setOnClickListener(view -> {
+            MainActivity.btnmp.start();
+            Intent intent = new Intent(getApplicationContext(),SentenceActivity.class);
+            //intent.putExtra("b_id",2);
+            startActivity(intent);
+            //finish();
+        });
+
 
     }
 }
