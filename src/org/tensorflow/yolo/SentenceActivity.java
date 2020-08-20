@@ -78,6 +78,7 @@ public class SentenceActivity extends AppCompatActivity implements TextToSpeech.
     String curMode;
     String result;
     int countword;
+    int mB_id;
 
     NetworkService networkService;
 
@@ -162,6 +163,9 @@ public class SentenceActivity extends AppCompatActivity implements TextToSpeech.
         Window w = getWindow();
         Navigation_Bar n = new Navigation_Bar();
         n.HideNavigationBar(w);
+        // getIntent
+        Intent intents = getIntent();
+        mB_id = intents.getIntExtra("b_id", 0);
 
         // back
         Button btn_back = findViewById(R.id.btn_back);
@@ -199,7 +203,7 @@ public class SentenceActivity extends AppCompatActivity implements TextToSpeech.
 
         // 서버 데이터 가져옴
         networkService = RetrofitSender.getNetworkService();
-        Call<List<Quiz>> call =  networkService.get_qb(1);
+        Call<List<Quiz>> call =  networkService.get_qb(mB_id);
         call.enqueue(new Callback<List<Quiz>>(){
             @Override
             public void onResponse(Call<List<Quiz>> call, Response<List<Quiz>> response) {
@@ -320,6 +324,7 @@ public class SentenceActivity extends AppCompatActivity implements TextToSpeech.
                                             intent.putExtra("countword",countword);
                                             intent.putExtra("myscore",Double.parseDouble(score));
 
+                                            intent.putExtra("b_id",  mB_id);
                                             startActivity(intent);
                                             finish();
                                         }catch(Throwable t){

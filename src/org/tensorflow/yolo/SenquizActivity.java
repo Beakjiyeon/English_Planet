@@ -25,7 +25,7 @@ import retrofit2.Response;
 
 public class SenquizActivity extends AppCompatActivity {
     ImageButton checkans;
-    int count;
+    int count, mB_id;
     TextView sen_k;
     NetworkService networkService;
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +40,11 @@ public class SenquizActivity extends AppCompatActivity {
         Navigation_Bar n = new Navigation_Bar();
         n.HideNavigationBar(w);
 
+        // getIntent
+        Intent intent = getIntent();
+        mB_id = intent.getIntExtra("b_id", 0);
         networkService = RetrofitSender.getNetworkService();
-        Call<List<Quiz>> call =  networkService.get_qb(1);
+        Call<List<Quiz>> call =  networkService.get_qb(mB_id);
         call.enqueue(new Callback<List<Quiz>>() {
             @Override
             public void onResponse(Call<List<Quiz>> call, Response<List<Quiz>> response) {
@@ -112,6 +115,7 @@ public class SenquizActivity extends AppCompatActivity {
                                     }
                                     intent.putExtra("sen",sen);
                                     intent.putExtra("type", "sentence");
+                                    intent.putExtra("b_id",  mB_id);
                                     startActivity(intent);
                                 }
                             }

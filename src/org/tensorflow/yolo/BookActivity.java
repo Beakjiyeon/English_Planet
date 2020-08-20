@@ -87,7 +87,7 @@ public class BookActivity extends Activity implements View.OnClickListener, Text
         // ArrayList create
         mOrigin = new ArrayList<>();
 
-        // getIntent
+             // getIntent
         Intent intent = getIntent();
         mB_id = intent.getIntExtra("b_id", 0);
 

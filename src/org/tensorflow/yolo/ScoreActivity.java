@@ -37,6 +37,7 @@ public class ScoreActivity extends AppCompatActivity {
         Double s=intent.getDoubleExtra("myscore",0);
         int countword = intent.getIntExtra("countword",0);
 
+        int mB_id = intent.getIntExtra("b_id", 0);
         count++;
 
         // 점수에 따라 배경 설정
@@ -80,6 +81,7 @@ public class ScoreActivity extends AppCompatActivity {
 
                     AppSetting.quizsen++;
                     Intent intent = new Intent(getApplicationContext(), SentenceActivity.class);
+                    intent.putExtra("b_id",  mB_id);
                     startActivity(intent);
                 }
             }

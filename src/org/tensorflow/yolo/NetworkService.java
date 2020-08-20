@@ -49,11 +49,11 @@ public interface NetworkService {
 
     // quiz
     @GET("/api/quiz/{userId}") Call<Quiz> getData(@Path("userId") String id);
-    @GET("/api/quiz") Call<List<Quiz>> get_qb (@Query("b_id") int b_id);
+    @GET("/api/quiz") Call<List<Quiz>> get_qb (@Query("id") int b_id);
 
     // bookword
     //@GET("/api/bookword/{userId}") Call<Bookword> get_bw_data(@Path("userId") String id);
-    @GET("api/bookword") Call<List<Bookword>> get_bw(@Query("b_id") int b_id);
+    @GET("api/bookword") Call<List<Bookword>> get_bw(@Query("id") int b_id);
 
     // camera
     @FormUrlEncoded

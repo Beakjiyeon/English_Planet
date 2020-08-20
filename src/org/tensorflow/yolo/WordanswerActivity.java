@@ -38,6 +38,7 @@ public class WordanswerActivity extends AppCompatActivity {
         Intent intent = getIntent();
         int correct = intent.getExtras().getInt("correct");
         String type = intent.getExtras().getString("type");
+        int mB_id = intent.getIntExtra("b_id", 0);
         if(type.equals("word")) {
             if (correct == 1) {
                 answerlayout.setBackgroundDrawable(ContextCompat.getDrawable(this, R.drawable.wordcorrect));
@@ -65,6 +66,7 @@ public class WordanswerActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent;
                 AppSetting.quizcount++;
+                Log.v("quizCount=======",AppSetting.quizcount+"");
                 if(AppSetting.quizcount<3) {
                     Log.v("quizCount=======",AppSetting.quizcount+"");
                     intent = new Intent(getApplicationContext(), WordquizActivity.class);
@@ -88,6 +90,7 @@ public class WordanswerActivity extends AppCompatActivity {
                 Log.d("널체크","문법점수엔 "+AppSetting.uid);
                 finish();
                 AppSetting.dp_bool=true;
+                intent.putExtra("b_id",  mB_id);
                 startActivity(intent);
             }
         });

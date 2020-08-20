@@ -32,21 +32,23 @@ public class PlanetActivity2 extends AppCompatActivity {
             startActivity(intent);
         });
 
-//        ImageView img2 = findViewById(R.id.imageView3);
-//        img2.setOnClickListener(view -> {
-        // MainActivity.btnmp.start();
-//            Intent intent = new Intent(getApplicationContext(), WordquizActivity.class);
-//            startActivity(intent);
-//            //finish();
-//        });
-//
-//        ImageView img3 = findViewById(R.id.imageView4);
-//        img3.setOnClickListener(view -> {
-        // MainActivity.btnmp.start();
-//            Intent intent = new Intent(getApplicationContext(),SentenceActivity.class);
-//            startActivity(intent);
-//            //finish();
-//        });
+        ImageView img2 = findViewById(R.id.imageView5);
+       img2.setOnClickListener(view -> {
+         MainActivity.btnmp.start();
+            Intent intent = new Intent(getApplicationContext(), WordquizActivity.class);
+           intent.putExtra("b_id",2);
+            startActivity(intent);
+            //finish();
+        });
+
+        ImageView img3 = findViewById(R.id.imageView6);
+        img3.setOnClickListener(view -> {
+         MainActivity.btnmp.start();
+            Intent intent = new Intent(getApplicationContext(),SentenceActivity.class);
+            intent.putExtra("b_id",2);
+            startActivity(intent);
+            //finish();
+        });
 
         Button btn_back = findViewById(R.id.btn_back);
         btn_back.setOnClickListener(new View.OnClickListener() {

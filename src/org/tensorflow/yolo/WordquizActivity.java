@@ -24,6 +24,7 @@ public class WordquizActivity extends AppCompatActivity {
     String answer,answer2;
     String[] wordarray;
     String[] wrongarray={"바나나", "동물", "코", "기억", "나무","고양이","악어","시끄러운","사자","부족한","작은","이빨","딱딱한","과일","조용한","목"};
+    int mB_id;
     NetworkService networkService;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,15 +54,22 @@ public class WordquizActivity extends AppCompatActivity {
 
         wordarray= new String[3];
 
+            // getIntent
+            Intent intent = getIntent();
+            mB_id = intent.getIntExtra("b_id", 0);
+
+
         // 서버 데이터 가져옴
         networkService = RetrofitSender.getNetworkService();
         //Call<Bookword> call =  retrofitConnection.server.get_bw_data("1");
-        Call<List<Bookword>> call =  networkService.get_bw(1);
+
+        Call<List<Bookword>> call =  networkService.get_bw(mB_id);
         //Log.d("흠흠무무무이",AppSetting.quizcount+"");
         call.enqueue(new Callback<List<Bookword>>() {
             @Override
             public void onResponse(Call<List<Bookword>> call, Response<List<Bookword>> response) {
                 if (response.isSuccessful()) {
+                    Log.d("흠흠흠",String.valueOf(AppSetting.quizcount));
                     Bookword bw= response.body().get(AppSetting.quizcount);
                     String bo=bw.getB_word_e();
                     answer2=bo;
@@ -111,6 +119,7 @@ public class WordquizActivity extends AppCompatActivity {
                     intent.putExtra("correct",0);
                 }
                 intent.putExtra("type", "word");
+                intent.putExtra("b_id",  mB_id);
                 startActivity(intent);
                 finish();
             }
@@ -126,6 +135,7 @@ public class WordquizActivity extends AppCompatActivity {
                     intent.putExtra("answer2",answer2);
                     intent.putExtra("correct",0);}
                 intent.putExtra("type", "word");
+                intent.putExtra("b_id",  mB_id);
                 startActivity(intent);
             }
         });
@@ -139,6 +149,7 @@ public class WordquizActivity extends AppCompatActivity {
                     intent.putExtra("answer2",answer2);
                     intent.putExtra("correct",0);}
                 intent.putExtra("type", "word");
+                intent.putExtra("b_id",  mB_id);
                 startActivity(intent);
             }
         });
