@@ -69,8 +69,6 @@ public class BookActivity extends Activity implements View.OnClickListener, Text
     private MediaPlayer mp;
 
 
-
-
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(null);
@@ -82,12 +80,12 @@ public class BookActivity extends Activity implements View.OnClickListener, Text
         n.HideNavigationBar(w);
 
         // 효과음
-        mp = MediaPlayer.create(this,R.raw.book);
+        mp = MediaPlayer.create(this, R.raw.book);
 
         // ArrayList create
         mOrigin = new ArrayList<>();
 
-             // getIntent
+        // getIntent
         Intent intent = getIntent();
         mB_id = intent.getIntExtra("b_id", 0);
 
@@ -100,8 +98,10 @@ public class BookActivity extends Activity implements View.OnClickListener, Text
                 mBooktitle.setText("Friends");
                 break;
 
-            // case 3:
-//            mChapter.setText("Chapter3");
+            case 3:
+                mChapter.setText("Chapter3");
+                mBooktitle.setText("Good For You.");
+                break;
         }
 
 
@@ -137,7 +137,7 @@ public class BookActivity extends Activity implements View.OnClickListener, Text
         });
 
         //Intent intentt = new Intent(this, BookwordActivity.class);
-       // startActivity(intentt);
+        // startActivity(intentt);
 
         networkService = RetrofitSender.getNetworkService();
 
@@ -285,7 +285,7 @@ public class BookActivity extends Activity implements View.OnClickListener, Text
     }
 
 
-    public void btnEngToKor(View view){
+    public void btnEngToKor(View view) {
         asyncTask = new NaverTranslateTask();
         String str = "";
         for (int i = 0; i < 3; i++) {
@@ -304,9 +304,9 @@ public class BookActivity extends Activity implements View.OnClickListener, Text
 
     }
 
-    public void btnKorToEng(View view){
+    public void btnKorToEng(View view) {
 
-        for(int i=0;i<mOrigin.size();i++){
+        for (int i = 0; i < mOrigin.size(); i++) {
             mTvList[i].setText(mOrigin.get(i));
         }
 
@@ -316,29 +316,29 @@ public class BookActivity extends Activity implements View.OnClickListener, Text
 
     // TODO EngTOKor, KorToEng 바꿀때마다 변경하는 함수 제작
 
-    private void SetEngToKor(){
+    private void SetEngToKor() {
         mBtn_KorToEng.setEnabled(false);
         mBtn_KorToEng.setBackgroundColor(Color.GRAY);
         mBtn_EngToKor.setEnabled(true);
         mBtn_EngToKor.setBackgroundColor(Color.parseColor("#69F0AE"));
 
-        for (int i=0;i<3;i++){
+        for (int i = 0; i < 3; i++) {
             mTvList[i].setEnabled(true);
         }
 
     }
-    private void SetKorToEng(){
+
+    private void SetKorToEng() {
         mBtn_KorToEng.setEnabled(true);
         mBtn_KorToEng.setBackgroundColor(Color.parseColor("#69F0AE"));
         mBtn_EngToKor.setEnabled(false);
         mBtn_EngToKor.setBackgroundColor(Color.GRAY);
 
-        for (int i=0;i<3;i++){
+        for (int i = 0; i < 3; i++) {
             mTvList[i].setEnabled(false);
         }
 
     }
-
 
 
 }
