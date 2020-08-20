@@ -12,9 +12,10 @@ import android.widget.Toast;
 
 import org.tensorflow.yolo.setting.AppSetting;
 import org.tensorflow.yolo.view.ClassifierActivity;
-
+//
 // 주희 : 행성리스트 액티비티
 public class PlanetListActivity extends AppCompatActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
