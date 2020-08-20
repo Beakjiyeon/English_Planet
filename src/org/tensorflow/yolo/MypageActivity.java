@@ -26,7 +26,7 @@ public class MypageActivity extends AppCompatActivity {
         TextView userinfo = (TextView)findViewById(R.id.userInfo);
         userinfo.setText(AppSetting.unickname);
 
-        ImageView book1 = (ImageView)findViewById(R.id.btnBook1);
+        ImageView book1 = (ImageView)findViewById(R.id.btnVoca);
         book1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -35,14 +35,6 @@ public class MypageActivity extends AppCompatActivity {
             }
         });
 
-        TextView voca = (TextView)findViewById(R.id.voca);
-        voca.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), CameraWordBookActivity.class);
-                startActivity(intent);//액티비티 띄우기
-            }
-        });
 
 
     }
