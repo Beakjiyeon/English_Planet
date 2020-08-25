@@ -81,11 +81,15 @@ public class WordanswerActivity extends AppCompatActivity {
                 }
                 else{
                     intent=new Intent(getApplicationContext(), PlanetActivity1.class);
+                    if(AppSetting.progress==11){
+                        AppSetting.progress=12;
+                        // 쳅터 1의 시작=0, 동화=1
+                        // db에 값 반영
+                        updateProgressDB();
+                    }
                 }
-                AppSetting.progress=2;
-                // 쳅터 1의 시작=0, 동화=1
-                // db에 값 반영
-                updateProgressDB();
+
+
 
                 Log.d("널체크","문법점수엔 "+AppSetting.uid);
                 finish();
@@ -99,7 +103,7 @@ public class WordanswerActivity extends AppCompatActivity {
     void updateProgressDB(){
         NetworkService networkService = RetrofitSender.getNetworkService();
         // b_id : 1번으로 설정
-        Call<ResponseBody> response2 = networkService.updateProgress(AppSetting.uid,2);
+        Call<ResponseBody> response2 = networkService.updateProgress(AppSetting.uid,12);
         response2.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

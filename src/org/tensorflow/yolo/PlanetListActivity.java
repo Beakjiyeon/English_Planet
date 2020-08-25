@@ -29,19 +29,16 @@ public class PlanetListActivity extends AppCompatActivity {
         Navigation_Bar n = new Navigation_Bar();
         n.HideNavigationBar(w);
 
-        /*
         // 지연 : 프로그레스 바
         ImageView progBar=(ImageView)findViewById(R.id.progBar);
-        if(AppSetting.progress>=0&&AppSetting.progress<=4) {	// 조건
-                detailProgBar.setImageDrawable(R.id.Prog0);
-        }else if(AppSetting.progress>=5&&AppSetting.progress<=9){
-                detailProgBar.setImageDrawable(R.id.Prog1);
-        }else if(AppSetting.progress>=10&&AppSetting.progress<=14){
-                detailProgBar.setImageDrawable(R.id.Prog2);
-        }else{
+        ImageView progBar_in=(ImageView)findViewById(R.id.progress_in);
+        if(AppSetting.big_progress==0){
+             //progBar.setImageDrawable(getResources().getDrawable(R.drawable.progress_bar2,getApplicationContext().getTheme()));
+        }else if(AppSetting.big_progress==1) {
+            // progBar.setImageDrawable(getResources().getDrawable(R.drawable.progress_bar2,getApplicationContext().getTheme()));
+             progBar_in.setImageDrawable(getResources().getDrawable(R.drawable.progress_bar_in,getApplicationContext().getTheme()));
         }
 
-        */
 
 
         ImageView planet1 = (ImageView) findViewById(R.id.planet1);

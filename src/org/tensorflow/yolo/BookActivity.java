@@ -204,11 +204,18 @@ public class BookActivity extends Activity implements View.OnClickListener, Text
                 @Override
                 public void onClick(View view) {
                     Toast t = Toast.makeText(getApplicationContext(), "학습 종료", Toast.LENGTH_SHORT);
-                    AppSetting.progress = 1;
-                    AppSetting.dp_bool = true;
-                    // 쳅터 1의 시작=0, 동화=1
-                    // db에 값 반영
-                    updateProgressDB();
+                    // 지연 : 동화 학습 종료한 상태로 변경
+                    if(AppSetting.progress==10){
+                        AppSetting.progress = 11;
+                        AppSetting.dp_bool = true;
+                        // db에 값 반영
+                        updateProgressDB();
+                    }else{
+                        // db 반영이 필요 없는 경우
+
+                    }
+
+
                     Log.d("널체크", "동화엔 " + AppSetting.uid);
                     Intent intent = new Intent(getApplicationContext(), PlanetActivity1.class);
                     startActivity(intent);
@@ -224,24 +231,19 @@ public class BookActivity extends Activity implements View.OnClickListener, Text
     // 지연: DB 진행률을 수정하는 함수
     void updateProgressDB() {
         networkService = RetrofitSender.getNetworkService();
-        // b_id : 1번으로 설정
-        Call<ResponseBody> response2 = networkService.updateProgress(AppSetting.uid, 1);
+        Call<ResponseBody> response2 = networkService.updateProgress(AppSetting.uid, 11);
         response2.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response != null) {
-                    Log.d("ㅋㅋㅋ#", "수정하고싶다");
-
-
+                    Log.d("#########db수정#####", "updateProgressDB");
                 } else {
-                    Log.d("ㅋㅋㅋ#", "ㄴㄴㄴxxxxxxx");
+                    Log.d("#########db수정#####", "updateProgressDB 실패");
                 }
-
             }
-
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Log.d("ㅋㅋㅋ#", t.getMessage());
+                Log.d("#########db수정#####", "updateProgressDB 실패");
             }
         });
     }
