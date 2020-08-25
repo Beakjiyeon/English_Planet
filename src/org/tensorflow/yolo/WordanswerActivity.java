@@ -64,7 +64,7 @@ public class WordanswerActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent;
+                Intent intent=null;
                 AppSetting.quizcount++;
                 Log.v("quizCount=======",AppSetting.quizcount+"");
                 if(AppSetting.quizcount<3) {
@@ -80,12 +80,22 @@ public class WordanswerActivity extends AppCompatActivity {
                     intent=new Intent(getApplicationContext(), SenquizActivity.class);
                 }
                 else{
-                    intent=new Intent(getApplicationContext(), PlanetActivity1.class);
-                    if(AppSetting.progress==11){
-                        AppSetting.progress=12;
-                        // 쳅터 1의 시작=0, 동화=1
+                    if(mB_id==1) {
+                        intent = new Intent(getApplicationContext(), PlanetActivity1.class);
+                    }else if(mB_id==2) {
+                        intent = new Intent(getApplicationContext(), PlanetActivity2.class);
+                    }else if(mB_id==3) {
+                        intent = new Intent(getApplicationContext(), PlanetActivity3.class);
+                    }
+
+                    if((AppSetting.progress/10==mB_id)&&(AppSetting.progress%10==1)){
+                        AppSetting.progress = mB_id*10+2;
+                        AppSetting.dp_bool = true;
                         // db에 값 반영
                         updateProgressDB();
+                    }else{
+                        // db 반영이 필요 없는 경우
+
                     }
                 }
 
@@ -96,6 +106,10 @@ public class WordanswerActivity extends AppCompatActivity {
                 AppSetting.dp_bool=true;
                 intent.putExtra("b_id",  mB_id);
                 startActivity(intent);
+
+
+
+
             }
         });
     }
@@ -103,7 +117,8 @@ public class WordanswerActivity extends AppCompatActivity {
     void updateProgressDB(){
         NetworkService networkService = RetrofitSender.getNetworkService();
         // b_id : 1번으로 설정
-        Call<ResponseBody> response2 = networkService.updateProgress(AppSetting.uid,12);
+        int progress=(AppSetting.big_progress+1)*10+2;
+        Call<ResponseBody> response2 = networkService.updateProgress(AppSetting.uid,progress);
         response2.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
