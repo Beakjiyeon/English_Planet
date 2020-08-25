@@ -67,12 +67,19 @@ public class ScoreActivity extends AppCompatActivity {
                 // AppSetting 값 수정 db에서 받아오는데 시간이 걸리기떄문...
                 if(AppSetting.quizsen==2) {
 
-                    // 쳅터 1의 시작=0, 동화=1
+
                     // db에 값 반영
-                    updateProgressDB();
+                    if(AppSetting.progress==12){
+                        updateProgressDB();
+                        AppSetting.progress=13;
+                        // 행성 하나에 있는 모든 미션을 완료했으므로 big_progress db 수정
+                        updateBigProgressDB();
+                    }
+
+
 
                     finish();
-                    AppSetting.progress=3;
+
                     Log.d("널체크","발음점수엔 "+AppSetting.uid);
                     Intent intent = new Intent(getApplicationContext(), PlanetActivity1.class);
                     startActivity(intent);
@@ -94,22 +101,45 @@ public class ScoreActivity extends AppCompatActivity {
     void updateProgressDB(){
         NetworkService networkService = RetrofitSender.getNetworkService();
         // b_id : 1번으로 설정
-        Call<ResponseBody> response2 = networkService.updateProgress(AppSetting.uid,3);
+        Call<ResponseBody> response2 = networkService.updateProgress(AppSetting.uid,13);
         response2.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if(response!=null) {
-                    Log.d("ㅋㅋㅋ4#", "수정하고싶다");
+                    Log.d("#######db수정###########3", "수정");
 
                 }else{
-                    Log.d("ㅋㅋㅋ#", "ㄴㄴㄴxxxxxxx");
+                    Log.d("#######db수정###########3", "실패");
                 }
 
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Log.d("ㅋㅋㅋ#", t.getMessage());
+                Log.d("#######db수정############", t.getMessage());
+            }
+        });
+    }
+    // 지연: DB 진행률을 수정하는 함수
+    void updateBigProgressDB(){
+        NetworkService networkService = RetrofitSender.getNetworkService();
+        // b_id : 1번으로 설정
+        Call<ResponseBody> response2 = networkService.updateBigProgress(AppSetting.uid,2);
+        response2.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if(response!=null) {
+                    Log.d("#######db수정###########5", "수정");
+
+                }else{
+                    Log.d("#######db수정###########3", "실패");
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.d("#######db수정############", t.getMessage());
             }
         });
     }

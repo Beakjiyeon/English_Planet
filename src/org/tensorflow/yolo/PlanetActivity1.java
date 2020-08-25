@@ -14,6 +14,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import org.tensorflow.yolo.setting.AppSetting;
 
@@ -42,6 +43,8 @@ public class PlanetActivity1 extends AppCompatActivity {
         // 세영: 퀴즈 숫자
         AppSetting.quizcount=0;
         AppSetting.quizsen=0;
+        //ImageView testCircle=(ImageView)findViewById(R.id.test1);
+        //지연+++++++++++++++++++++++++++++++++++++++++++++
         ImageView detailProgBar=(ImageView)findViewById(R.id.detailProgBar);
 
 
@@ -82,85 +85,116 @@ public class PlanetActivity1 extends AppCompatActivity {
         });
 
 
-        // 지연 : DB에서 USER 진행률 가져오기
+        // 지연 : DB에서 사용자의 진행률 p_progress를 받아와 AppSetting에 등록한다.
         AppSetting.progress=getProgressDB();
-        // 지연 : 행성별 프로그레스 바
-
-
-
-        switch (AppSetting.progress) {	// 조건 %5
-            case 0: // 시작, 동화 단계가 노란글씨 + 첫번쨰 컨텐츠 깜빡임
+        // 지연 : p_progress 에 따른 map 이미지 & 깜빡임 & 클릭 시 동작
+        // 지연 : map 클릭 가능여부는 추후개선
+        switch (AppSetting.progress) {
+            case 10:
+                // 지연 : 처음 행성에 들어온 상태
+                // map 이미지 = _시작_ *동화* 퀴즈 발음 기타 끝
+                // 미션 깜밖임 = 동화 미션 이미지 색깔 gray->color->gray
                 handler=new Handler();
-                r=new Runnable(){//
+                r=new Runnable(){
                     @Override
                     public void run() {
                         if(AppSetting.dp_bool){
-                            //img.setImageBitmap(null);
-                            //img.setLayoutParams(new LinearLayout.LayoutParams(330, 200));
                             img.setImageResource(R.drawable.yellow_rocket);
                             AppSetting.dp_bool=false;
                         }else{
                             img.setImageResource(R.drawable.yellow_rocket_g);
                             AppSetting.dp_bool=true;
                         }
-                        handler.postDelayed(r,500);
+                        handler.postDelayed(r,200);
                     }
                 };
-
                 handler.post(r);
-                detailProgBar.setImageResource(R.drawable.dprog1);
-                break;
-            case 1:// 문법 단계가 노란글씨 + 두번쨰 컨텐츠 깜빡임 + 첫번째 컨텐츠 /
-                img.setOnTouchListener(new View.OnTouchListener() {
+                // 퀴즈 미션 클릭시 : 클릭 불가+퀴즈 미션 먼저 수행하세요
+                img2.setOnTouchListener(new View.OnTouchListener() {
                     @Override
                     public boolean onTouch(View v, MotionEvent event) {
+                        Toast.makeText(getApplicationContext(), "동화 미션 먼저 수행하세요", Toast.LENGTH_LONG).show();
                         return true;
                     }
-                });//
-
+                });
+                // 발음 미션 클릭시 : 클릭 불가+퀴즈 미션 먼저 수행하세요!
                 img3.setOnTouchListener(new View.OnTouchListener() {
                     @Override
                     public boolean onTouch(View v, MotionEvent event) {
+                        Toast.makeText(getApplicationContext(), "동화 미션 먼저 수행하세요", Toast.LENGTH_LONG).show();
                         return true;
                     }
-                });//
-
+                });
+                // map 이미지
+                detailProgBar.setImageResource(R.drawable.dprog1);
+                break;
+            case 11:
+                // 지연 : 동화 미션을 수행한 상태
+                // map 이미지 : _시작_ _동화_ *퀴즈* 발음 기타 끝
+                // 미션 깜빡임 : 퀴즈 미션
+                // 동화 미션 클릭시 : BookActivity로 이동
+                img.setOnTouchListener(new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+                        MainActivity.btnmp.start();
+                        Intent intent = new Intent(getApplicationContext(), BookActivity.class);
+                        intent.putExtra("b_id",1);
+                        startActivity(intent);
+                        return true;
+                    }
+                });
+                // 발음 미션 클릭시 : 클릭 불가+퀴즈 미션 먼저 수행하세요!
+                img3.setOnTouchListener(new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+                        Toast.makeText(getApplicationContext(), "퀴즈 미션 먼저 수행하세요", Toast.LENGTH_LONG).show();
+                        return true;
+                    }
+                });
+                // 미션 깜빡임 설정
                 handler=new Handler();
                 img.setImageResource(R.drawable.yellow_rocket);
                 r=new Runnable(){
                     @Override
                     public void run() {
                         if(AppSetting.dp_bool){
-                            //img.setImageBitmap(null);
-                            //img.setLayoutParams(new LinearLayout.LayoutParams(330, 200));
                             img2.setImageResource(R.drawable.satellite);
                             AppSetting.dp_bool=false;
                         }else{
                             img2.setImageResource(R.drawable.satellite_g);
                             AppSetting.dp_bool=true;
                         }
-                        handler.postDelayed(r,400);
+                        handler.postDelayed(r,200);
         }
     };
                 handler.post(r);
+                // map 이미지 수정
                 detailProgBar.setImageResource(R.drawable.dprog2);
-
                 break;
-            case 2: // 발음단계
+            case 12:
+                // 퀴즈 수행을 마친 단계
+                // 동화 미션 클릭시 : BookActivity로 이동
                 img.setOnTouchListener(new View.OnTouchListener() {
                     @Override
                     public boolean onTouch(View v, MotionEvent event) {
+                        MainActivity.btnmp.start();
+                        Intent intent = new Intent(getApplicationContext(), BookActivity.class);
+                        intent.putExtra("b_id",1);
+                        startActivity(intent);
                         return true;
                     }
-                });//
+                });
+                // 퀴즈 미션 클릭시 : 퀴즈 액티비티로 이동
                 img2.setOnTouchListener(new View.OnTouchListener() {
                     @Override
                     public boolean onTouch(View v, MotionEvent event) {
+                        MainActivity.btnmp.start();
+                        Intent intent = new Intent(getApplicationContext(), WordquizActivity.class);
+                        intent.putExtra("b_id",1);
+                        startActivity(intent);
                         return true;
                     }
-                });//
-
-
+                });
                 handler=new Handler();
                 img.setImageResource(R.drawable.yellow_rocket);
                 img2.setImageResource(R.drawable.satellite);
@@ -174,14 +208,16 @@ public class PlanetActivity1 extends AppCompatActivity {
                             img3.setImageResource(R.drawable.battery1);
                             AppSetting.dp_bool=true;
                         }
-                        handler.postDelayed(r,400);
+                        handler.postDelayed(r,200);
                     }
                 };
                 handler.post(r);
                 detailProgBar.setImageResource(R.drawable.dprog3);
                 break;
-            case 3:
-
+            case 13:
+                // 발음 미션을 완료한 단계
+                // 모든 이미지 터치 가능
+                // 미션 이미지 모두 color
                 img.setImageResource(R.drawable.yellow_rocket);
                 img2.setImageResource(R.drawable.satellite);
                 img3.setImageResource(R.drawable.battery1);
@@ -209,6 +245,7 @@ public class PlanetActivity1 extends AppCompatActivity {
         return px/density;
     }
 
+    // 지연 : db로 부터 p_progress를 받아오는 함수
     int getProgressDB(){
         NetworkService networkService = RetrofitSender.getNetworkService();
         Call<User> response2 = networkService.get_pk_user(AppSetting.uid);
@@ -217,16 +254,16 @@ public class PlanetActivity1 extends AppCompatActivity {
             public void onResponse(Call<User> call, Response<User> response) {
                 if(response!=null) {
                     AppSetting.progress=response.body().getP_progress();
-                    Log.d("ㅋㅋㅋ2#", ""+AppSetting.progress);
+                    Log.d("#########앱세팅#########", ""+AppSetting.progress);
                 }else{
-                    Log.d("ㅋㅋㅋ2#", "ㄴㄴㄴxxxxxxx");
+                    Log.d("#########앱세팅#########", "fail");
                 }
 
             }
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                Log.d("ㅋㅋㅋ2#", t.getMessage());
+                Log.d("#########앱세팅#########", "실패"+t.getMessage());
             }
         });
 

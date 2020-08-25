@@ -117,6 +117,7 @@ public class SenquizActivity extends AppCompatActivity {
                                     intent.putExtra("sen",sen);
                                     intent.putExtra("type", "sentence");
                                     intent.putExtra("b_id",  mB_id);
+
                                     startActivity(intent);
                                 }
                             }

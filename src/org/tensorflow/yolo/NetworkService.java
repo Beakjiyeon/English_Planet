@@ -27,7 +27,8 @@ public interface NetworkService {
     Call<User> register_user(@Field("uid") String uid,
                              @Field("upw") String upw,
                              @Field("nickname") String nickname,
-                             @Field("p_progress") int p_progress);
+                             @Field("p_progress") int p_progress,
+                             @Field("big_progress") int big_progress);
 
     @PATCH("/api/user/{pk}/")
     Call<User> patch_user(@Path("pk") int pk, @Body User user);
@@ -77,6 +78,10 @@ public interface NetworkService {
     @FormUrlEncoded
     @PATCH("/api/user/{pk}/")
     Call<ResponseBody> updateProgress(@Path("pk") String uid, @Field("p_progress") int progress);
+
+    @FormUrlEncoded
+    @PATCH("/api/user/{pk}/")
+    Call<ResponseBody> updateBigProgress(@Path("pk") String uid, @Field("big_progress") int big_progress);
 
 
 }
