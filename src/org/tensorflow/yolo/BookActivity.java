@@ -15,7 +15,11 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.LinearInterpolator;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,8 +31,11 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.Locale;
 import java.util.NoSuchElementException;
+import java.util.Queue;
+import java.util.Stack;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -47,10 +54,8 @@ public class BookActivity extends Activity implements View.OnClickListener, Text
 
     NaverTranslateTask asyncTask;
 
-
     // TextView List
     public static TextView[] mTvList;
-    public static String[] mTransText;
 
     // 원문을 보여주기 위한 ArrayList<>
     public ArrayList<String> mOrigin;
@@ -65,8 +70,20 @@ public class BookActivity extends Activity implements View.OnClickListener, Text
     TextView mChapter;
     TextView mBooktitle;
 
+    // tap image - 손가락
+    ImageView mTap;
+
+    // animation
+    Animation mAnimation;
+
     // 효과음
     private MediaPlayer mp;
+
+    // Queue
+    Queue mBookQueue;
+
+
+
 
 
     @Override
@@ -91,16 +108,36 @@ public class BookActivity extends Activity implements View.OnClickListener, Text
 
         mChapter = findViewById(R.id.chapter);
         mBooktitle = findViewById(R.id.book_title);
+
+        // tap imageview findviewbyid
+        mTap = findViewById(R.id.tap1);
+        // animation
+        mAnimation = new AlphaAnimation(1, 0);
+        mAnimation.setDuration(800);
+        mAnimation.setInterpolator(new LinearInterpolator());
+        mAnimation.setRepeatCount(Animation.INFINITE);
+        mAnimation.setRepeatMode(Animation.REVERSE);
+        //애니메이션 시작
+        mTap.startAnimation(mAnimation);
+
+        //stack create
+        mBookQueue = new LinkedList();
+
+
         // chaper하고 책 제목 변경
         switch (mB_id) {
             case 2:
                 mChapter.setText("Chapter2");
                 mBooktitle.setText("Friends");
+                mTap.setVisibility(View.GONE);
+                mAnimation.cancel();
                 break;
 
             case 3:
                 mChapter.setText("Chapter3");
                 mBooktitle.setText("Tall and Short");
+                mTap.setVisibility(View.GONE);
+                mAnimation.cancel();
                 break;
         }
 
@@ -113,7 +150,6 @@ public class BookActivity extends Activity implements View.OnClickListener, Text
         // 초기값 비활성화 : 처음에 영어문장이므로 영어로 번역하는 버튼 비활성화함
         mBtn_KorToEng.setEnabled(false);
         mBtn_KorToEng.setBackgroundColor(Color.GRAY);
-
 
         // textview
         mTvList = new TextView[3];
@@ -141,7 +177,7 @@ public class BookActivity extends Activity implements View.OnClickListener, Text
 
         networkService = RetrofitSender.getNetworkService();
 
-        // b_id : 1번으로 설정
+        // 책 가져오는 코드
         Call<Book> response = networkService.get_book(mB_id);
         response.enqueue(new Callback<Book>() {
             @Override
@@ -167,12 +203,26 @@ public class BookActivity extends Activity implements View.OnClickListener, Text
     public void btnNext(View v) {
         // 효과음
         mp.start();
-
+        mTap.setVisibility(View.GONE);
+        mAnimation.cancel();
         // 다음페이지로 넘어가면 초기값 세팅
         SetEngToKor();
 
         BookItr();
 
+    }
+
+    public void btnPrev(View v){
+        mp.start();
+        for (int i=0;i<3;i++) {
+            mTvList[i].setText("");
+        }
+
+        for (int i=0;i<3;i++){
+            if(!mBookQueue.isEmpty()){
+                mTvList[i].setText(mBookQueue.poll().toString());
+            }
+        }
     }
 
     private void BookItr() {
@@ -187,14 +237,18 @@ public class BookActivity extends Activity implements View.OnClickListener, Text
                 s = mItr.next();
                 mTvList[0].setText(s);
                 mOrigin.add(s);
+                mBookQueue.offer(s);
+
 
                 s = mItr.next();
                 mTvList[1].setText(s);
                 mOrigin.add(s);
+                mBookQueue.offer(s);
 
                 s = mItr.next();
                 mTvList[2].setText(s);
                 mOrigin.add(s);
+                mBookQueue.offer(s);
 
             }
 
