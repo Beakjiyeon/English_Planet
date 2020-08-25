@@ -163,6 +163,9 @@ public class BookActivity extends Activity implements View.OnClickListener, Text
 
         tts = new TextToSpeech(this.getApplicationContext(), this);
 
+       // Intent inten = new Intent(getApplicationContext(), BookwordActivity.class);
+        //startActivity(inten);
+
         // back btn
         Button btn_back = findViewById(R.id.btn_back);
         btn_back.setOnClickListener(new View.OnClickListener() {
@@ -172,8 +175,7 @@ public class BookActivity extends Activity implements View.OnClickListener, Text
             }
         });
 
-        //Intent intentt = new Intent(this, BookwordActivity.class);
-        // startActivity(intentt);
+
 
         networkService = RetrofitSender.getNetworkService();
 
@@ -190,6 +192,7 @@ public class BookActivity extends Activity implements View.OnClickListener, Text
 
                 // book iterator
                 BookItr();
+
             }
 
             @Override
@@ -259,8 +262,12 @@ public class BookActivity extends Activity implements View.OnClickListener, Text
                 public void onClick(View view) {
                     Toast t = Toast.makeText(getApplicationContext(), "학습 종료", Toast.LENGTH_SHORT);
                     // 지연 : 동화 학습 종료한 상태로 변경
-                    if(AppSetting.progress==10){
-                        AppSetting.progress = 11;
+                    // 1. 만약 처음 동떄
+                    // 2. 두번째 학습인데 십의 자리가 b_id와 다른 경우는 db에 입력하지 않음
+                    // 즉!!!
+                    // 현재 p_progress값과 현재 b_id가 같고, 동화미션을 수행했을경우(즉 아직 수행전인 상태로 db에 남아있는 상태의 경우)에 db반영시킴
+                    if((AppSetting.progress/10==mB_id)&&(AppSetting.progress%10==0)){
+                        AppSetting.progress = mB_id*10+1;
                         AppSetting.dp_bool = true;
                         // db에 값 반영
                         updateProgressDB();
@@ -270,11 +277,27 @@ public class BookActivity extends Activity implements View.OnClickListener, Text
                     }
 
 
+
                     Log.d("널체크", "동화엔 " + AppSetting.uid);
-                    Intent intent = new Intent(getApplicationContext(), PlanetActivity1.class);
-                    startActivity(intent);
-                    t.show();
-                    finish();
+                    if(mB_id==1) {
+                        Intent intent = new Intent(getApplicationContext(), PlanetActivity1.class);
+                        startActivity(intent);
+                        t.show();
+                        finish();
+                    }
+                    if(mB_id==2) {
+                        Intent intent = new Intent(getApplicationContext(), PlanetActivity2.class);
+                        startActivity(intent);
+                        t.show();
+                        finish();
+                    }
+                    if(mB_id==3) {
+                        Intent intent = new Intent(getApplicationContext(), PlanetActivity3.class);
+                        startActivity(intent);
+                        t.show();
+                        finish();
+                    }
+
                 }
             });
 
@@ -285,7 +308,8 @@ public class BookActivity extends Activity implements View.OnClickListener, Text
     // 지연: DB 진행률을 수정하는 함수
     void updateProgressDB() {
         networkService = RetrofitSender.getNetworkService();
-        Call<ResponseBody> response2 = networkService.updateProgress(AppSetting.uid, 11);
+        int progress=(AppSetting.big_progress+1)*10+1;
+        Call<ResponseBody> response2 = networkService.updateProgress(AppSetting.uid, progress);
         response2.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
