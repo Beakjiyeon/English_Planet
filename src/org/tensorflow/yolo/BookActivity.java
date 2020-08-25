@@ -127,6 +127,9 @@ public class BookActivity extends Activity implements View.OnClickListener, Text
 
         tts = new TextToSpeech(this.getApplicationContext(), this);
 
+       // Intent inten = new Intent(getApplicationContext(), BookwordActivity.class);
+        //startActivity(inten);
+
         // back btn
         Button btn_back = findViewById(R.id.btn_back);
         btn_back.setOnClickListener(new View.OnClickListener() {
@@ -136,8 +139,7 @@ public class BookActivity extends Activity implements View.OnClickListener, Text
             }
         });
 
-        //Intent intentt = new Intent(this, BookwordActivity.class);
-        // startActivity(intentt);
+
 
         networkService = RetrofitSender.getNetworkService();
 
@@ -154,6 +156,7 @@ public class BookActivity extends Activity implements View.OnClickListener, Text
 
                 // book iterator
                 BookItr();
+
             }
 
             @Override

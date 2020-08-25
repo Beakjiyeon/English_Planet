@@ -7,57 +7,72 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:collapseColumns="3,3"
+    android:layout_margin="30dp"
     >
     <TableRow
-        android:weightSum="3">
+        android:weightSum="3"
+        android:padding="10dp">
         <TextView
             android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
             ></TextView>
     </TableRow>
     <TableRow>
     <Button
+        android:layout_margin="5dp"
         android:layout_weight="1"
-        android:layout_height="match_parent"
-        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:background="@drawable/cword"
         android:text="horn\n뿔">
 
     </Button>
     <Button
+        android:layout_margin="5dp"
         android:layout_weight="1"
-        android:layout_height="match_parent"
-        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:background="@drawable/cword"
     android:text="horn\n뿔">
 
 </Button>
     <Button
+        android:layout_margin="5dp"
         android:layout_weight="1"
-        android:layout_height="match_parent"
-        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:background="@drawable/cword"
         android:text="horn\n뿔">
 
     </Button>
     </TableRow>
-    <TableRow>
+    <TableRow
+        android:layout_margin="10dp">
     <Button
+        android:layout_margin="5dp"
         android:layout_weight="1"
-        android:layout_height="match_parent"
-        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:background="@drawable/cword"
         android:text="horn\n뿔">
 
     </Button>
     <Button
+        android:layout_margin="5dp"
         android:layout_weight="1"
         android:layout_height="match_parent"
         android:layout_width="match_parent"
+        android:background="@drawable/cword"
         android:text="horn\n뿔">
 
     </Button>
     <Button
+        android:layout_margin="5dp"
         android:layout_weight="1"
-        android:layout_height="match_parent"
-        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:background="@drawable/cword"
         android:text="horn\n뿔">
 
     </Button>

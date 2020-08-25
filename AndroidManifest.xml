@@ -97,7 +97,10 @@
             android:screenOrientation="landscape"
             android:theme="@style/fullScreen"/>
 
-
+        <activity
+            android:name=".BookwordActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/Theme.AppCompat.DayNight.Dialog"/>
     </application>
 
 </manifest>
