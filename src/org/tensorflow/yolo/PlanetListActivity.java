@@ -3,6 +3,7 @@ package org.tensorflow.yolo;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
@@ -12,6 +13,11 @@ import android.widget.Toast;
 
 import org.tensorflow.yolo.setting.AppSetting;
 import org.tensorflow.yolo.view.ClassifierActivity;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 //
 // 주희 : 행성리스트 액티비티
 public class PlanetListActivity extends AppCompatActivity {
@@ -29,16 +35,23 @@ public class PlanetListActivity extends AppCompatActivity {
         Navigation_Bar n = new Navigation_Bar();
         n.HideNavigationBar(w);
 
+        // bigpro값 받아오기
+        AppSetting.big_progress=getBig();
         // 지연 : 프로그레스 바
         ImageView progBar=(ImageView)findViewById(R.id.progBar);
-        ImageView progBar_in=(ImageView)findViewById(R.id.progress_in);
+        //ImageView progBar_in=(ImageView)findViewById(R.id.progress_in);
         if(AppSetting.big_progress==0){
-             //progBar.setImageDrawable(getResources().getDrawable(R.drawable.progress_bar2,getApplicationContext().getTheme()));
+            // 하나도 학습x
         }else if(AppSetting.big_progress==1) {
-            // progBar.setImageDrawable(getResources().getDrawable(R.drawable.progress_bar2,getApplicationContext().getTheme()));
-             progBar_in.setImageDrawable(getResources().getDrawable(R.drawable.progress_bar_in,getApplicationContext().getTheme()));
+            // 행성 1개 클리어
+            progBar.setBackgroundResource(R.drawable.bigpro1);
+        }else if(AppSetting.big_progress==2) {
+            // 행성 2개 클리어
+            progBar.setBackgroundResource(R.drawable.bigpro2);
+        }else if(AppSetting.big_progress==3) {
+            // 행성 3개 클리어
+            progBar.setBackgroundResource(R.drawable.bigpro3);
         }
-
 
 
         ImageView planet1 = (ImageView) findViewById(R.id.planet1);
@@ -101,6 +114,31 @@ public class PlanetListActivity extends AppCompatActivity {
                 startActivity(intent);//액티비티 띄우기
             }
         });
+
+
+    }
+    int getBig(){
+        NetworkService networkService = RetrofitSender.getNetworkService();
+        Call<User> response2 = networkService.get_pk_user(AppSetting.uid);
+        response2.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if(response!=null) {
+                    AppSetting.big_progress=response.body().getBig_progress();
+                    Log.d("#########앱세팅#########", ""+AppSetting.big_progress);
+                }else{
+                    Log.d("#########앱세팅#########", "fail");
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                Log.d("#########앱세팅#########", "실패"+t.getMessage());
+            }
+        });
+
+        return AppSetting.big_progress;
 
     }
 

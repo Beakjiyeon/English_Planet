@@ -12,34 +12,16 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:id="@+id/relative1">
-        <FrameLayout
-            android:id="@+id/FrameLayout01"
-            android:layout_width="550dp"
-            android:layout_height="65dp"
-            >
+
             <ImageView
                 android:id="@+id/progBar"
                 android:layout_width="500dp"
-                android:layout_height="60dp"
-
+                android:layout_height="62dp"
                 android:layout_marginLeft="50dp"
                 android:layout_marginTop="10dp"
-
                 android:background="@drawable/progress_bar2" />
             android:adjustViewBounds="true"
 
-            <ImageView
-
-                android:id="@+id/progress_in"
-                android:layout_width="140dp"
-                android:layout_height="100dp"
-                android:layout_marginLeft="158dp"
-                android:paddingBottom="20dp"
-                android:layout_marginBottom="10dp"
-
-
-                android:src="@drawable/progress_bar_in"></ImageView>
-        </FrameLayout>
 
 
 

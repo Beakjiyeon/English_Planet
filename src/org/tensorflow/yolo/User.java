@@ -6,6 +6,16 @@ public class User {
     private String nickname;
     private int p_progress;
 
+    public int getBig_progress() {
+        return big_progress;
+    }
+
+    public void setBig_progress(int big_progress) {
+        this.big_progress = big_progress;
+    }
+
+    private int big_progress;
+
     public String getUid() {
         return uid;
     }

@@ -67,13 +67,16 @@ public class ScoreActivity extends AppCompatActivity {
                 // AppSetting 값 수정 db에서 받아오는데 시간이 걸리기떄문...
                 if(AppSetting.quizsen==2) {
 
-
-                    // db에 값 반영
-                    if(AppSetting.progress==12){
+                    // 현재 p_progress값과 현재 b_id가 같고, 동화미션을 수행했을경우(즉 아직 수행전인 상태로 db에 남아있는 상태의 경우)에 db반영시킴
+                    if((AppSetting.progress/10==mB_id)&&(AppSetting.progress%10==2)){
+                        AppSetting.progress = (mB_id+1)*10;
                         updateProgressDB();
-                        AppSetting.progress=13;
                         // 행성 하나에 있는 모든 미션을 완료했으므로 big_progress db 수정
                         updateBigProgressDB();
+
+                    }else{
+                        // db 반영이 필요 없는 경우
+
                     }
 
 
@@ -81,7 +84,16 @@ public class ScoreActivity extends AppCompatActivity {
                     finish();
 
                     Log.d("널체크","발음점수엔 "+AppSetting.uid);
-                    Intent intent = new Intent(getApplicationContext(), PlanetActivity1.class);
+                    Intent intent=null;
+                    if(mB_id==1) {
+                        intent = new Intent(getApplicationContext(), PlanetActivity1.class);
+                    }else if(mB_id==2) {
+                        intent = new Intent(getApplicationContext(), PlanetActivity2.class);
+                    }else if(mB_id==3) {
+                        intent = new Intent(getApplicationContext(), PlanetActivity3.class);
+                    }
+
+
                     startActivity(intent);
                 }
                 else{
@@ -101,7 +113,8 @@ public class ScoreActivity extends AppCompatActivity {
     void updateProgressDB(){
         NetworkService networkService = RetrofitSender.getNetworkService();
         // b_id : 1번으로 설정
-        Call<ResponseBody> response2 = networkService.updateProgress(AppSetting.uid,13);
+        //int progress=(AppSetting.big_progress+2)*10+0;
+        Call<ResponseBody> response2 = networkService.updateProgress(AppSetting.uid,AppSetting.progress);
         response2.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -124,7 +137,9 @@ public class ScoreActivity extends AppCompatActivity {
     void updateBigProgressDB(){
         NetworkService networkService = RetrofitSender.getNetworkService();
         // b_id : 1번으로 설정
-        Call<ResponseBody> response2 = networkService.updateBigProgress(AppSetting.uid,2);
+        int calcBig=(AppSetting.progress-1)/10;
+        AppSetting.big_progress=calcBig;
+        Call<ResponseBody> response2 = networkService.updateBigProgress(AppSetting.uid,calcBig);
         response2.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
