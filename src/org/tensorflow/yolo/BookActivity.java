@@ -127,8 +127,9 @@ public class BookActivity extends Activity implements View.OnClickListener, Text
 
         tts = new TextToSpeech(this.getApplicationContext(), this);
 
-       // Intent inten = new Intent(getApplicationContext(), BookwordActivity.class);
-        //startActivity(inten);
+        Intent inten = new Intent(getApplicationContext(), BookwordActivity.class);
+        inten.putExtra("b_id",mB_id);
+        startActivity(inten);
 
         // back btn
         Button btn_back = findViewById(R.id.btn_back);
