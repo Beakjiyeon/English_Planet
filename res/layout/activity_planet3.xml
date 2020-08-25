@@ -35,7 +35,7 @@
                 android:fontFamily="@font/cookierun_bold"
                 android:textSize="25dp"
                 android:textColor="#FFFFFF"
-                android:text="Good For You.">
+                android:text="Tall and Short">
             </TextView>
         </LinearLayout>
     </LinearLayout>

@@ -100,7 +100,7 @@ public class BookActivity extends Activity implements View.OnClickListener, Text
 
             case 3:
                 mChapter.setText("Chapter3");
-                mBooktitle.setText("Good For You.");
+                mBooktitle.setText("Tall and Short");
                 break;
         }
 
