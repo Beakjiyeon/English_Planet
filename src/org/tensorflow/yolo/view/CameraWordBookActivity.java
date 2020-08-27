@@ -165,14 +165,18 @@ public class CameraWordBookActivity extends Activity {
             @Override
             public void onResponse(Call<List<Camera>> call, Response<List<Camera>> response) {
                 if(response!=null) {
+                    ArrayList<Camera> list2=new ArrayList<Camera>();
+
                     list=response.body();
-                    adapter.setItems(list);
+                    //adapter.setItems(list);
                     int totalElements = list.size();// arrayList의 요소의 갯수를 구한다.
                     for (int index = 0; index < totalElements; index++) {
                         if(list.get(index).getUid().equals(AppSetting.uid)) {
                             Log.d("########", list.get(index).getC_word_e() + "/" + list.get(index).getC_word_k());
+                            list2.add(list.get(index));
                         }
                     }
+                    adapter.setItems(list2);
                 }else{
                     Log.d("########", "xxxxxxx");
                 }
