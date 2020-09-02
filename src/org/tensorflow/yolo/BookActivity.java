@@ -121,12 +121,6 @@ public class BookActivity extends Activity implements View.OnClickListener, Text
         //애니메이션 시작
         mTap.startAnimation(mAnimation);
 
-//        //queue create -> 전체 동화책 내용을 담음
-////        mBookQueue = new LinkedList();
-////        //mBookPrevQueue = new LinkedList();
-////
-////        // 이전 내용의 동화를 담는 스택
-////        mBookPrevStack = new Stack<>();
 
         mStackA = new Stack<>();
         mStackB = new Stack<>();
@@ -176,6 +170,11 @@ public class BookActivity extends Activity implements View.OnClickListener, Text
 
         tts = new TextToSpeech(this.getApplicationContext(), this);
 
+        if(AppSetting.progress%10==0&&AppSetting.progress/10==mB_id) {
+            Intent inten = new Intent(getApplicationContext(), BookwordActivity.class);
+            inten.putExtra("b_id", mB_id);
+            startActivity(inten);
+        }
 
         // back btn 뒤로가기 버튼
         Button btn_back = findViewById(R.id.btn_back);
@@ -210,6 +209,7 @@ public class BookActivity extends Activity implements View.OnClickListener, Text
 
             }
         });
+
 
     }
 
@@ -299,32 +299,6 @@ public class BookActivity extends Activity implements View.OnClickListener, Text
         });
     }
 
-
-//
-//        // boolean 값 이용? <- 동화책 끝내기 위해서
-//        boolean fin = false;
-//
-//        for (int i=0;i<3;i++){
-//            if (mBookQueue.isEmpty()) {
-//                fin = true;
-//                break;
-//            }
-//                mTvList[i].setText(mBookQueue.poll().toString());
-//                mBookPrevStack.push(mTvList[i].getText().toString());
-//        }
-//
-//        if (fin) {
-//
-////            // stack에 잘담겼는지 확인
-////            while(!mBookPrevStack.isEmpty()){
-////                Log.v("STACK=============", mBookPrevStack.pop()+"");
-////            }
-//
-//            mBtnNext.setText("QUIT");
-//            mBtnNext.setOnClickListener(view -> {
-//                finish();
-//            });
-//        }
 
     setOriginArray();
 
@@ -444,9 +418,6 @@ public class BookActivity extends Activity implements View.OnClickListener, Text
         }
         asyncTask.execute(str);
 
-//        for (int i=0;i<mTransText.length;i++){
-//                mTvList[i].setText(mTransText[i]);
-//            }
 
         // setdisabeld 값 변경하기
         SetKorToEng();
