@@ -44,13 +44,12 @@ import retrofit2.Response;
 
 
 public class BookActivity extends Activity implements View.OnClickListener, TextToSpeech.OnInitListener {
-    // iterator
-    Iterator<String> mItr;
-    ArrayList<String> mBookList;
+
     NetworkService networkService;
-    Button mBtn;
+    Button mBtnNext;
     Button mBtn_EngToKor;
     Button mBtn_KorToEng;
+    Button mBtnPrev;
 
     NaverTranslateTask asyncTask;
 
@@ -79,11 +78,12 @@ public class BookActivity extends Activity implements View.OnClickListener, Text
     // 효과음
     private MediaPlayer mp;
 
-    // Queue
-    Queue mBookQueue;
+    Stack<String> mStackA;
+    Stack<String> mStackB;
 
-
-
+    // for book list
+    int idx = 0;
+    String temp = "";
 
 
     @Override
@@ -92,6 +92,7 @@ public class BookActivity extends Activity implements View.OnClickListener, Text
 
         setContentView(R.layout.activity_book);
 
+        // 네비게이션바 없애는 코드
         Window w = getWindow();
         Navigation_Bar n = new Navigation_Bar();
         n.HideNavigationBar(w);
@@ -109,9 +110,9 @@ public class BookActivity extends Activity implements View.OnClickListener, Text
         mChapter = findViewById(R.id.chapter);
         mBooktitle = findViewById(R.id.book_title);
 
-        // tap imageview findviewbyid
+        // tap imageview findviewbyid : 손가락 표시
         mTap = findViewById(R.id.tap1);
-        // animation
+        // 손가락 animation
         mAnimation = new AlphaAnimation(1, 0);
         mAnimation.setDuration(800);
         mAnimation.setInterpolator(new LinearInterpolator());
@@ -120,8 +121,15 @@ public class BookActivity extends Activity implements View.OnClickListener, Text
         //애니메이션 시작
         mTap.startAnimation(mAnimation);
 
-        //stack create
-        mBookQueue = new LinkedList();
+//        //queue create -> 전체 동화책 내용을 담음
+////        mBookQueue = new LinkedList();
+////        //mBookPrevQueue = new LinkedList();
+////
+////        // 이전 내용의 동화를 담는 스택
+////        mBookPrevStack = new Stack<>();
+
+        mStackA = new Stack<>();
+        mStackB = new Stack<>();
 
 
         // chaper하고 책 제목 변경
@@ -129,6 +137,7 @@ public class BookActivity extends Activity implements View.OnClickListener, Text
             case 2:
                 mChapter.setText("Chapter2");
                 mBooktitle.setText("Friends");
+                // 2번째 행성 애니메이션 취소
                 mTap.setVisibility(View.GONE);
                 mAnimation.cancel();
                 break;
@@ -136,13 +145,17 @@ public class BookActivity extends Activity implements View.OnClickListener, Text
             case 3:
                 mChapter.setText("Chapter3");
                 mBooktitle.setText("Tall and Short");
+                // 3번째 행성 애니메이션 취소
                 mTap.setVisibility(View.GONE);
                 mAnimation.cancel();
                 break;
         }
 
+        mBtnNext = findViewById(R.id.btn_next); // 다음페이지 버튼
+        mBtnPrev = findViewById(R.id.prev); // 이전페이지 버튼
+        // 초기값 false : 이전 페이지로 넘어가지 않도록
+        mBtnPrev.setVisibility(View.INVISIBLE);
 
-        mBtn = findViewById(R.id.btn_next); // 다음페이지 버튼
         // EngToKor
         mBtn_EngToKor = findViewById(R.id.btn_EngToKor);
         // KorToEng
@@ -163,10 +176,8 @@ public class BookActivity extends Activity implements View.OnClickListener, Text
 
         tts = new TextToSpeech(this.getApplicationContext(), this);
 
-       // Intent inten = new Intent(getApplicationContext(), BookwordActivity.class);
-        //startActivity(inten);
 
-        // back btn
+        // back btn 뒤로가기 버튼
         Button btn_back = findViewById(R.id.btn_back);
         btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -174,7 +185,6 @@ public class BookActivity extends Activity implements View.OnClickListener, Text
                 finish();
             }
         });
-
 
 
         networkService = RetrofitSender.getNetworkService();
@@ -187,12 +197,12 @@ public class BookActivity extends Activity implements View.OnClickListener, Text
 
                 Book b = (Book) response.body();
                 b_text = b.getB_text().split("\r\n");
-                mBookList = new ArrayList<>(Arrays.asList(b_text));
-                mItr = mBookList.iterator();
 
-                // book iterator
-                BookItr();
-
+                // 첫번째 페이지 설정
+                for (int i = 0; i < 3; i++) {
+                    mTvList[i].setText(b_text[idx]);
+                    idx++;
+                }
             }
 
             @Override
@@ -204,111 +214,168 @@ public class BookActivity extends Activity implements View.OnClickListener, Text
     }
 
     public void btnNext(View v) {
+        boolean fin = false;
+
         // 효과음
         mp.start();
+        // 다음페이지로 넘어가면 손가락 애니메이션 사라짐
         mTap.setVisibility(View.GONE);
         mAnimation.cancel();
         // 다음페이지로 넘어가면 초기값 세팅
         SetEngToKor();
 
-        BookItr();
+        // prev 버튼 활성화
+        mBtnPrev.setVisibility(View.VISIBLE);
 
-    }
-
-    public void btnPrev(View v){
-        mp.start();
-        for (int i=0;i<3;i++) {
-            mTvList[i].setText("");
+        //현재 내용을 Stack A push
+        temp = "";
+        for (int i = 0; i < 3; i++) {
+            temp += mTvList[i].getText().toString() + "/";
         }
+        mStackA.push(temp);
 
-        for (int i=0;i<3;i++){
-            if(!mBookQueue.isEmpty()){
-                mTvList[i].setText(mBookQueue.poll().toString());
-            }
-        }
-    }
+        clearTextView(); // textview 초기화
 
-    private void BookItr() {
-        try {
-            String s = "";
-            mOrigin.clear();
-            mTvList[0].setText("");
-            mTvList[1].setText("");
-            mTvList[2].setText("");
-
-            if (mItr.hasNext()) {
-                s = mItr.next();
-                mTvList[0].setText(s);
-                mOrigin.add(s);
-                mBookQueue.offer(s);
-
-
-                s = mItr.next();
-                mTvList[1].setText(s);
-                mOrigin.add(s);
-                mBookQueue.offer(s);
-
-                s = mItr.next();
-                mTvList[2].setText(s);
-                mOrigin.add(s);
-                mBookQueue.offer(s);
-
+        // mStackB가 비어져 있으면
+        if (mStackB.isEmpty()) {
+            for (int i = 0; i < 3; i++) {
+                if (idx == b_text.length) {
+                    fin = true;
+                    break;
+                }
+                mTvList[i].setText(b_text[idx]);
+                idx++;
             }
 
-        } catch (NoSuchElementException ne) {
-            mBtn.setText("Quit");
-            mBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Toast t = Toast.makeText(getApplicationContext(), "학습 종료", Toast.LENGTH_SHORT);
-                    // 지연 : 동화 학습 종료한 상태로 변경
-                    // 1. 만약 처음 동떄
-                    // 2. 두번째 학습인데 십의 자리가 b_id와 다른 경우는 db에 입력하지 않음
-                    // 즉!!!
-                    // 현재 p_progress값과 현재 b_id가 같고, 동화미션을 수행했을경우(즉 아직 수행전인 상태로 db에 남아있는 상태의 경우)에 db반영시킴
-                    if((AppSetting.progress/10==mB_id)&&(AppSetting.progress%10==0)){
-                        AppSetting.progress = mB_id*10+1;
-                        AppSetting.dp_bool = true;
-                        // db에 값 반영
-                        updateProgressDB();
-                    }else{
-                        // db 반영이 필요 없는 경우
+        } else { // mStackB에 내용이 있으면
+            String[] str_list = mStackB.pop().split("/");
+            for (int i = 0; i < 3; i++) {
+                mTvList[i].setText(str_list[i]);
+            }
 
-                    }
+        }
 
-
-
-                    Log.d("널체크", "동화엔 " + AppSetting.uid);
-                    if(mB_id==1) {
-                        Intent intent = new Intent(getApplicationContext(), PlanetActivity1.class);
-                        startActivity(intent);
-                        t.show();
-                        finish();
-                    }
-                    if(mB_id==2) {
-                        Intent intent = new Intent(getApplicationContext(), PlanetActivity2.class);
-                        startActivity(intent);
-                        t.show();
-                        finish();
-                    }
-                    if(mB_id==3) {
-                        Intent intent = new Intent(getApplicationContext(), PlanetActivity3.class);
-                        startActivity(intent);
-                        t.show();
-                        finish();
-                    }
+        // 종료 코드
+        if (fin) {
+            mBtnNext.setText("QUIT");
+            mBtnNext.setOnClickListener(view -> {
+                Toast t = Toast.makeText(getApplicationContext(), "학습 종료", Toast.LENGTH_SHORT);
+                t.show();
+                // 지연 : 동화 학습 종료한 상태로 변경
+                // 1. 만약 처음 동떄
+                // 2. 두번째 학습인데 십의 자리가 b_id와 다른 경우는 db에 입력하지 않음
+                // 즉!!!
+                // 현재 p_progress값과 현재 b_id가 같고, 동화미션을 수행했을경우(즉 아직 수행전인 상태로 db에 남아있는 상태의 경우)에 db반영시킴
+                if ((AppSetting.progress / 10 == mB_id) && (AppSetting.progress % 10 == 0)) {
+                    AppSetting.progress = mB_id * 10 + 1;
+                    AppSetting.dp_bool = true;
+                    // db에 값 반영
+                    updateProgressDB();
+                } else {
+                    // db 반영이 필요 없는 경우
 
                 }
-            });
 
+                Log.d("널체크", "동화엔 " + AppSetting.uid);
+                if (mB_id == 1) {
+                    Intent intent = new Intent(getApplicationContext(), PlanetActivity1.class);
+                    startActivity(intent);
+                    t.show();
+                    finish();
+                }
+                if (mB_id == 2) {
+                    Intent intent = new Intent(getApplicationContext(), PlanetActivity2.class);
+                    startActivity(intent);
+                    t.show();
+                    finish();
+                }
+                if (mB_id == 3) {
+                    Intent intent = new Intent(getApplicationContext(), PlanetActivity3.class);
+                    startActivity(intent);
+                    t.show();
+                    finish();
+                }
+
+        });
+    }
+
+
+//
+//        // boolean 값 이용? <- 동화책 끝내기 위해서
+//        boolean fin = false;
+//
+//        for (int i=0;i<3;i++){
+//            if (mBookQueue.isEmpty()) {
+//                fin = true;
+//                break;
+//            }
+//                mTvList[i].setText(mBookQueue.poll().toString());
+//                mBookPrevStack.push(mTvList[i].getText().toString());
+//        }
+//
+//        if (fin) {
+//
+////            // stack에 잘담겼는지 확인
+////            while(!mBookPrevStack.isEmpty()){
+////                Log.v("STACK=============", mBookPrevStack.pop()+"");
+////            }
+//
+//            mBtnNext.setText("QUIT");
+//            mBtnNext.setOnClickListener(view -> {
+//                finish();
+//            });
+//        }
+
+    setOriginArray();
+
+}
+
+
+    public void btnPrev(View v) {
+        mp.start(); // 효과음
+
+        if (mStackA.isEmpty()) {
+            mBtnPrev.setEnabled(false);
         }
+
+        temp = "";
+        for (int i = 0; i < 3; i++) {
+            temp += mTvList[i].getText().toString() + "/";
+        }
+        mStackB.push(temp);
+
+        clearTextView();
+
+        String[] str_list = mStackA.pop().split("/");
+        for (int i = 0; i < 3; i++) {
+            mTvList[i].setText(str_list[i]);
+        }
+
+        setOriginArray();
 
     }
 
+    // 한글로 번역 후 다시 원문으로 되돌리는 코드
+    private void setOriginArray() {
+        mOrigin.clear();
+        for (int i = 0; i < 3; i++) {
+            mOrigin.add(mTvList[i].getText().toString());
+        }
+    }
+
+    // 텍스트 뷰를 깨끗하게.. 만드는 코드
+    private void clearTextView() {
+        for (int i = 0; i < 3; i++) {
+            mTvList[i].setText("");
+        }
+    }
+
+
     // 지연: DB 진행률을 수정하는 함수
+    // 아직 연결 X!!!!!!
     void updateProgressDB() {
         networkService = RetrofitSender.getNetworkService();
-        int progress=(AppSetting.big_progress+1)*10+1;
+        int progress = (AppSetting.big_progress + 1) * 10 + 1;
         Call<ResponseBody> response2 = networkService.updateProgress(AppSetting.uid, progress);
         response2.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -319,6 +386,7 @@ public class BookActivity extends Activity implements View.OnClickListener, Text
                     Log.d("#########db수정#####", "updateProgressDB 실패");
                 }
             }
+
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Log.d("#########db수정#####", "updateProgressDB 실패");
@@ -327,6 +395,7 @@ public class BookActivity extends Activity implements View.OnClickListener, Text
     }
 
 
+    // TTS 설정 코드
     @Override
     public void onClick(View view) {
 
@@ -346,6 +415,7 @@ public class BookActivity extends Activity implements View.OnClickListener, Text
     }
 
 
+    // TTS 설정 코드
     @Override
     public void onInit(int status) {
         if (status == TextToSpeech.SUCCESS) {
@@ -394,8 +464,7 @@ public class BookActivity extends Activity implements View.OnClickListener, Text
 
     }
 
-    // TODO EngTOKor, KorToEng 바꿀때마다 변경하는 함수 제작
-
+    // EngTOKor, KorToEng 바꿀때마다 변경하는 함수 제작
     private void SetEngToKor() {
         mBtn_KorToEng.setEnabled(false);
         mBtn_KorToEng.setBackgroundColor(Color.GRAY);
