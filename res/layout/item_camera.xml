@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:scaleType="centerCrop"
-            android:src="@drawable/cword"></ImageView>
+            android:src="@drawable/c_word_original"></ImageView>
 
         <LinearLayout
             android:layout_width="wrap_content"

@@ -1,83 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="700dp"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="700dp"
     android:layout_height="400dp"
+    android:orientation="vertical"
    android:background="@drawable/bg_bword">
+
+    <ImageButton
+        android:id="@+id/btnxx"
+        android:layout_margin="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:background="@drawable/btnxx"
+        tools:ignore="MissingConstraints"></ImageButton>
 <TableLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:collapseColumns="3,3"
-    android:layout_margin="30dp"
+    android:layout_margin="10dp"
+    android:stretchColumns="*"
+    android:shrinkColumns="*"
     >
     <TableRow
-        android:weightSum="3"
-        android:padding="10dp">
-        <TextView
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            ></TextView>
-    </TableRow>
-    <TableRow>
+        android:layout_margin="20dp">
     <Button
-        android:layout_margin="5dp"
+        android:id="@+id/wbtn1"
+        android:layout_margin="10dp"
         android:layout_weight="1"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:background="@drawable/cword"
-        android:text="horn\n뿔">
+        android:fontFamily="@font/cookierun_bold"
+        android:textSize="25dp">
 
     </Button>
     <Button
-        android:layout_margin="5dp"
+        android:id="@+id/wbtn2"
+        android:layout_margin="10dp"
         android:layout_weight="1"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:background="@drawable/cword"
-    android:text="horn\n뿔">
+        android:fontFamily="@font/cookierun_bold"
+        android:textSize="25dp">
 
 </Button>
     <Button
-        android:layout_margin="5dp"
+        android:id="@+id/wbtn3"
+        android:layout_margin="10dp"
         android:layout_weight="1"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:background="@drawable/cword"
-        android:text="horn\n뿔">
+        android:fontFamily="@font/cookierun_bold"
+        android:textSize="25dp">
 
     </Button>
     </TableRow>
     <TableRow
-        android:layout_margin="10dp">
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
     <Button
-        android:layout_margin="5dp"
+        android:id="@+id/wbtn4"
+        android:layout_margin="10dp"
         android:layout_weight="1"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:background="@drawable/cword"
-        android:text="horn\n뿔">
+        android:fontFamily="@font/cookierun_bold"
+        android:textSize="25dp">
 
     </Button>
     <Button
-        android:layout_margin="5dp"
+        android:id="@+id/wbtn5"
+        android:layout_margin="10dp"
         android:layout_weight="1"
         android:layout_height="match_parent"
         android:layout_width="match_parent"
         android:background="@drawable/cword"
-        android:text="horn\n뿔">
+        android:fontFamily="@font/cookierun_bold"
+        android:textSize="25dp">
 
     </Button>
     <Button
-        android:layout_margin="5dp"
+        android:id="@+id/wbtn6"
+        android:layout_margin="10dp"
         android:layout_weight="1"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:background="@drawable/cword"
-        android:text="horn\n뿔">
+        android:fontFamily="@font/cookierun_bold"
+        android:textSize="25dp">
 
     </Button>
 </TableRow>
 </TableLayout>
 
 
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>

@@ -23,7 +23,7 @@ public class WordquizActivity extends AppCompatActivity {
     ImageView ivans1, ivans2, ivans3;
     String answer,answer2;
     String[] wordarray;
-    String[] wrongarray={"바나나", "동물", "코", "기억", "나무","고양이","악어","시끄러운","사자","부족한","작은","이빨","딱딱한","과일","조용한","목"};
+    String[] wrongarray={"바나나", "동물", "코", "기억", "나무","고양이","악어","시끄러운","사자","부족한","기쁜","이빨","딱딱한","과일","조용한","목"};
     int mB_id;
     NetworkService networkService;
     @Override
