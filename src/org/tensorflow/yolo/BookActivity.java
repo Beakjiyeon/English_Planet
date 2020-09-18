@@ -226,6 +226,8 @@ public class BookActivity extends Activity implements View.OnClickListener, Text
 
         // prev 버튼 활성화
         mBtnPrev.setVisibility(View.VISIBLE);
+        mBtnPrev.setEnabled(true);
+        mBtnPrev.setBackgroundColor(Color.parseColor("#69F0AE"));
 
         //현재 내용을 Stack A push
         temp = "";
@@ -308,10 +310,6 @@ public class BookActivity extends Activity implements View.OnClickListener, Text
     public void btnPrev(View v) {
         mp.start(); // 효과음
 
-        if (mStackA.isEmpty()) {
-            mBtnPrev.setEnabled(false);
-        }
-
         temp = "";
         for (int i = 0; i < 3; i++) {
             temp += mTvList[i].getText().toString() + "/";
@@ -326,6 +324,11 @@ public class BookActivity extends Activity implements View.OnClickListener, Text
         }
 
         setOriginArray();
+
+        if (mStackA.empty()) {
+            mBtnPrev.setEnabled(false);
+            mBtnPrev.setBackgroundColor(Color.GRAY);
+        }
 
     }
 
