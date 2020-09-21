@@ -44,6 +44,7 @@ public class LoginActivity extends AppCompatActivity {
                         AppSetting.upwd = pwd;
                         AppSetting.unickname = u.getNickname();
                         AppSetting.progress = u.getP_progress();
+                        AppSetting.big_progress = u.getBig_progress();
 
                     } else {
 
@@ -115,9 +116,16 @@ public class LoginActivity extends AppCompatActivity {
 //                        finish();
 //                    } else {
 //                        Log.v("tutorial==============",AppSetting.tutorial+"");
+
+                    if (AppSetting.big_progress < 0 ){
+                        Intent intent = new Intent(getApplicationContext(), TutorialActivity.class);
+                        startActivity(intent);
+
+                    } else {
                         Intent intent = new Intent(getApplicationContext(), PlanetListActivity.class);
                         startActivity(intent);
                         finish();
+                    }
 
 
                 } else {

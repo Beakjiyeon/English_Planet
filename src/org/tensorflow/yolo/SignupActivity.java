@@ -37,7 +37,8 @@ public class SignupActivity extends AppCompatActivity {
                 id = findViewById(R.id.user_id);
                 pwd = findViewById(R.id.user_pwd);
                 nick = findViewById(R.id.user_nickname);
-                Call<User> response = networkService.register_user(id.getText().toString(),pwd.getText().toString(),nick.getText().toString(),10,0);
+                // bigprogress => 튜토리얼 완료하면 0 / 완료 안하면 -1
+                Call<User> response = networkService.register_user(id.getText().toString(),pwd.getText().toString(),nick.getText().toString(),10,-1);
                 response.enqueue(new Callback<User>() {
                     @Override
                     public void onResponse(Call<User> call, Response<User> response) {

@@ -1,9 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/tutorial_layout"
     android:background="@drawable/tutorial1"
     android:orientation="horizontal">
+
+    <TextView
+        android:paddingTop="15dp"
+        android:id="@+id/tutorial_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="다음으로 넘어가려면 화면을 터치하세요."
+        android:fontFamily="@font/cookierun_bold"
+        android:textSize="20dp"
+        android:textAlignment="center"
+        android:gravity="center"
+        tools:ignore="MissingConstraints"
+        android:textColor="#FFFFFF"/>
 
 </android.support.constraint.ConstraintLayout>
