@@ -90,5 +90,12 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             app:srcCompat="@drawable/battery1_gray" />
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/antenna_gray" />
     </LinearLayout>
 </LinearLayout>
