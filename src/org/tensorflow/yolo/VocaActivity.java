@@ -58,5 +58,12 @@ public class VocaActivity extends AppCompatActivity {
             }
         });
 
+        btn_wrongNote.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(),MywordActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }}
