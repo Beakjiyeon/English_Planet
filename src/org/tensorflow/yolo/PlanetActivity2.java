@@ -190,7 +190,7 @@ public class PlanetActivity2 extends AppCompatActivity {
                 @Override
                 public void run() {
                     if (AppSetting.dp_bool) {
-                        img3.setImageResource(R.drawable.battery2);
+                        img3.setImageResource(R.drawable.battery1);
                         AppSetting.dp_bool = false;
                     } else {
                         img3.setImageResource(R.drawable.battery1_gray);
@@ -208,7 +208,7 @@ public class PlanetActivity2 extends AppCompatActivity {
                 // 미션 이미지 모두 color
                 img.setImageResource(R.drawable.spaceship);
                 img2.setImageResource(R.drawable.telescope);
-                img3.setImageResource(R.drawable.battery2);
+                img3.setImageResource(R.drawable.battery1);
 
                 detailProgBar.setImageResource(R.drawable.dprog4);
 

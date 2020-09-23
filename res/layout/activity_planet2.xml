@@ -83,6 +83,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:adjustViewBounds="true"
-            app:srcCompat="@drawable/battery2" />
+            app:srcCompat="@drawable/battery1_gray" />
     </LinearLayout>
 </LinearLayout>
