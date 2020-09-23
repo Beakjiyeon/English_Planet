@@ -31,7 +31,7 @@ public class MypageActivity extends AppCompatActivity {
         book1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), CameraWordBookActivity.class);
+                Intent intent = new Intent(getApplicationContext(), VocaActivity.class);
                 startActivity(intent);//액티비티 띄우기
             }
         });
@@ -47,6 +47,16 @@ public class MypageActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),"로그아웃 되었습니다.",Toast.LENGTH_SHORT).show();
                 finish();
                 startActivity(intentt);
+            }
+        });
+
+        ImageView modify = (ImageView)findViewById(R.id.btnSettings);
+        modify.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                Intent info = new Intent(getApplicationContext(), modifyinfoActivity.class);
+                startActivity(info);
             }
         });
 

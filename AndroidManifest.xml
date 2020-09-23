@@ -101,6 +101,27 @@
             android:name=".BookwordActivity"
             android:screenOrientation="landscape"
             android:theme="@style/dialog"/>
+
+        <activity
+            android:name=".CameraQuizActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/fullScreen"></activity>
+        <activity
+            android:name=".CameraQuizAnswerActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/fullScreen"></activity>
+
+
+        <activity
+            android:name=".modifyinfoActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/fullScreen"/>
+
+
+        <activity
+            android:name=".VocaActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/fullScreen"/>
     </application>
 
 </manifest>

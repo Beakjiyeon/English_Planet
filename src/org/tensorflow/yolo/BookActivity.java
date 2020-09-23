@@ -202,6 +202,8 @@ public class BookActivity extends Activity implements View.OnClickListener, Text
                     mTvList[i].setText(b_text[idx]);
                     idx++;
                 }
+
+                setOriginArray();
             }
 
             @Override

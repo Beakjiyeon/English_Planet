@@ -1,6 +1,10 @@
 package org.tensorflow.yolo;
 
-public class Camera {
+import android.widget.ImageView;
+
+import java.io.Serializable;
+
+public class Camera implements Serializable {
     // 카메라 단어 pk추가
     private int c_id;
 
