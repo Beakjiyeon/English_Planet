@@ -72,14 +72,6 @@ public class PlanetActivity1 extends AppCompatActivity {
             //finish();
         });
 
-        // 사진미션 추가
-        ImageView img4 = findViewById(R.id.imageView5);
-        img4.setOnClickListener(view -> {
-            Intent intent = new Intent(getApplicationContext(),CameraQuizActivity.class);
-            intent.putExtra("b_id",1);
-            startActivity(intent);
-            //finish();
-        });
 
         Button btn_back = findViewById(R.id.btn_back);
         btn_back.setOnClickListener(new View.OnClickListener() {
