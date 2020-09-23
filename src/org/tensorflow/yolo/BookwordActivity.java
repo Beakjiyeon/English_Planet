@@ -43,7 +43,7 @@ public class BookwordActivity extends AppCompatActivity {
         // 서버 데이터 가져옴
         networkService = RetrofitSender.getNetworkService();
         Call<List<Bookword>> call =  networkService.get_bw(mB_id);
-
+//
         call.enqueue(new Callback<List<Bookword>>() {
                         @Override
                         public void onResponse(Call<List<Bookword>> call, Response<List<Bookword>> response) {

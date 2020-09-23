@@ -67,23 +67,24 @@
 
         <ImageView
             android:id="@+id/imageView7"
-            android:layout_width="wrap_content"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:srcCompat="@drawable/spaceship" />
+            />
 
         <ImageView
             android:id="@+id/imageView8"
-            android:layout_width="wrap_content"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:srcCompat="@drawable/antenna" />
+             />
 
         <ImageView
+
             android:id="@+id/imageView9"
-            android:layout_width="wrap_content"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:srcCompat="@drawable/battery1" />
+            />
     </LinearLayout>
 </LinearLayout>

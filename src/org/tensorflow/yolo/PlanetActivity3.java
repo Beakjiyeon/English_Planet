@@ -78,7 +78,7 @@ public class PlanetActivity3 extends AppCompatActivity {
             startActivity(intent);
             //finish();
         });
-
+        img2.setImageResource(R.drawable.antenna_gray);img3.setImageResource(R.drawable.battery1_gray);
         // 맵
         // 지연 : DB에서 사용자의 진행률 p_progress를 받아와 AppSetting에 등록한다.
         AppSetting.progress=getProgressDB();
