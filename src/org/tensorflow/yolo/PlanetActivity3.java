@@ -37,6 +37,9 @@ public class PlanetActivity3 extends AppCompatActivity {
         Window w = getWindow();
         Navigation_Bar n = new Navigation_Bar();
         n.HideNavigationBar(w);
+        // 세영: 퀴즈 숫자
+        AppSetting.quizcount=0;
+        AppSetting.quizsen=0;
 
 
         // 뒤로가기
