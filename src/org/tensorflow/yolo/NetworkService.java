@@ -31,7 +31,7 @@ public interface NetworkService {
                              @Field("big_progress") int big_progress);
 
     @PATCH("/api/user/{pk}/")
-    Call<User> patch_user(@Path("pk") int pk, @Body User user);
+    Call<User> patch_user(@Path("pk") String pk, @Body User user);
 
     @DELETE("/api/user/{pk}/")
     Call<User> delete_user(@Path("pk") int pk);
