@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.tensorflow.yolo.setting.AppSetting;
 import org.tensorflow.yolo.view.CameraWordBookActivity;
@@ -32,6 +33,20 @@ public class MypageActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), CameraWordBookActivity.class);
                 startActivity(intent);//액티비티 띄우기
+            }
+        });
+
+        ImageView logout = (ImageView)findViewById(R.id.btnLogout);
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentt = new Intent(getApplicationContext(),MainActivity.class);
+                intentt.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intentt.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                //intent.putExtra("KILL",true);
+                Toast.makeText(getApplicationContext(),"로그아웃 되었습니다.",Toast.LENGTH_SHORT).show();
+                finish();
+                startActivity(intentt);
             }
         });
 

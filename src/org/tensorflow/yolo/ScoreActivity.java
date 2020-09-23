@@ -33,7 +33,7 @@ public class ScoreActivity extends AppCompatActivity {
 
 
         // 발음 점수 받아오기
-       Intent intent=new Intent(this.getIntent());
+        Intent intent=new Intent(this.getIntent());
         Double s=intent.getDoubleExtra("myscore",0);
         int countword = intent.getIntExtra("countword",0);
 
