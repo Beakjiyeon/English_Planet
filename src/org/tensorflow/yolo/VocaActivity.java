@@ -48,5 +48,15 @@ public class VocaActivity extends AppCompatActivity {
             }
         });
 
-    }
-}
+        // 사진퀴즈
+        btn_picQuiz.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(),CameraQuizActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+    }}
