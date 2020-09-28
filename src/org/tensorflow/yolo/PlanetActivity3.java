@@ -37,6 +37,9 @@ public class PlanetActivity3 extends AppCompatActivity {
         Window w = getWindow();
         Navigation_Bar n = new Navigation_Bar();
         n.HideNavigationBar(w);
+        // 세영: 퀴즈 숫자
+        AppSetting.quizcount=0;
+        AppSetting.quizsen=0;
 
 
         // 뒤로가기
@@ -75,7 +78,7 @@ public class PlanetActivity3 extends AppCompatActivity {
             startActivity(intent);
             //finish();
         });
-
+        img2.setImageResource(R.drawable.antenna_gray);img3.setImageResource(R.drawable.battery1_gray);
         // 맵
         // 지연 : DB에서 사용자의 진행률 p_progress를 받아와 AppSetting에 등록한다.
         AppSetting.progress=getProgressDB();
@@ -90,7 +93,7 @@ public class PlanetActivity3 extends AppCompatActivity {
                @Override
                public void run() {
                    if (AppSetting.dp_bool) {
-                       img.setImageResource(R.drawable.spaceship2);
+                       img.setImageResource(R.drawable.spaceship);
                        AppSetting.dp_bool = false;
                    } else {
                        img.setImageResource(R.drawable.spaceship_g);
@@ -185,13 +188,13 @@ public class PlanetActivity3 extends AppCompatActivity {
                }
            });
            handler = new Handler();
-           img.setImageResource(R.drawable.spaceship2);
+           img.setImageResource(R.drawable.spaceship);
            img2.setImageResource(R.drawable.antenna);
            r = new Runnable() {
                @Override
                public void run() {
                    if (AppSetting.dp_bool) {
-                       img3.setImageResource(R.drawable.battery3);
+                       img3.setImageResource(R.drawable.battery1);
                        AppSetting.dp_bool = false;
                    } else {
                        img3.setImageResource(R.drawable.battery1_gray);
@@ -206,9 +209,9 @@ public class PlanetActivity3 extends AppCompatActivity {
            // 발음 미션을 완료한 단계
            // 모든 이미지 터치 가능
            // 미션 이미지 모두 color
-           img.setImageResource(R.drawable.spaceship2);
+           img.setImageResource(R.drawable.spaceship);
            img2.setImageResource(R.drawable.antenna);
-           img3.setImageResource(R.drawable.battery3);
+           img3.setImageResource(R.drawable.battery1);
 
            detailProgBar.setImageResource(R.drawable.dprog4);
 

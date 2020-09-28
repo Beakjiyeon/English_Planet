@@ -119,6 +119,10 @@
 
 
         <activity
+            android:name=".MywordActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/dialog"/>
+        <activity
             android:name=".VocaActivity"
             android:screenOrientation="landscape"
             android:theme="@style/fullScreen"/>

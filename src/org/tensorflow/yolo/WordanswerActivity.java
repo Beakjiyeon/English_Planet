@@ -7,9 +7,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.tensorflow.yolo.setting.AppSetting;
 
@@ -22,11 +24,16 @@ public class WordanswerActivity extends AppCompatActivity {
     RelativeLayout answerlayout;
     TextView tvans;
     ImageButton btn;
+    NetworkService networkService;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wordanswer);
         answerlayout = (RelativeLayout)findViewById(R.id.answerlayout);
+
+        networkService = RetrofitSender.getNetworkService();
 
         Window w = getWindow();
         Navigation_Bar n = new Navigation_Bar();
@@ -47,6 +54,27 @@ public class WordanswerActivity extends AppCompatActivity {
                 String answer2 = intent.getExtras().getString("answer2");
                 tvans.setText(answer2 + "의 뜻은 " + answer);
                 answerlayout.setBackgroundDrawable(ContextCompat.getDrawable(this, R.drawable.wordwrong));
+                Call<Myword> response = networkService.put_myword(AppSetting.uid,mB_id,answer2,answer,0);response.enqueue(new Callback<Myword>() {
+                    @Override
+                    public void onResponse(Call<Myword> call, Response<Myword> response) {
+                        try{
+                            if(response.isSuccessful()){
+
+                            }
+
+                            else {
+                                Log.e("########response isnt","실패1");
+
+                            }} catch(Exception e){
+                            Log.e("Error2",e.getMessage());
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Myword> call, Throwable t) {
+                        Log.e("########response isnt",t.getMessage());
+                    }
+                });
             }
         }
         else if(type.equals("sentence")){
@@ -55,9 +83,31 @@ public class WordanswerActivity extends AppCompatActivity {
 
             } else {
                 String sen = intent.getExtras().getString("sen");
+                String senk = intent.getExtras().getString("senk");
                 tvans.setText(sen);
-                answerlayout.setBackgroundDrawable(ContextCompat.getDrawable(this, R.drawable.wordwrong));
+                answerlayout.setBackgroundDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.wordwrong));
+                Call<Myword> response = networkService.put_myword(AppSetting.uid,mB_id,sen,senk,1);
+                response.enqueue(new Callback<Myword>() {
+                    @Override
+                    public void onResponse(Call<Myword> call, Response<Myword> response) {
+                        try{
+                            if(response.isSuccessful()){
 
+                            }
+
+                            else {
+                                Log.e("########response isnt","실패1");
+
+                            }} catch(Exception e){
+                            Log.e("Error2",e.getMessage());
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Myword> call, Throwable t) {
+                        Log.e("########response isnt",t.getMessage());
+                    }
+                });
             }
         }
 

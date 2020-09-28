@@ -84,4 +84,15 @@ public interface NetworkService {
     Call<ResponseBody> updateBigProgress(@Path("pk") String uid, @Field("big_progress") int big_progress);
 
 
+    // myword
+    //@GET("/api/myword/{userId}") Call<Myword> get_myword(@Path("userId") String id);
+    @FormUrlEncoded
+    @POST("/api/myword/")
+    Call<Myword> put_myword(@Field("uid") String uid,
+                             @Field("b_id") int b_id,
+                             @Field("m_word_e") String m_word_e,
+                             @Field("m_word_k") String m_word_k,
+                             @Field("check_ws") int check_ws);
+    @GET("/api/myword") Call<List<Myword>> get_myword (@Query("id") int uid);
+
 }

@@ -62,7 +62,7 @@ public class CameraQuizAnswerActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "이동하자", Toast.LENGTH_LONG).show();
 
                     Log.v("Sentence Quiz=======", "OK");
-                    intent3 = new Intent(getApplicationContext(), PlanetActivity1.class);
+                    intent3 = new Intent(getApplicationContext(), PlanetListActivity.class);
                     intent.putExtra("b_id",1 );
                     startActivity(intent3);
                     AppSetting.cq_count=0;
