@@ -85,6 +85,14 @@ public class PlanetListActivity extends AppCompatActivity {
 
         }else if(AppSetting.big_progress==1) {
             // 행성 1개 클리어
+            planet1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    MainActivity.btnmp.start();
+                    Intent intent = new Intent(getApplicationContext(), PlanetActivity1.class);
+                    startActivity(intent);
+                }
+            });
             planet2.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -109,6 +117,22 @@ public class PlanetListActivity extends AppCompatActivity {
 
 
         }else if(AppSetting.big_progress==2) {
+            planet1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    MainActivity.btnmp.start();
+                    Intent intent = new Intent(getApplicationContext(), PlanetActivity1.class);
+                    startActivity(intent);
+                }
+            });
+            planet2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    MainActivity.btnmp.start();
+                    Intent intent = new Intent(getApplicationContext(), PlanetActivity2.class);
+                    startActivity(intent);
+                }
+            });
             // 행성 2개 클리어
             planet3.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -128,6 +152,32 @@ public class PlanetListActivity extends AppCompatActivity {
 
         }else if(AppSetting.big_progress==3) {
             // 행성 3개 클리어
+
+            planet1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    MainActivity.btnmp.start();
+                    Intent intent = new Intent(getApplicationContext(), PlanetActivity1.class);
+                    startActivity(intent);
+                }
+            });
+            planet2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    MainActivity.btnmp.start();
+                    Intent intent = new Intent(getApplicationContext(), PlanetActivity2.class);
+                    startActivity(intent);
+                }
+            });
+            planet3.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    MainActivity.btnmp.start();
+                    Intent intent = new Intent(getApplicationContext(), PlanetActivity3.class);
+                    startActivity(intent);
+                }
+            });
+
             progBar.setBackgroundResource(R.drawable.bigpro3);
 
 
