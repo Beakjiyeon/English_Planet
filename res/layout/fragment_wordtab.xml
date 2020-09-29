@@ -7,10 +7,28 @@
     android:background="@drawable/bg">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
+    <TableLayout
+        android:stretchColumns="*"
         android:layout_height="match_parent"
-        android:textColor="#fff"
-        android:text="word" />
+        android:layout_width="match_parent">
 
+        <TableRow
+            android:gravity="center">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="단어"
+                android:layout_gravity="center"
+                android:textColor="#ffffff"
+                android:textSize="25dp"></TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="뜻"
+                android:layout_gravity="center"
+                android:textColor="#ffffff"
+                android:textSize="25dp"></TextView>
+        </TableRow>
+    </TableLayout>
 </FrameLayout>

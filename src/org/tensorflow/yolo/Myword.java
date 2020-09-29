@@ -2,13 +2,13 @@ package org.tensorflow.yolo;
 
 public class Myword {
     private int m_id;
-    private int uid;
+    private String uid;
     private int b_id;
     private String m_word_k;
     private String m_word_e;
 
 
-    public Myword(int m_id, int uid, int b_id, String m_word_k, String m_word_e) {
+    public Myword(int m_id, String uid, int b_id, String m_word_k, String m_word_e) {
         this.m_id = m_id;
         this.uid = uid;
         this.b_id = b_id;
@@ -25,11 +25,11 @@ public class Myword {
         this.m_id = m_id;
     }
 
-    public int getUid() {
+    public String getUid() {
         return uid;
     }
 
-    public void setUid(int uid) {
+    public void setUid(String uid) {
         this.uid = uid;
     }
 

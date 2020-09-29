@@ -28,5 +28,7 @@ public class wordtab extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_wordtab, container, false);
+
+
     }
 }
