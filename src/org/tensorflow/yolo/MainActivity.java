@@ -1,7 +1,6 @@
 package org.tensorflow.yolo;
 
 import android.app.Activity;
-//import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;

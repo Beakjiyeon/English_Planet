@@ -240,6 +240,11 @@ public class PlanetListActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+    }
+
 
 
 }

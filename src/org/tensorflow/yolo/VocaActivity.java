@@ -58,6 +58,7 @@ public class VocaActivity extends AppCompatActivity {
             }
         });
 
+        // 오답노트
         btn_wrongNote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
