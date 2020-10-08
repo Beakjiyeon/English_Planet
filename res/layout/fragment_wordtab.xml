@@ -8,6 +8,7 @@
 
     <!-- TODO: Update blank fragment layout -->
     <TableLayout
+        android:id="@+id/wordtable"
         android:stretchColumns="*"
         android:layout_height="match_parent"
         android:layout_width="match_parent">
@@ -30,5 +31,6 @@
                 android:textColor="#ffffff"
                 android:textSize="25dp"></TextView>
         </TableRow>
+
     </TableLayout>
 </FrameLayout>

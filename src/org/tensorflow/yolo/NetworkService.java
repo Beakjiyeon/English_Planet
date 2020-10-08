@@ -93,6 +93,6 @@ public interface NetworkService {
                              @Field("m_word_e") String m_word_e,
                              @Field("m_word_k") String m_word_k,
                              @Field("check_ws") int check_ws);
-    //@GET("/api/myword") Call<List<Myword>> get_myword (@Query("id") String uid);
+    //@GET("/api/myword") Call<List<Myword>> get_myword(@Query("id") String uid);
     @GET("/api/myword?")  Call<List<Myword>> get_myword();
 }
