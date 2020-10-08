@@ -126,6 +126,11 @@
             android:name=".VocaActivity"
             android:screenOrientation="landscape"
             android:theme="@style/fullScreen"/>
+        <activity
+            android:name=".AudioActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/fullScreen"/>
+
     </application>
 
 </manifest>

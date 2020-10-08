@@ -60,6 +60,7 @@ import retrofit2.Response;
 
 public class SentenceActivity extends AppCompatActivity implements TextToSpeech.OnInitListener {
 
+
     //tts
     TextToSpeech tts;
     Button buttonSound;
@@ -175,6 +176,9 @@ public class SentenceActivity extends AppCompatActivity implements TextToSpeech.
                 finish();
             }
         });
+
+
+
 
 
         // tts create
@@ -412,6 +416,7 @@ public class SentenceActivity extends AppCompatActivity implements TextToSpeech.
                 forceStop = false;
                 isRecording = true;
                 audio.startRecording();
+
                 while (!forceStop) {
                     int ret = audio.read(inBuffer, 0, bufferSize);
                     for (int i = 0; i < ret ; i++ ) {
