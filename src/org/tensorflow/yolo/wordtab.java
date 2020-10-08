@@ -62,9 +62,10 @@ public class wordtab extends Fragment {
                             list2.add(list.get(index));
                         }
                     }
-                    TableRow tableRow = new TableRow(getActivity());
 
                     for(int i=0;i<list2.size();i++){
+                        TableRow tableRow = new TableRow(getActivity());
+
                         if(tableRow.getParent() != null) {
                             ((ViewGroup)tableRow.getParent()).removeView(tableRow); // <- fix
                         }
