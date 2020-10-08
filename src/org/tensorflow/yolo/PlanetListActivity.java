@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 //import androidx.appcompat.app.AppCompatActivity;
 
+import org.tensorflow.yolo.ownmodel.CameraMainActivity;
 import org.tensorflow.yolo.setting.AppSetting;
 import org.tensorflow.yolo.view.ClassifierActivity;
 
@@ -197,7 +198,8 @@ public class PlanetListActivity extends AppCompatActivity {
             public void onClick(View view) {
                 MainActivity.btnmp.start();
                 Toast.makeText(getApplicationContext(),"영어 뜻을 알고싶은 물건을 찍어보세요",Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(getApplicationContext(), ClassifierActivity.class);
+                //Intent intent = new Intent(getApplicationContext(), ClassifierActivity.class);
+                Intent intent = new Intent(getApplicationContext(), CameraMainActivity.class);
                 startActivity(intent);//액티비티 띄우기
             }
         });

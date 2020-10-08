@@ -32,6 +32,9 @@
             android:screenOrientation="portrait"></activity>
         <activity android:name=".view.DetailActivity" />
         <activity android:name=".view.CameraActivity" />
+        <activity android:name=".ownmodel.CameraMainActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/fullScreen"/>
         <activity
             android:name=".view.CameraWordBookActivity"
             android:screenOrientation="landscape" />
