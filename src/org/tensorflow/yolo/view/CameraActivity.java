@@ -270,7 +270,7 @@ public abstract class CameraActivity extends Activity implements OnImageAvailabl
                         // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
                         // ...
                         // 성공하면
-                        Toast.makeText(CameraActivity.this,"Image Uproad Successfultty",Toast.LENGTH_LONG).show();
+                        Toast.makeText(CameraActivity.this,"Image Uproad Successfully",Toast.LENGTH_LONG).show();
 
 
                         Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
