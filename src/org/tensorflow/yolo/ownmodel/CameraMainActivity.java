@@ -135,6 +135,7 @@ public class CameraMainActivity extends AppCompatActivity {
                 // 지연 : result들 중 퍼센트가 가장 높은 1개만 처리
                 String max=results.get(0).toString();
                 english_word=(max.split(" "))[1];
+                Log.d("인식",results.toString());
                 JsoupAsyncTask jsoupAsyncTask = new JsoupAsyncTask();
                 jsoupAsyncTask.execute();
 
