@@ -10,6 +10,14 @@
         android:layout_height="wrap_content">
 
         <ImageView
+            android:id="@+id/ending_video"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
+            app:srcCompat="@drawable/video_g"/>
+
+
+        <ImageView
             android:id="@+id/imageView10"
             android:layout_width="373dp"
             android:layout_height="wrap_content"
