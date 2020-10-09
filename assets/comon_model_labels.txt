@@ -1,0 +1,4 @@
+bottle
+chair
+glasses
+monitor

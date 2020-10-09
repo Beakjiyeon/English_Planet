@@ -57,33 +57,33 @@
         android:background="@drawable/sen_btn" />
 
 
-        <!-- <Spinner
-            android:id="@+id/spinnerMode"
-            android:layout_width="match_parent"
-            android:layout_height="52dp"
-            android:layout_marginBottom="5dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="5dp"
-            android:elevation="1dp"
-            tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="454dp" />
+    <!-- <Spinner
+        android:id="@+id/spinnerMode"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
+        android:elevation="1dp"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="454dp" />
 -->
 
 
-        <EditText
-            android:id="@+id/editID"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="5dp"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="CLIENT_ID"
-            tools:layout_editor_absoluteX="11dp"
-            tools:layout_editor_absoluteY="541dp" />
+    <EditText
+        android:id="@+id/editID"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="5dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="CLIENT_ID"
+        tools:layout_editor_absoluteX="11dp"
+        tools:layout_editor_absoluteY="541dp" />
 
     <TextView
         android:id="@+id/textResult"
@@ -105,4 +105,3 @@
         app:layout_constraintVertical_bias="0.326" />
 
 </RelativeLayout>
-
