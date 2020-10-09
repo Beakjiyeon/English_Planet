@@ -20,14 +20,14 @@
         android:background="#000000"
         android:alpha="0.5"
         android:padding="20dp"
-        android:layout_marginRight="30dp"
+        android:layout_marginLeft="20dp"
         android:id="@+id/textViewResult"
         android:layout_width="300dp"
         android:layout_height="80dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:fadeScrollbars="false"
         android:fontFamily="@font/cookierun_bold"
-        android:layout_gravity="top|right"
+        android:layout_gravity="top"
         android:maxLines="50"
         android:scrollbars="vertical"
 
@@ -39,38 +39,44 @@
         android:layout_gravity="center"
         android:visibility="invisible"/>
 
+
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="match_parent"
+        android:background="#050505"
+        android:layout_gravity="bottom|right"/>
+
+
     <Button
         android:fontFamily="@font/cookierun_bold"
         android:id="@+id/btnSaveDB"
         android:layout_width="60dp"
         android:layout_height="60dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="30dp"
         android:layout_gravity="bottom|right"
         android:visibility="invisible"
-        android:text="저장"
-        android:textAllCaps="false"
-        android:textColor="@android:color/black" />
+        android:background="@drawable/save_file"/>
     <Button
         android:fontFamily="@font/cookierun_bold"
         android:id="@+id/btnToggleCamera"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_gravity="right"
-        android:layout_marginTop="70dp"
-        android:text="화면전환"
-        android:textAllCaps="false"
-        android:textColor="@android:color/black" />
+        android:background="@drawable/rotate_camera"
+        android:layout_marginTop="50dp"
+        android:layout_marginRight="20dp"/>
 
     <Button
         android:fontFamily="@font/cookierun_bold"
         android:id="@+id/btnDetectObject"
+        android:layout_margin="5dp"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_gravity="center|right"
-        android:text="캡처하기"
-        android:background="#ff0010"
-        android:textSize="30dp"
-        android:textAllCaps="false"
-        android:textColor="@android:color/black"
-         />
+        android:background="@drawable/btn_shoot1"
+        />
+
 
 </FrameLayout>

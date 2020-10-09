@@ -70,7 +70,7 @@ public class CameraWordBookActivity extends Activity {
         //Refresh your stuff here
     }
     public void voice(String text){
-
+        tts.setLanguage(Locale.ENGLISH); // tts 언어설정
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             tts.speak(text,TextToSpeech.QUEUE_FLUSH,null,null);
         } else {
