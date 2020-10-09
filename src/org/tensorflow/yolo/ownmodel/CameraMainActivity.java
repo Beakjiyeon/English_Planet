@@ -162,16 +162,16 @@ public class CameraMainActivity extends AppCompatActivity {
 
                 if(captureFlag){ //
                     btnSaveDB.setVisibility(View.VISIBLE);
-                    btnDetectObject.setBackgroundColor(Color.YELLOW);
-                    btnDetectObject.setText("다시하기");
+                    btnDetectObject.setBackgroundResource(R.drawable.btn_shoot2); // 다시하기 버튼 설정
                     cameraView.captureImage();
 
 
                 }else{
                     textViewResult.setVisibility(View.INVISIBLE);
                     btnSaveDB.setVisibility(View.INVISIBLE);
-                    btnDetectObject.setText("캡처하기");
-                    btnDetectObject.setBackgroundColor(Color.RED);
+//                    btnDetectObject.setText("캡처하기");
+//                    btnDetectObject.setBackgroundColor(Color.RED);
+                    btnDetectObject.setBackgroundResource(R.drawable.btn_shoot1); // 연한색깔 버튼
                     captureFlag=true;
                     imageViewResult.setVisibility(View.INVISIBLE);
 
