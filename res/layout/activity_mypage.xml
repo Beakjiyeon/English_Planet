@@ -14,7 +14,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_margin="10dp"
-            app:srcCompat="@drawable/video"/>
+            app:srcCompat="@drawable/video_g"/>
 
 
         <ImageView
