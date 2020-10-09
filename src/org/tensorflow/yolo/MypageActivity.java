@@ -64,30 +64,33 @@ public class MypageActivity extends AppCompatActivity {
         });
 
         mVideo = (ImageView)findViewById(R.id.ending_video);
-        if (AppSetting.big_progress<3 || AppSetting.progress<40){
-            mVideo.setEnabled(false);
-            Toast.makeText(getApplicationContext(), "학습을 모두 완료한 후에 볼 수 있습니다.", Toast.LENGTH_LONG).show();
-        } else {
-            // image source 변경
-            mVideo.setImageResource(R.drawable.video);
-            mVideo.setEnabled(true);
-            mVideo.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
+        mVideo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (AppSetting.big_progress<3 || AppSetting.progress<40){
+                    mVideo.setEnabled(false);
+                    Toast.makeText(getApplicationContext(), "학습을 모두 완료한 후에 볼 수 있습니다.", Toast.LENGTH_LONG).show();
+                } else {
+                    // image source 변경
+                    mVideo.setImageResource(R.drawable.video);
+                    mVideo.setEnabled(true);
+                    mVideo.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
 //                    Intent vIntent = new Intent(getApplicationContext(), VideoActivity.class);
 //                    startActivity(vIntent);
 
-                    Intent intent = new Intent(
-                            Intent.ACTION_VIEW,
-                            Uri.parse("https://youtu.be/wFE_Frt3t3I"));
+                            Intent intent = new Intent(
+                                    Intent.ACTION_VIEW,
+                                    Uri.parse("https://youtu.be/wFE_Frt3t3I"));
 
-                    startActivity( intent );
+                            startActivity( intent );
+                        }
+                    });
                 }
-            });
-        }
 
-
-
+            }
+        });
 
 
     }

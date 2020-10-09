@@ -40,7 +40,7 @@ public class VocaActivity extends AppCompatActivity {
         btn_guide.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dialogShow();
+                dialogShow(); 
 
             }
         });
@@ -49,6 +49,7 @@ public class VocaActivity extends AppCompatActivity {
         btn_cameraword.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
+                MainActivity.btnmp.start();
                 Intent intent = new Intent(getApplicationContext(), CameraWordBookActivity.class);
                 startActivity(intent);
             }
@@ -59,6 +60,7 @@ public class VocaActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
+                MainActivity.btnmp.start();
                 Intent intent = new Intent(getApplicationContext(),CameraQuizActivity.class);
                 startActivity(intent);
             }
@@ -68,6 +70,7 @@ public class VocaActivity extends AppCompatActivity {
         btn_wrongNote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                MainActivity.btnmp.start();
                 Intent intent = new Intent(getApplicationContext(),MywordActivity.class);
                 startActivity(intent);
             }
@@ -81,18 +84,7 @@ public class VocaActivity extends AppCompatActivity {
         builder.setTitle("간단 설명서");
         builder.setMessage(str1+str2+str3);
         builder.setNeutralButton("OK",null);
-//        builder.setPositiveButton("예",
-//                new DialogInterface.OnClickListener() {
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        Toast.makeText(getApplicationContext(),"예를 선택했습니다.",Toast.LENGTH_LONG).show();
-//                    }
-//                });
-//        builder.setNegativeButton("아니오",
-//                new DialogInterface.OnClickListener() {
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        Toast.makeText(getApplicationContext(),"아니오를 선택했습니다.",Toast.LENGTH_LONG).show();
-//                    }
-//                });
+
         builder.show();
     }
  }
