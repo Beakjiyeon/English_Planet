@@ -61,7 +61,6 @@ public class SenquizActivity extends AppCompatActivity {
                     }
 
                     shuffle(array,array.length);
-
                     for(int i=0;i<array.length;i++){
                         final Button btn = new Button(getApplicationContext());
 //                        btn.setBackgroundColor(Color.WHITE);
@@ -124,6 +123,7 @@ public class SenquizActivity extends AppCompatActivity {
                             }
                         });
                     }
+
                 }
                 else {
 

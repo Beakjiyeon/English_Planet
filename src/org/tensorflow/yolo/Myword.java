@@ -1,6 +1,8 @@
 package org.tensorflow.yolo;
 
-public class Myword {
+import java.io.Serializable;
+
+public class Myword implements Serializable {
     private int m_id;
     private String uid;
     private int b_id;

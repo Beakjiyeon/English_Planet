@@ -134,6 +134,20 @@
             android:screenOrientation="landscape"
             android:theme="@style/fullScreen"/>
 
+        <activity
+            android:name=".MysenQuizActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/fullScreen"/>
+
+        <activity
+            android:name=".MywordQuizActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/fullScreen"/>
+        <activity
+            android:name=".MywordAnswerActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/fullScreen"/>
+
     </application>
 
 </manifest>

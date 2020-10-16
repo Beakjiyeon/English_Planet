@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import org.tensorflow.yolo.setting.AppSetting;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -24,6 +25,7 @@ public class WordquizActivity extends AppCompatActivity {
     String answer,answer2;
     String[] wordarray;
     String[] wrongarray={"바나나", "동물", "코", "기억", "나무","고양이","악어","시끄러운","사자","부족한","기쁜","이빨","딱딱한","과일","조용한","목","고양이","빛"};
+    List<Myword> list;
     int mB_id;
     NetworkService networkService;
     @Override
@@ -57,6 +59,7 @@ public class WordquizActivity extends AppCompatActivity {
             // getIntent
             Intent intent = getIntent();
             mB_id = intent.getIntExtra("b_id", 0);
+
 
 
         // 서버 데이터 가져옴

@@ -9,6 +9,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     <!-- TODO: Update blank fragment layout -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
     <TableLayout
         android:id="@+id/sentable"
         android:stretchColumns="*"
@@ -16,7 +20,8 @@
         android:layout_width="match_parent">
 
         <TableRow
-            android:gravity="center">
+            android:gravity="center"
+            android:layout_marginBottom="10dp">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -24,6 +29,7 @@
                 android:gravity="center"
                 android:layout_gravity="center"
                 android:textColor="#ffffff"
+                android:fontFamily="@font/cookierun_bold"
                 android:textSize="40dp"></TextView>
 
             <TextView
@@ -32,10 +38,20 @@
                 android:text="뜻"
                 android:gravity="center"
                 android:layout_gravity="center"
+                android:fontFamily="@font/cookierun_bold"
                 android:textColor="#ffffff"
                 android:textSize="40dp"></TextView>
         </TableRow>
 
     </TableLayout>
+        <Button
+            android:id="@+id/rebtn_s"
+            android:visibility="gone"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:background="@drawable/my_btn"
+            android:layout_gravity="center"
+            ></Button>
+        </LinearLayout>
     </ScrollView>
 </FrameLayout>
