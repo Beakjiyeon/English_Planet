@@ -59,7 +59,7 @@ public class CameraWordBookActivity extends Activity {
     TextView cword_text;
     TextView cword_text2;
     CameraAdpater adapter;
-    TextToSpeech tts;
+    static TextToSpeech  tts;
     RecyclerView recyclerView;
     List<Camera> list;
     int delete;
@@ -72,7 +72,7 @@ public class CameraWordBookActivity extends Activity {
         super.onResume();
         //Refresh your stuff here
     }
-    public void voice(String text){
+    public static void voice(String text){
         tts.setLanguage(Locale.ENGLISH); // tts 언어설정
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             tts.speak(text,TextToSpeech.QUEUE_FLUSH,null,null);
@@ -124,10 +124,6 @@ public class CameraWordBookActivity extends Activity {
 
             @Override
             public void onCameraClicked(Camera model) {
-
-                voice(model.getC_word_e());
-
-
                 // 다이얼로그 메세지 띄우기
                 AlertDialog.Builder builder = new AlertDialog.Builder(CameraWordBookActivity.this);
                 builder.setTitle("단어장에서 삭제하시겠습니까?");
@@ -291,6 +287,14 @@ public class CameraWordBookActivity extends Activity {
             Camera item = mItems.get(position);
             holder.c_word_e.setText(item.getC_word_e());
             holder.c_word_k.setText(item.getC_word_k());
+            String str = holder.c_word_e.getText().toString();
+
+            holder.btn_word_sound.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    voice(str);
+                }
+            });
 
             Glide
                     .with(holder.c_url.getContext())
