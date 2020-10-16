@@ -66,6 +66,7 @@ import retrofit2.Response;
 
 public class CameraMainActivity extends AppCompatActivity {
 
+    List<Classifier.Recognition> resultss;
     // DB
     StorageReference mStorageRef;
     String imageUrl;
@@ -131,7 +132,7 @@ public class CameraMainActivity extends AppCompatActivity {
                 imageViewResult.setImageBitmap(bitmap);
                 bitmap = Bitmap.createScaledBitmap(bitmap, INPUT_SIZE, INPUT_SIZE, false);
                 final List<Classifier.Recognition> results = classifier.recognizeImage(bitmap);
-
+                resultss=results;
                 // 지연 : result들 중 퍼센트가 가장 높은 1개만 처리
                 String max=results.get(0).toString();
                 english_word=(max.split(" "))[1];
@@ -274,7 +275,9 @@ public class CameraMainActivity extends AppCompatActivity {
 
             korea_word=means;
             Toast.makeText(CameraMainActivity.this, korea_word, Toast.LENGTH_SHORT).show();
-            textViewResult.setText(english_word+"\n"+korea_word);
+            // textViewResult.setText(english_word+"\n"+korea_word);
+            // 하...
+            textViewResult.setText(resultss.toString());
             pdialog.dismiss();
 
             textViewResult.setVisibility(View.VISIBLE);

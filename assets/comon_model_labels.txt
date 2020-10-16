@@ -1,24 +1,4 @@
-apple
-banana
-baseball bat
-baseball glove
-bookshelf
 bottle
-car
-cat
 chair
-clock
-cup
-dining table
-dog
 glasses
-grape
 keyboard
-monitor
-pencil
-person
-scissors
-smartphone
-teddy bear
-toothbrush
-umbrella

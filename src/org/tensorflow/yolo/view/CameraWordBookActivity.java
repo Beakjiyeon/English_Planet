@@ -268,7 +268,9 @@ public class CameraWordBookActivity extends Activity {
                 public void onClick(View v) {
                     if (mListener != null) {
                         final Camera item = mItems.get(viewHolder.getAdapterPosition());
+
                         mListener.onCameraClicked(item);
+
                     }
                 }
             });
@@ -280,6 +282,7 @@ public class CameraWordBookActivity extends Activity {
             Camera item = mItems.get(position);
             holder.c_word_e.setText(item.getC_word_e());
             holder.c_word_k.setText(item.getC_word_k());
+
             // 이미지 속도 처리
             Glide
                     .with(holder.c_url.getContext())
