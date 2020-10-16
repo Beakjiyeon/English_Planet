@@ -63,6 +63,9 @@ public class CameraWordBookActivity extends Activity {
     RecyclerView recyclerView;
     List<Camera> list;
     int delete;
+
+
+
     @Override
     public void onResume()
     {  // After a pause OR at startup
@@ -92,6 +95,9 @@ public class CameraWordBookActivity extends Activity {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(null);
         setContentView(R.layout.activity_camera_recycle);
+
+
+
 // tts추가
         tts=new TextToSpeech(this, new TextToSpeech.OnInitListener() {
             @Override
@@ -110,6 +116,8 @@ public class CameraWordBookActivity extends Activity {
                 }
             }
         });
+
+
         // 리사이클러뷰
         recyclerView=findViewById(R.id.camera_recycler);
         adapter=new CameraAdpater(new CameraAdpater.OnCameraClickListener(){
@@ -257,6 +265,7 @@ public class CameraWordBookActivity extends Activity {
             notifyDataSetChanged();
         }
 
+        //TODO
         @NonNull
         @Override
         public CameraViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -272,15 +281,17 @@ public class CameraWordBookActivity extends Activity {
                     }
                 }
             });
+
             return viewHolder;
         }
 
+        // TODO 버튼선언
         @Override
         public void onBindViewHolder(@NonNull CameraViewHolder holder, int position) {
             Camera item = mItems.get(position);
             holder.c_word_e.setText(item.getC_word_e());
             holder.c_word_k.setText(item.getC_word_k());
-            // 이미지 속도 처리
+
             Glide
                     .with(holder.c_url.getContext())
                     .load(item.getC_url())
@@ -290,8 +301,7 @@ public class CameraWordBookActivity extends Activity {
                             .fitCenter())
                     .into(holder.c_url);
 
-
-        }
+        } // onBindViewHolder
 
         @Override
         public int getItemCount() {
@@ -303,12 +313,20 @@ public class CameraWordBookActivity extends Activity {
             TextView c_word_e;
             TextView c_word_k;
             ImageView c_url;
+            //TODO
+            ImageView btn_word_x;
+            ImageView btn_word_sound;
 
             public CameraViewHolder(@NonNull View itemView) {
                 super(itemView);
+                // findviewbyid 설정
+                btn_word_sound = itemView.findViewById(R.id.btn_word_sound);
+                btn_word_x = itemView.findViewById(R.id.btn_word_x);
                 c_word_e=itemView.findViewById(R.id.cword_text);
                 c_word_k=itemView.findViewById(R.id.cword_text2);
                 c_url= itemView.findViewById(R.id.cimage);
+
+
 
             }
 
