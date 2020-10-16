@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,6 +27,13 @@ public class MypageActivity extends AppCompatActivity {
         Navigation_Bar n = new Navigation_Bar();
         n.HideNavigationBar(w);
 
+        Button btn_back = findViewById(R.id.btn_back);
+        btn_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         TextView userinfo = (TextView) findViewById(R.id.userInfo);
         userinfo.setText(AppSetting.unickname);
@@ -34,6 +42,7 @@ public class MypageActivity extends AppCompatActivity {
         book1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                MainActivity.btnmp.start();
                 Intent intent = new Intent(getApplicationContext(), VocaActivity.class);
                 startActivity(intent);//액티비티 띄우기
             }
@@ -43,6 +52,7 @@ public class MypageActivity extends AppCompatActivity {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                MainActivity.btnmp.start();
                 Intent intentt = new Intent(getApplicationContext(), MainActivity.class);
                 intentt.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intentt.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
@@ -58,6 +68,7 @@ public class MypageActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
+                MainActivity.btnmp.start();
                 Intent info = new Intent(getApplicationContext(), modifyinfoActivity.class);
                 startActivity(info);
             }
