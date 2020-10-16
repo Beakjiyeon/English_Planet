@@ -274,10 +274,10 @@ public class CameraMainActivity extends AppCompatActivity {
             //imageViewResult.setVisibility(View.VISIBLE);
 
             korea_word=means;
-            Toast.makeText(CameraMainActivity.this, korea_word, Toast.LENGTH_SHORT).show();
-            // textViewResult.setText(english_word+"\n"+korea_word);
+            Toast.makeText(CameraMainActivity.this, resultss.toString(), Toast.LENGTH_SHORT).show();
+            textViewResult.setText(english_word+"\n"+korea_word);
             // 하...
-            textViewResult.setText(resultss.toString());
+            //textViewResult.setText(resultss.toString());
             pdialog.dismiss();
 
             textViewResult.setVisibility(View.VISIBLE);
