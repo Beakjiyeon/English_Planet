@@ -5,7 +5,9 @@
     android:layout_height="match_parent"
     tools:context=".wordtab"
     android:background="@drawable/bg">
-
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <!-- TODO: Update blank fragment layout -->
     <TableLayout
         android:id="@+id/wordtable"
@@ -19,18 +21,29 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="단어"
+                android:gravity="center"
                 android:layout_gravity="center"
                 android:textColor="#ffffff"
-                android:textSize="25dp"></TextView>
+                android:textSize="40dp"></TextView>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="뜻"
+                android:gravity="center"
                 android:layout_gravity="center"
                 android:textColor="#ffffff"
-                android:textSize="25dp"></TextView>
+                android:textSize="40dp"></TextView>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="듣기"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:textColor="#ffffff"
+                android:textSize="40dp"></TextView>
         </TableRow>
 
     </TableLayout>
+    </ScrollView>
 </FrameLayout>

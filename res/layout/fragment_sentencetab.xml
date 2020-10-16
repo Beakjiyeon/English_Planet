@@ -5,12 +5,37 @@
     android:layout_height="match_parent"
     tools:context=".sentencetab"
     android:background="@drawable/bg">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <!-- TODO: Update blank fragment layout -->
+    <TableLayout
+        android:id="@+id/sentable"
+        android:stretchColumns="*"
         android:layout_height="match_parent"
-        android:textColor="#fff"
-        android:text="sentence" />
+        android:layout_width="match_parent">
 
+        <TableRow
+            android:gravity="center">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="문장"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:textColor="#ffffff"
+                android:textSize="40dp"></TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="뜻"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:textColor="#ffffff"
+                android:textSize="40dp"></TextView>
+        </TableRow>
+
+    </TableLayout>
+    </ScrollView>
 </FrameLayout>
