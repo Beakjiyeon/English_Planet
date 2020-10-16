@@ -59,17 +59,20 @@ public class CameraWordBookActivity extends Activity {
     TextView cword_text;
     TextView cword_text2;
     CameraAdpater adapter;
-    TextToSpeech tts;
+    static TextToSpeech  tts;
     RecyclerView recyclerView;
     List<Camera> list;
     int delete;
+
+
+
     @Override
     public void onResume()
     {  // After a pause OR at startup
         super.onResume();
         //Refresh your stuff here
     }
-    public void voice(String text){
+    public static void voice(String text){
         tts.setLanguage(Locale.ENGLISH); // tts 언어설정
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             tts.speak(text,TextToSpeech.QUEUE_FLUSH,null,null);
@@ -92,6 +95,9 @@ public class CameraWordBookActivity extends Activity {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(null);
         setContentView(R.layout.activity_camera_recycle);
+
+
+
 // tts추가
         tts=new TextToSpeech(this, new TextToSpeech.OnInitListener() {
             @Override
@@ -110,16 +116,14 @@ public class CameraWordBookActivity extends Activity {
                 }
             }
         });
+
+
         // 리사이클러뷰
         recyclerView=findViewById(R.id.camera_recycler);
         adapter=new CameraAdpater(new CameraAdpater.OnCameraClickListener(){
 
             @Override
             public void onCameraClicked(Camera model) {
-
-                voice(model.getC_word_e());
-
-
                 // 다이얼로그 메세지 띄우기
                 AlertDialog.Builder builder = new AlertDialog.Builder(CameraWordBookActivity.this);
                 builder.setTitle("단어장에서 삭제하시겠습니까?");
@@ -257,6 +261,7 @@ public class CameraWordBookActivity extends Activity {
             notifyDataSetChanged();
         }
 
+        //TODO
         @NonNull
         @Override
         public CameraViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -268,22 +273,29 @@ public class CameraWordBookActivity extends Activity {
                 public void onClick(View v) {
                     if (mListener != null) {
                         final Camera item = mItems.get(viewHolder.getAdapterPosition());
-
                         mListener.onCameraClicked(item);
-
                     }
                 }
             });
+
             return viewHolder;
         }
 
+        // TODO 버튼선언
         @Override
         public void onBindViewHolder(@NonNull CameraViewHolder holder, int position) {
             Camera item = mItems.get(position);
             holder.c_word_e.setText(item.getC_word_e());
             holder.c_word_k.setText(item.getC_word_k());
+            String str = holder.c_word_e.getText().toString();
 
-            // 이미지 속도 처리
+            holder.btn_word_sound.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    voice(str);
+                }
+            });
+
             Glide
                     .with(holder.c_url.getContext())
                     .load(item.getC_url())
@@ -293,8 +305,7 @@ public class CameraWordBookActivity extends Activity {
                             .fitCenter())
                     .into(holder.c_url);
 
-
-        }
+        } // onBindViewHolder
 
         @Override
         public int getItemCount() {
@@ -306,12 +317,20 @@ public class CameraWordBookActivity extends Activity {
             TextView c_word_e;
             TextView c_word_k;
             ImageView c_url;
+            //TODO
+            ImageView btn_word_x;
+            ImageView btn_word_sound;
 
             public CameraViewHolder(@NonNull View itemView) {
                 super(itemView);
+                // findviewbyid 설정
+                btn_word_sound = itemView.findViewById(R.id.btn_word_sound);
+                btn_word_x = itemView.findViewById(R.id.btn_word_x);
                 c_word_e=itemView.findViewById(R.id.cword_text);
                 c_word_k=itemView.findViewById(R.id.cword_text2);
                 c_url= itemView.findViewById(R.id.cimage);
+
+
 
             }
 

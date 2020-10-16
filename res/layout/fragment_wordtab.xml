@@ -9,6 +9,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     <!-- TODO: Update blank fragment layout -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
     <TableLayout
         android:id="@+id/wordtable"
         android:stretchColumns="*"
@@ -22,6 +26,7 @@
                 android:layout_height="match_parent"
                 android:text="단어"
                 android:gravity="center"
+                android:fontFamily="@font/cookierun_bold"
                 android:layout_gravity="center"
                 android:textColor="#ffffff"
                 android:textSize="40dp"></TextView>
@@ -30,14 +35,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="뜻"
-                android:gravity="center"
-                android:layout_gravity="center"
-                android:textColor="#ffffff"
-                android:textSize="40dp"></TextView>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="듣기"
+                android:fontFamily="@font/cookierun_bold"
                 android:gravity="center"
                 android:layout_gravity="center"
                 android:textColor="#ffffff"
@@ -45,5 +43,14 @@
         </TableRow>
 
     </TableLayout>
+        <Button
+            android:id="@+id/rebtn_w"
+            android:visibility="gone"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:background="@drawable/my_btn"
+            android:layout_gravity="center"
+            ></Button>
+        </LinearLayout>
     </ScrollView>
 </FrameLayout>

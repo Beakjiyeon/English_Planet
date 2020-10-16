@@ -30,9 +30,11 @@ import android.view.Window;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 
 import org.apache.commons.lang.StringEscapeUtils;
@@ -60,6 +62,7 @@ import retrofit2.Response;
 
 public class SentenceActivity extends AppCompatActivity implements TextToSpeech.OnInitListener {
 
+    ImageView soundform;
 
     //tts
     TextToSpeech tts;
@@ -178,6 +181,10 @@ public class SentenceActivity extends AppCompatActivity implements TextToSpeech.
         });
 
 
+        // imageview
+        soundform = findViewById(R.id.soundform);
+        Glide.with(this).load(R.drawable.soundform).into(soundform);
+        soundform.setVisibility(View.INVISIBLE);
 
 
 
@@ -285,9 +292,11 @@ public class SentenceActivity extends AppCompatActivity implements TextToSpeech.
         buttonStart.setOnClickListener(new  View.OnClickListener() {
             public void onClick(View v) {
                 if (isRecording) {
+                    soundform.setVisibility(View.INVISIBLE);
                     buttonStart.setBackgroundResource(R.drawable.sen_btn);
                     forceStop = true;
                 } else {
+                    soundform.setVisibility(View.VISIBLE);
                     buttonStart.setBackgroundResource(R.drawable.sen_recoding_btn);
 
                     try {

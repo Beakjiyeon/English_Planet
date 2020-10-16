@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/answerlayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:fontFamily="@font/cookierun_regular"
+            android:id="@+id/tvans"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center_horizontal|center_vertical"
+            android:textColor="#000000"
+            android:textSize="35dp"
+            android:layout_marginTop="35dp"
+
+            ></TextView>
+        <ImageButton
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn"
+            android:src="@drawable/btn_next"
+            android:background="@android:color/transparent"
+            android:layout_gravity="center"
+            android:layout_marginTop="300dp"
+            android:layout_marginLeft="270dp"
+            android:layout_marginRight="250dp"
+            android:layout_marginBottom="0dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"></ImageButton>
+    </RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>
