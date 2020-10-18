@@ -1,3 +1,4 @@
 bottle
 chair
 glasses
+hand
