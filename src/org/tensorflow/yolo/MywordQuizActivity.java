@@ -29,6 +29,7 @@ public class MywordQuizActivity extends AppCompatActivity implements Serializabl
     String[] wrongarray = {"바나나", "동물", "코", "기억", "나무", "고양이", "악어", "시끄러운", "사자", "부족한", "기쁜", "이빨", "딱딱한", "과일", "조용한", "목", "고양이", "빛"};
     List<Myword> list,list2;
     NetworkService networkService;
+    int m_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +61,7 @@ public class MywordQuizActivity extends AppCompatActivity implements Serializabl
         wordarray = new String[3];
         // myword에 있는 데이터들
         list2 = new ArrayList<Myword>();
+
         networkService = RetrofitSender.getNetworkService();
         if(AppSetting.myquizcount==0){
             Call<List<Myword>> call = networkService.get_myword();
@@ -77,6 +79,7 @@ public class MywordQuizActivity extends AppCompatActivity implements Serializabl
                         }
                         Myword mw = list2.get(AppSetting.myquizcount);
                         String bo = mw.getM_word_e();
+                        m_id=mw.getM_id();
                         answer2 = bo;
                         answer = mw.getM_word_k();
                         wordtv.setText(bo);
@@ -152,6 +155,7 @@ public class MywordQuizActivity extends AppCompatActivity implements Serializabl
                     intent.putExtra("correct",0);
                 }
                 intent.putExtra("type", "word");
+                intent.putExtra("m_id",m_id);
                 intent.putExtra("list2", (Serializable) list2);
                 startActivity(intent);
                 finish();
@@ -168,8 +172,10 @@ public class MywordQuizActivity extends AppCompatActivity implements Serializabl
                     intent.putExtra("answer2",answer2);
                     intent.putExtra("correct",0);}
                 intent.putExtra("type", "word");
+                intent.putExtra("m_id",m_id);
                 intent.putExtra("list2", (Serializable) list2);
                 startActivity(intent);
+                finish();
             }
         });
         ivans3.setOnClickListener(new View.OnClickListener() {
@@ -182,8 +188,10 @@ public class MywordQuizActivity extends AppCompatActivity implements Serializabl
                     intent.putExtra("answer2",answer2);
                     intent.putExtra("correct",0);}
                 intent.putExtra("type", "word");
+                intent.putExtra("m_id",m_id);
                 intent.putExtra("list2", (Serializable) list2);
                 startActivity(intent);
+                finish();
             }
         });
 

@@ -95,4 +95,6 @@ public interface NetworkService {
                              @Field("check_ws") int check_ws);
     //@GET("/api/myword") Call<List<Myword>> get_myword(@Query("id") String uid);
     @GET("/api/myword?")  Call<List<Myword>> get_myword();
+    @DELETE("/api/myword/{pk}/")
+    Call<ResponseBody> delete_myword(@Path("pk") int pk);
 }
