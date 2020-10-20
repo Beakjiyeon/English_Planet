@@ -25,7 +25,7 @@ import retrofit2.Response;
 
 public class MysenQuizActivity extends AppCompatActivity {
     ImageButton checkans;
-    int count;
+    int count, m_id;
     TextView sen_k;
     NetworkService networkService;
     List<Myword> list,list2;
@@ -62,6 +62,7 @@ public class MysenQuizActivity extends AppCompatActivity {
                         Myword mw = list2.get(AppSetting.myquizcount);
                         String senk=mw.getM_word_k();
                         String sen=mw.getM_word_e();
+                        m_id=mw.getM_id();
                         sen_k.setText(senk);
                         final String[ ] ans= sen.split(" ");
                         String[] array = new String[ans.length];
@@ -125,6 +126,7 @@ public class MysenQuizActivity extends AppCompatActivity {
                                         intent.putExtra("sen",sen);
                                         intent.putExtra("senk",senk);
                                         intent.putExtra("type", "sentence");
+                                        intent.putExtra("m_id",m_id);
                                         intent.putExtra("list2", (Serializable) list2);
 
                                         startActivity(intent);
@@ -149,6 +151,7 @@ public class MysenQuizActivity extends AppCompatActivity {
             Myword mw = list2.get(AppSetting.myquizcount);
             String senk=mw.getM_word_k();
             String sen=mw.getM_word_e();
+            m_id=mw.getM_id();
             sen_k.setText(senk);
             final String[ ] ans= sen.split(" ");
             String[] array = new String[ans.length];
@@ -210,6 +213,7 @@ public class MysenQuizActivity extends AppCompatActivity {
                             }
                             intent.putExtra("sen", sen);
                             intent.putExtra("senk", senk);
+                            intent.putExtra("m_id",m_id);
                             intent.putExtra("type", "sentence");
                             intent.putExtra("list2", (Serializable) list2);
 
@@ -235,3 +239,4 @@ public class MysenQuizActivity extends AppCompatActivity {
         }
     }
 }
+

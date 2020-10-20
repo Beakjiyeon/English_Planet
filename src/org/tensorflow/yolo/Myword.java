@@ -1,6 +1,7 @@
 package org.tensorflow.yolo;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class Myword implements Serializable {
     private int m_id;
@@ -9,6 +10,7 @@ public class Myword implements Serializable {
     private String m_word_k;
     private String m_word_e;
     private int check_ws;
+
 
 
     public Myword(int m_id, String uid, int b_id, String m_word_k, String m_word_e, int check_ws) {
