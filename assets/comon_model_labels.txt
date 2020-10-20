@@ -1,4 +1,2 @@
 bottle
-chair
 glasses
-hand

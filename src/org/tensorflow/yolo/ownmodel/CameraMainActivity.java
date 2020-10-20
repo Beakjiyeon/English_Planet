@@ -276,7 +276,7 @@ public class CameraMainActivity extends AppCompatActivity {
             korea_word=means;
             Toast.makeText(CameraMainActivity.this, resultss.toString(), Toast.LENGTH_SHORT).show();
             textViewResult.setText(english_word+"\n"+korea_word);
-            // 하.../
+            // 하.../ㅇ
             //textViewResult.setText(resultss.toString());
             pdialog.dismiss();
 

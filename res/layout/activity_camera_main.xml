@@ -9,9 +9,16 @@
 
     <com.wonderkiln.camerakit.CameraView
         android:id="@+id/cameraView"
-        android:layout_width="716dp"
+        android:layout_width="634dp"
         android:layout_height="400dp"
-        android:layout_gravity="center" >
+        android:layout_gravity="left">
+
+        <ImageView
+            android:id="@+id/imageViewResult"
+            android:layout_width="656dp"
+            android:layout_height="400dp"
+            android:layout_gravity="center"
+            android:visibility="invisible" />
     </com.wonderkiln.camerakit.CameraView>
 
     <TextView
@@ -32,13 +39,6 @@
         android:scrollbars="vertical"
 
         android:textColor="#ffffff" />
-    <ImageView
-        android:id="@+id/imageViewResult"
-        android:layout_width="716dp"
-        android:layout_height="400dp"
-        android:layout_gravity="center"
-        android:visibility="invisible"/>
-
 
 
     <ImageView
