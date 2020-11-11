@@ -31,7 +31,7 @@
 
         <ImageView
             android:id="@+id/imageView10"
-            android:layout_width="373dp"
+            android:layout_width="400dp"
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/mypage" />
 
@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/cookierun_bold"
             android:text="User"
-            android:textSize="25sp"
+            android:textSize="40sp"
             android:textColor="#000000"
             android:layout_centerInParent="true"/>
 
@@ -52,21 +52,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="60dp"
         android:layout_marginRight="15dp"
         android:layout_marginBottom="15dp">
 
         <ImageView
             android:id="@+id/btnVoca"
             android:layout_width="wrap_content"
-            android:layout_height="100dp"
+            android:layout_height="130dp"
             android:layout_marginBottom="15dp"
             android:src="@drawable/btn_voca" />
 
         <ImageView
             android:id="@+id/btnSettings"
             android:layout_width="wrap_content"
-            android:layout_height="100dp"
+            android:layout_height="130dp"
             android:layout_below="@id/btnVoca"
             android:layout_marginBottom="15dp"
             android:src="@drawable/btn_settings" />
@@ -74,7 +74,7 @@
         <ImageView
             android:id="@+id/btnLogout"
             android:layout_width="wrap_content"
-            android:layout_height="100dp"
+            android:layout_height="130dp"
             android:layout_below="@id/btnSettings"
             android:src="@drawable/btn_logout" />
 

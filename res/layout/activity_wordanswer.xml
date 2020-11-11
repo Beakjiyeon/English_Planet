@@ -30,11 +30,9 @@
             android:id="@+id/btn"
             android:src="@drawable/btn_next"
             android:background="@android:color/transparent"
-            android:layout_gravity="center"
-            android:layout_marginTop="300dp"
-            android:layout_marginLeft="270dp"
-            android:layout_marginRight="250dp"
-            android:layout_marginBottom="0dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="50dp"
             android:adjustViewBounds="true"
             android:scaleType="fitXY"></ImageButton>
     </RelativeLayout>

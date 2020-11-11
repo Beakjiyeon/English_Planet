@@ -40,11 +40,14 @@ import com.wonderkiln.camerakit.CameraKitImage;
 import com.wonderkiln.camerakit.CameraKitVideo;
 import com.wonderkiln.camerakit.CameraView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.tensorflow.yolo.Camera;
+import org.tensorflow.yolo.Image;
 import org.tensorflow.yolo.NetworkService;
 import org.tensorflow.yolo.R;
 import org.tensorflow.yolo.RetrofitSender;
@@ -56,6 +59,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -110,7 +115,7 @@ public class CameraMainActivity extends AppCompatActivity {
         btnSaveDB.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-               saveView();
+               saveView(1);
             }
         });
 
@@ -131,16 +136,7 @@ public class CameraMainActivity extends AppCompatActivity {
                 bitmap = cameraKitImage.getBitmap();
                 imageViewResult.setImageBitmap(bitmap);
                 bitmap = Bitmap.createScaledBitmap(bitmap, INPUT_SIZE, INPUT_SIZE, false);
-                final List<Classifier.Recognition> results = classifier.recognizeImage(bitmap);
-                resultss=results;
-                // 지연 : result들 중 퍼센트가 가장 높은 1개만 처리
-                String max=results.get(0).toString();
-                english_word=(max.split(" "))[1];
-                Log.d("인식",results.toString());
-                JsoupAsyncTask jsoupAsyncTask = new JsoupAsyncTask();
-                jsoupAsyncTask.execute();
-
-
+                saveView(2);
 
 
             }
@@ -176,14 +172,12 @@ public class CameraMainActivity extends AppCompatActivity {
                     btnDetectObject.setBackgroundResource(R.drawable.btn_shoot1); // 연한색깔 버튼
                     captureFlag=true;
                     imageViewResult.setVisibility(View.INVISIBLE);
-
                 }
-
             }
 
         });
 
-        initTensorFlowAndLoadModel();
+        //initTensorFlowAndLoadModel();
     }
 
     @Override
@@ -250,6 +244,7 @@ public class CameraMainActivity extends AppCompatActivity {
         String means="";
         @Override
         protected Void doInBackground(Void... params) {
+            //english_word
 
             try {
                 String htmlPageUrl="https://dic.daum.net/search.do?type=eng&q="+ english_word;
@@ -274,7 +269,7 @@ public class CameraMainActivity extends AppCompatActivity {
             //imageViewResult.setVisibility(View.VISIBLE);
 
             korea_word=means;
-            Toast.makeText(CameraMainActivity.this, resultss.toString(), Toast.LENGTH_SHORT).show();
+            //Toast.makeText(CameraMainActivity.this, resultss.toString(), Toast.LENGTH_SHORT).show();
             textViewResult.setText(english_word+"\n"+korea_word);
             // 하.../ㅇ
             //textViewResult.setText(resultss.toString());
@@ -288,11 +283,20 @@ public class CameraMainActivity extends AppCompatActivity {
             captureFlag=false;
         }
     }
+
+
     // 파이어베이스 연결
-    private void saveView()
+    private void saveView(int n)
     {
         if(bitmap!=null){
-            mStorageRef= FirebaseStorage.getInstance().getReference("Images/"+english_word);
+            if(n==1){
+                // 카메라 단어장에 들어가는 파이어베이스 이미지 경로
+                mStorageRef= FirebaseStorage.getInstance().getReference("Images/"+english_word);
+            }else if(n==2){
+                // 장고 서버에서 분류하기 위해 필요한 파이어베이스 이미지 경로
+                mStorageRef= FirebaseStorage.getInstance().getReference("images_classify/"+AppSetting.uid);
+            }
+
             Bitmap image_bitmap = bitmap; //?????????????????????????????/
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             image_bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
@@ -309,7 +313,61 @@ public class CameraMainActivity extends AppCompatActivity {
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     // FIREBASE STORAGE 이미지 저장
                     // 성공하면
-                    Toast.makeText(CameraMainActivity.this,"저장 되었습니다. . .",Toast.LENGTH_LONG).show();
+                    if(n==1){
+                        //Toast.makeText(CameraMainActivity.this,"저장 되었습니다. . .",Toast.LENGTH_LONG).show();
+                    }else if(n==2){
+                        //Toast.makeText(CameraMainActivity.this,"서버용 저장 되었습니다. . .",Toast.LENGTH_LONG).show();
+                        // 서버 image_classifier로 부터 받아오기
+
+                        networkService = RetrofitSender.getNetworkService();
+                        Log.d("서버버","된다");
+                        // b_id : 1번으로 설정
+                        Call<Image> response = networkService.img_classifier(AppSetting.uid);
+                        response.enqueue(new Callback<Image>() {
+                            @Override
+                            public void onResponse(Call<Image> call, Response<Image> response) {
+                                if(response!=null){
+                                    //JSONObject jo=response.body();
+                                    Image img = response.body();
+                                    Log.d("서버결과값","되니니니니");
+                                    Log.d("서버결과값",img.getLabel());
+                                    english_word=img.getLabel();
+                                    JsoupAsyncTask jsoupAsyncTask = new JsoupAsyncTask();
+                                    jsoupAsyncTask.execute();
+
+//                                    try {
+//                                        String label=jo.getString("label");
+//                                        String re=jo.getString("result");
+//                                        Toast.makeText(CameraMainActivity.this, label+","+re, Toast.LENGTH_SHORT).show();
+//                                    } catch (JSONException e) {
+//                                        e.printStackTrace();
+//                                    }
+
+                                    // 해석하자
+                                }else{
+                                    Log.d("서버결과값","안돼");
+                                    Log.d("########", "xxxxxxx");
+                                }
+                                Log.d("########", "xxxㅇㅇxxxx");
+                            }
+
+                            @Override
+                            public void onFailure(Call<Image> call, Throwable t) {
+                                Log.d("서버결과값","안돼2");
+                                Log.d("########", t.getMessage());
+                            }
+                        });
+
+//                final List<Classifier.Recognition> results = classifier.recognizeImage(bitmap);
+//                resultss=results;
+//                // 지연 : result들 중 퍼센트가 가장 높은 1개만 처리
+//                String max=results.get(0).toString();
+//                english_word=(max.split(" "))[1];
+//                Log.d("인식",results.toString());
+
+
+                    }
+
 
                     Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                         @Override

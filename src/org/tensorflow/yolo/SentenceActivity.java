@@ -333,7 +333,9 @@ public class SentenceActivity extends AppCompatActivity implements TextToSpeech.
                                             else {
                                                 Log.d("점수", "miss");
                                             }
-
+                                            Log.d("흠냐리확인",obj+"");
+                                            Log.d("흠냐리카운트",countword+"");
+                                            Log.d("흠냐리스코어",Double.parseDouble(score)+"");
                                             intent.putExtra("countword",countword);
                                             intent.putExtra("myscore",Double.parseDouble(score));
 
@@ -381,10 +383,14 @@ public class SentenceActivity extends AppCompatActivity implements TextToSpeech.
         }
         String[] array_recognized = recognized.split(" ");  //인식된 단어 배열
         String[] array_word = qw.split(" "); // 비교단어 배열
+        for(int i=0;i<array_recognized.length;i++){
+
+        }
 
         int cw=0; // 일치값
         for(int i=0;i<array_recognized.length;i++){
             for(int j=0;j<array_word.length;j++){
+                Log.d("흠냘쓰",array_recognized[i]+" , "+array_word[j]);
                 if(array_recognized[i].equals(array_word[j]))  // 단어가 일치하면
                     cw++;   // 일치값 증가
             }

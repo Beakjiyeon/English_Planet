@@ -8,7 +8,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
         <ImageView
             android:id="@+id/btn_guide"
             android:layout_margin="10dp"
@@ -22,39 +23,40 @@
             android:layout_height="wrap_content"
             android:text="설명이 필요하면 왼쪽 버튼을 눌러주세요."
             android:fontFamily="@font/cookierun_bold"
-            android:textSize="20dp"
+            android:textSize="30dp"
             android:layout_gravity="center_vertical"
             android:textColor="#FFFFFFFF"/>
     </LinearLayout>
 
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="20dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="15dp">
+        android:layout_marginTop="50dp">
 
         <ImageView
             android:id="@+id/btn_carmeraword"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
+            android:layout_width="280dp"
+            android:layout_height="280dp"
+            android:layout_margin="10dp"
             android:src="@drawable/btn_cameraword" />
 
 
         <ImageView
             android:id="@+id/btn_picquiz"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
+            android:layout_width="280dp"
+            android:layout_height="280dp"
+            android:layout_margin="10dp"
             android:src="@drawable/btn_picquiz" />
 
 
         <ImageView
             android:id="@+id/btn_wrong"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
+            android:layout_width="280dp"
+            android:layout_height="280dp"
+            android:layout_margin="10dp"
             android:src="@drawable/btn_wrong" />
 
 

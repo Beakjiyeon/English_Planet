@@ -97,4 +97,8 @@ public interface NetworkService {
     @GET("/api/myword?")  Call<List<Myword>> get_myword();
     @DELETE("/api/myword/{pk}/")
     Call<ResponseBody> delete_myword(@Path("pk") int pk);
+
+
+    // Image
+    @GET("/api/classify?") Call<Image> img_classifier(@Query("id") String id);
 }

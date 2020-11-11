@@ -10,6 +10,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import org.tensorflow.yolo.setting.AppSetting;
 
@@ -25,7 +26,7 @@ public class ScoreActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_score);
         ImageButton btn = (ImageButton)findViewById(R.id.btn);
-        LinearLayout scorelayout = (LinearLayout)findViewById(R.id.scorelayout);
+        RelativeLayout scorelayout = (RelativeLayout)findViewById(R.id.scorelayout);
 
         Window w = getWindow();
         Navigation_Bar n = new Navigation_Bar();
@@ -36,6 +37,8 @@ public class ScoreActivity extends AppCompatActivity {
         Intent intent=new Intent(this.getIntent());
         Double s=intent.getDoubleExtra("myscore",0);
         int countword = intent.getIntExtra("countword",0);
+        Log.d("흠냐리받아온거",s+"");
+        Log.d("흠냐리받아온카운트",countword+"");
 
         int mB_id = intent.getIntExtra("b_id", 0);
         count++;

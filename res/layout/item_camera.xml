@@ -10,18 +10,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_margin="10dp">
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="30dp">
         <ImageView
             android:id="@+id/cword_back"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
+            android:layout_width="480dp"
+            android:layout_height="400dp"
             android:layout_centerInParent="true"
             android:scaleType="centerCrop"
             android:src="@drawable/c_word_original"></ImageView>
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="450dp"
+            android:layout_height="380dp"
+            android:layout_margin="10dp"
             android:orientation="vertical">
 
 
@@ -31,7 +33,7 @@
                 android:orientation="horizontal"
                 android:layout_gravity="center"
                 android:layout_marginTop="3dp"
-                android:layout_marginBottom="3dp">
+                android:layout_marginBottom="10dp">
 
                 <TextView
                     android:id="@+id/cword_text"
@@ -41,20 +43,22 @@
                     android:enabled="false"
                     android:fontFamily="@font/cookierun_regular"
                     android:gravity="center"
+                    android:layout_gravity="center"
                     android:text="dddd"
                     android:textColor="#000000"
-                    android:textSize="20dp" />
+                    android:textSize="30dp" />
 
                 <ImageView
                     android:id="@+id/btn_word_sound"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_marginLeft="50dp"
                     android:layout_marginRight="12dp"
                     android:src="@drawable/speakers"/>
                 <ImageView
                     android:id="@+id/btn_word_x"
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
                     android:layout_marginTop="4dp"
                     android:src="@drawable/letter_x"/>
             </LinearLayout>
@@ -62,10 +66,10 @@
 
             <ImageView
                 android:layout_gravity="center"
-                android:layout_width="250dp"
+                android:layout_width="380dp"
                 android:id="@+id/cimage"
                 android:layout_marginBottom="3dp"
-                android:layout_height="150dp">
+                android:layout_height="250dp">
             </ImageView>
 
             <TextView
@@ -78,7 +82,8 @@
                 android:gravity="center"
                 android:text="dddd"
                 android:textColor="#000000"
-                android:textSize="10dp" />
+                android:layout_gravity="center"
+                android:textSize="20dp" />
 
 
         </LinearLayout>

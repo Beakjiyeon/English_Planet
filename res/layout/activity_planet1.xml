@@ -24,7 +24,7 @@
         android:gravity="center_horizontal"
         android:fontFamily="@font/cookierun_bold"
         android:layout_marginTop="5dp"
-        android:textSize="20dp"
+        android:textSize="30dp"
         android:textColor="#FFFFFF"
         android:text="Chapter1."></TextView>
     <TextView
@@ -32,7 +32,7 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:fontFamily="@font/cookierun_bold"
-        android:textSize="25dp"
+        android:textSize="40dp"
         android:textColor="#FFFFFF"
         android:text="Animals You Can See At the Zoo">
 
@@ -58,20 +58,24 @@
             android:layout_marginHorizontal="80dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
             android:layout_weight="1"
             />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="450dp"
         android:orientation="horizontal"
-        android:layout_margin="15dp">
+        android:layout_marginTop="100dp"
+        android:layout_marginBottom="80dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp">
 
         <ImageView
             android:id="@+id/imageView2"
-            android:layout_width="330dp"
-            android:layout_height="200dp"
+            android:layout_width="400dp"
+            android:layout_height="300dp"
             android:layout_marginLeft="20dp"
             android:layout_weight="1"
             app:srcCompat="@drawable/yellow_rocket_g"
@@ -80,14 +84,16 @@
         <ImageView
             android:id="@+id/imageView3"
             android:layout_width="500dp"
-            android:layout_height="wrap_content"
+            android:layout_height="300dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="20dp"
             android:layout_weight="1"
             app:srcCompat="@drawable/satellite_g" />
 
         <ImageView
             android:id="@+id/imageView4"
-            android:layout_width="400dp"
-            android:layout_height="wrap_content"
+            android:layout_width="500dp"
+            android:layout_height="300dp"
             android:layout_weight="1"
             app:srcCompat="@drawable/battery1_gray" />
 

@@ -15,9 +15,10 @@
 
             <ImageView
                 android:id="@+id/progBar"
-                android:layout_width="500dp"
-                android:layout_height="62dp"
+                android:layout_width="620dp"
+                android:layout_height="75dp"
                 android:layout_marginLeft="50dp"
+                android:layout_marginRight="10dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/progress_bar2" />
             android:adjustViewBounds="true"
@@ -43,7 +44,7 @@
             android:layout_alignBaseline="@id/progBar"
             android:layout_alignParentTop="true"
             android:layout_marginTop="8dp"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="20dp"
             android:layout_toRightOf="@id/BtnCamera"
             app:srcCompat="@drawable/icon_mypage"/>
     </LinearLayout>
@@ -59,11 +60,11 @@
 
         <ImageView
             android:id="@+id/planet1"
-            android:layout_width="365dp"
-            android:layout_height="365dp"
+            android:layout_width="380dp"
+            android:layout_height="380dp"
             android:layout_gravity="bottom|center"
             android:adjustViewBounds="true"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="30dp"
             android:src="@drawable/planet1"
             android:layout_marginBottom="5dp"/>
 
@@ -74,6 +75,9 @@
             android:layout_gravity="bottom|center"
             android:layout_toRightOf="@id/planet1"
             android:adjustViewBounds="true"
+            android:layout_width="380dp"
+            android:layout_height="380dp"
+            android:layout_marginTop="30dp"
             android:src="@drawable/planet2" />
 
         <ImageView
@@ -83,6 +87,9 @@
             android:layout_gravity="bottom|center"
             android:layout_toRightOf="@id/planet2"
             android:adjustViewBounds="true"
+            android:layout_width="380dp"
+            android:layout_height="380dp"
+            android:layout_marginTop="30dp"
             android:src="@drawable/planet3" />
 
         <ImageView

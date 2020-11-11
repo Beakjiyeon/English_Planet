@@ -55,6 +55,7 @@ public class MywordAnswerActivity extends AppCompatActivity implements Serializa
         if (type.equals("word")) {
             if (correct == 1) {
                 answerlayout.setBackgroundDrawable(ContextCompat.getDrawable(this, R.drawable.wordcorrect));
+                Log.d("흠냐리",m_id+"");
                 deleteMword(m_id);
 
             } else {
@@ -111,7 +112,7 @@ public class MywordAnswerActivity extends AppCompatActivity implements Serializa
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if(response.isSuccessful()) {
-                    Log.d("########", "삭제하고싶다");
+                    Log.d("흠냐리########", "삭제하고싶다"+m_id);
 
                 }else{
                     Log.d("########", "ㄴㄴㄴxxxxxxx");
