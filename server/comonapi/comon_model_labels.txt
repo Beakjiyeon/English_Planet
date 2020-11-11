@@ -1,0 +1,11 @@
+bottle
+chair
+clock
+cup
+glasses
+keyboard
+monitor
+mouse
+pencil
+scissors
+smartphone
